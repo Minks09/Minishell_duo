@@ -1,0 +1,2 @@
+#! 
+echo "voici un simple test"
