@@ -10,7 +10,7 @@ COLOUR_END=\033[0m
 NAME 			= minishell
 #NOM DU PROJET et de lexecutable#
 #//////////////////////////////DIRECTORIES////////////////////////////////#
-SRC_PATH 		= 	srcs
+SRC_PATH 		= 	srcs/
 
 LIB 			= 	includes/Libft
 
@@ -29,6 +29,8 @@ CFLAGS 			= 	-I $(HEADER) -I$(HEADER_LIBFT) -Wall -Wextra -Werror -fsanitize=add
 #CI dessus sont definis les variable utiles a la compilation comme les flags ou certaine commande#
 #/////////////////////////////SRCS////////////////////////////////////////
 SRCS = 	main.c\
+		builtins/export.c\
+		env/env.c\
 		
 #CI dessus sont definis tous les fichiers sources du projet #
 #il faut les lister ici en pensant que le chemin des src est deja /srcs/#

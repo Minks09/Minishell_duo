@@ -6,14 +6,14 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/05/28 04:16:50 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/05/30 01:50:56 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <stdio.h>
+#include "struct.h"
 
 ////////COLORS////////
 #define C_GREEN = "\033[0;32m";
