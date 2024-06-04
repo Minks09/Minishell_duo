@@ -38,6 +38,7 @@ char	*expand(char *str);
 t_bool	search_semi_back(char *str);
 t_queue    *init_queue(void);
 void    enqueue(t_queue *queue, char *key, char *value);
-//char	*ft_strdup(const char *str);
+char    *return_key(char *str);
+char    *return_value(char *str);
 
 #endif
