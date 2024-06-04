@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 01:45:28 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/05/31 18:29:40 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/06/04 17:45:53 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+# include <minishell.h>
 
 t_env_var create_new(char *string)
 {
@@ -18,18 +18,18 @@ t_env_var create_new(char *string)
 	int	j;
 	t_env_var *new;
 	
-	new = malloc(sizeof(t_env_var))
+	new = malloc(sizeof(t_env_var));
 	if (!new)
-		return 
+		return (perror(R_MALLOC));
 }
-void    ft_envs_to_lst(char **envp, t_envs_lst **envs)
+
+void    ft_env_to_lst(char **envp, t_envs_lst **envs)
 {
     int i;
     if (!envp)
         return;
     i = 0;
     while (!(envp[i]))
-		ft_add_var(envs, envp[i++])
+		ft_lstadd_back(envs, ft_lstnew(envp[i++]));
 }
-
     

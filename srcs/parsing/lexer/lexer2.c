@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 01:57:52 by nigateau          #+#    #+#             */
-/*   Updated: 2024/05/24 15:18:56 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:21:35 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "lexer.h"
+#include "../../../includes/minishell.h"
 
 void    copy_envp(t_queue *queue_env, char **env)
 {
@@ -42,7 +42,9 @@ void    copy_envp(t_queue *queue_env, char **env)
 
 int main(int ac, char **av, char **env)
 {
-    t_queue *queue_env;
+    (void) ac;
+    (void) av;
+    t_queue *queue_env = NULL;
     copy_envp(queue_env, env);
     while (queue_env->head)
     {

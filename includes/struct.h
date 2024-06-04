@@ -6,25 +6,15 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:16:13 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/06/02 19:24:48 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/06/04 16:58:38 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include "libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <string.h>
-# include <fcntl.h>
-# include <dirent.h>
-# include <sys/wait.h>
-# include <limits.h>
-# include <errno.h>
-# include <signal.h>
-
+# include <stdbool.h>
+# include <sys/types.h>
 //definition des types possible de token 
 # define T_EMPTY 0
 # define T_CMD 1
@@ -55,6 +45,8 @@
 # define IS_DIRECTORY 126
 # define UNKNOWN_COMMAND 127
 
+# define FALSE 0
+
 
 typedef struct s_quotes
 {
@@ -76,11 +68,14 @@ typedef struct s_parse
 
 typedef struct s_token
 {
-	char			*str;
-	int				type; // define by T_*
-	struct s_token	*prev;
-	struct s_token	*next;
-}					t_token;
+    char	*command;
+    char    *path;
+    char	*argument;
+    char   *operator;
+    char   *file;
+    int    type;
+    struct s_token	*next;
+}	t_token;
 
 typedef struct s_env_var
 {
@@ -99,9 +94,9 @@ typedef struct s_shell
 	pid_t	pid;
 	int		std_in;
 	int		std_out;
-	int		f_in;
-	int		f_out;
-	int		p_lvl;
+	int		fd_in;
+	int		fd_out;
+	int		proc_lvl;
 	int		exit_status;
 	char	*tmpfile;
 	int		shlvl;

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:32:37 by nigateau          #+#    #+#             */
-/*   Updated: 2024/05/28 17:13:16 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/06/04 16:59:09 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include <minishell.h>
 
 void    skip_parenthesis2(const char *input, int parenthesis_nb,char sep)
 {

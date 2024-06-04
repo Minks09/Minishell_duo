@@ -31,7 +31,13 @@ CFLAGS 			= 	-I $(HEADER) -I$(HEADER_LIBFT) -Wall -Wextra -Werror -fsanitize=add
 SRCS = 	main.c\
 		builtins/export.c\
 		env/env.c\
-		parsing/lexer/fa
+		parsing/lexer/ft_split.c\
+		parsing/lexer/heredoc.c\
+		parsing/lexer/lexer.c\
+		parsing/lexer/lexer2.c\
+		parsing/lexer/utils.c\
+		utils/env_utils.c\
+		utils/env_utils2.c
 		
 #CI dessus sont definis tous les fichiers sources du projet #
 #il faut les lister ici en pensant que le chemin des src est deja /srcs/#

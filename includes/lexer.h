@@ -3,36 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 01:58:28 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/02 19:36:59 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/06/04 16:29:21 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-#include <stdbool.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-
 #define FALSE 0
 #define TRUE 1
 #define t_bool int
-
-typedef struct s_token
-{
-    char	*command;
-    char    *path;
-    char	*argument;
-    char   *operator;
-    char   *file;
-    int    type;
-    struct s_token	*next;
-}	t_token;
 
 typedef struct s_envp
 {

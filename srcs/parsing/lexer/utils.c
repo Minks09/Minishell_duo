@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 02:21:34 by nigateau          #+#    #+#             */
-/*   Updated: 2024/05/24 14:07:01 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/06/04 18:21:02 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "../../../includes/minishell.h"
 
 t_queue    *init_queue(void)
 {
