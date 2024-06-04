@@ -15,6 +15,7 @@
 
 #include "struct.h"
 #include "lexer.h"
+#include "Libft/libft.h"
 
 ////////COLORS////////
 #define C_GREEN = "\033[0;32m";

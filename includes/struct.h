@@ -13,7 +13,7 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include "libft.h"
+# include "Libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -24,6 +24,7 @@
 # include <limits.h>
 # include <errno.h>
 # include <signal.h>
+# include <stdbool.h>
 
 //definition des types possible de token 
 # define T_EMPTY 0
@@ -73,14 +74,6 @@ typedef struct s_parse
 	int			token_amount;
 	int			index_token;
 }			t_parse;
-
-typedef struct s_token
-{
-	char			*str;
-	int				type; // define by T_*
-	struct s_token	*prev;
-	struct s_token	*next;
-}					t_token;
 
 typedef struct s_env_var
 {

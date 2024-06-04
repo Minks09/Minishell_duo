@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include  "../../../includes/minishell.h"
 
 t_queue    *init_queue(void)
 {
@@ -80,7 +80,7 @@ void    enqueue(t_queue *queue, char *key, char *value)
     token->key = key;
     token->value = value;
     token->next = NULL;
-    push_queue(queue, token);
+    push_queue_envp(queue, token);
 }
 
 // void    free_queue(t_queue *queue)
