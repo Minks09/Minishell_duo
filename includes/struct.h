@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:16:13 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/06/04 19:42:57 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/06/16 16:59:16 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define R_CMD_NOT_FOUND 126// If a command is found but is not executable,the return status is 126
 # define R_CHILD_ABORTED 127//If a command is not found, the child process created to execute it returns a status of 127
 	//-> // output : Command not found
-# define R_FILE_NOT_FOUND 
+# define R_FILE_NOT_FOUND 255
 
 # define BUFF_SIZE 4096
 # define EXPANSION -36
