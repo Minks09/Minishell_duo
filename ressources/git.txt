@@ -41,3 +41,23 @@ Une fois les conflits résolus, utilisez git add pour marquer les fichiers comme
 Valider les modifications :
 Enfin, validez les modifications en utilisant git commit et poussez-les vers le serveur distant avec :
 git push origin main
+
+Envoyer les modifications de la branche debug vers la branche main :
+Assurez-vous que vous êtes sur la branche debug :
+git checkout debug
+
+Mettez à jour votre branche debug avec les dernières modifications (optionnel, mais recommandé pour éviter les conflits) :
+git pull origin debug
+
+Changez pour la branche main :
+git checkout main
+
+Mettez à jour la branche main avec les dernières modifications:
+git pull origin main
+
+Fusionnez la branche debug dans main :
+git merge debug
+
+Poussez les modifications fusionnées vers le serveur distant :
+git push origin main
+
