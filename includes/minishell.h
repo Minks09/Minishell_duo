@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/06/16 17:21:23 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/06/16 17:23:51 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@
 # include "struct.h"
 # include "lexer.h"
 # include "Libft/libft.h"
-# include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <string.h>
 # include <fcntl.h>
-# include <dirent.h>
-# include <sys/wait.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <limits.h>
 # include <errno.h>
 # include <signal.h>
+# include <termios.h>
 # include <termios.h>
 
 ////////COLORS////////
@@ -39,6 +39,6 @@
 
 /////////////PROTOTYPES////////////////
 void    ft_env_to_lst(char **envp, t_envs_lst **envs);
-
+void	ft_envs_lst_add_back(t_envs_lst **lst, t_envs_lst *new);
 
 # endif

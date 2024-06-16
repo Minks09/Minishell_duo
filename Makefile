@@ -25,7 +25,7 @@ RM 				= 	rm -f
 
 CC 				= 	cc
 
-CFLAGS 			= 	-I $(HEADER) -I$(HEADER_LIBFT) -Wall -Wextra -Werror -fsanitize=address 
+CFLAGS 			= 	-I $(HEADER) -I$(HEADER_LIBFT) -Wall -Wextra -Werror -fsanitize=address -g
 #CI dessus sont definis les variable utiles a la compilation comme les flags ou certaine commande#
 #/////////////////////////////SRCS////////////////////////////////////////
 SRCS = 	main.c\

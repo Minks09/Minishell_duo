@@ -61,3 +61,9 @@ git merge debug
 Poussez les modifications fusionnées vers le serveur distant :
 git push origin main
 
+
+
+pour changer de branches sans commit ses changement git stash (toutes les fichiers modifier que l'on souhaite mettre de cote)
+git stash est une pile, donc si vous "stasher" plusieurs fois, vous pouvez utiliser 
+git stash list pour voir tous vos états stashed,
+git stash pop ou git stash apply avec le nom d'un état pour appliquer un état spécifique.

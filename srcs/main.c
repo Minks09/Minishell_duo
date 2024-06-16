@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 15:18:48 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/06/04 16:56:04 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/06/09 22:37:48 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,17 @@ void shell_init(t_shell *shell)
    shell->fd_in = -1;
    shell->fd_out = -1;
    shell->proc_lvl = 0;
+   //ici set la copy de lenv et la rendre utilisable 
 }
 
 int main(int argc, char **argv, char **envp)
 {
    t_envs_lst *envs;
-   //t_shell shell;
+   t_termios   
 
    (void) argv;
-   (void) argc;
-   envs = NULL;
-   ft_env_to_lst(envp, &envs);
+   if (argc != 1)
+      return 
+   //ft_env_to_lst(envp, &envs);
    //start(&envs);
 }
