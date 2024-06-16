@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 02:21:34 by nigateau          #+#    #+#             */
-/*   Updated: 2024/05/24 14:07:01 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:22:43 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void    push_queue(t_queue *queue, t_envp *token)
 
 void    push_queue_envp(t_queue *queue, t_envp *token)
 {
-    if (!queue || !token)
-        return ;
+    //if (!queue || !token)
+    //    return ;
     if (!queue->head)
     {
         queue->head = token;
@@ -81,6 +81,15 @@ void    enqueue(t_queue *queue, char *key, char *value)
     token->value = value;
     token->next = NULL;
     push_queue_envp(queue, token);
+}
+
+t_bool queue_is_empty(t_queue *queue)
+{
+    if (queue == NULL)
+        return (1);
+    if (queue->size == 0)
+        return (1);
+    return (0);
 }
 
 // void    free_queue(t_queue *queue)

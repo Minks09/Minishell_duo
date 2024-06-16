@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 01:58:28 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/02 19:36:59 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/06/16 16:28:44 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_token
     char   *operator;
     char   *file;
     int    type;
+    int    fd;
     struct s_token	*next;
 }	t_token;
 
@@ -57,5 +58,6 @@ t_queue    *init_queue(void);
 void    enqueue(t_queue *queue, char *key, char *value);
 char    *return_key(char *str);
 char    *return_value(char *str);
+t_bool  queue_is_empty(t_queue *queue);
 
 #endif

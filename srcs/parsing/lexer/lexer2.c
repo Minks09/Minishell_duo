@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 01:57:52 by nigateau          #+#    #+#             */
-/*   Updated: 2024/05/24 15:18:56 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/06/10 16:35:33 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,34 @@ int main(int ac, char **av, char **env)
 {
     (void)ac;
     (void)av;
-    t_queue *queue_env = NULL;
+    int i;
+    t_queue *queue_env;
     copy_envp(queue_env, env);
-    while (queue_env->tail->next)
+    if (!queue_is_empty(queue_env))
+        printf("queue is not empty\n");
+    i = 0;
+    while (queue_env->size >= i)
     {
-        printf("key: %s\n", queue_env->tail->key);
-        printf("value: %s\n", queue_env->tail->value);
-        queue_env->tail = queue_env->tail->next;
+        printf("key: %s\n", queue_env->head->key);
+        printf("value: %s\n", queue_env->head->value);
+        queue_env->head = queue_env->head->next;
+        i++;
     }
     return (0);
 }
+
+// int main(int ac, char **av, char **env)
+// {
+//     (void)ac;
+//     (void)av;
+//     int i;
+//     t_queue *queue_env;
+//     queue_env = init_queue();
+//     if (queue_is_empty(queue_env))
+//         printf("queue is empty\n");
+//     enqueue(queue_env, "key1", "value1");
+//     if (!queue_is_empty(queue_env))
+//         printf("queue is not empty\n");
+//     printf("queue size : %d\n", queue_env->size);
+//     return (0);
+// }
