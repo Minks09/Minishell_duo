@@ -6,11 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2024/06/16 17:06:36 by racinedelar      ###   ########.fr       */
-=======
-/*   Updated: 2024/06/16 16:30:36 by racinedelar      ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2024/06/16 17:21:23 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
