@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 13:40:54 by nchebbi           #+#    #+#             */
-/*   Updated: 2024/06/16 16:50:30 by racinedelar      ###   ########.fr       */
+/*   Created: 2024/06/14 20:20:09 by racinedelar       #+#    #+#             */
+/*   Updated: 2024/06/14 21:58:33 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
-#include <stdio.h>
+#include <minishell.h>
 
-char	*ft_strrchr(const char *s, int c)
+void ft_tty_mask(void)
 {
-	size_t	len;
-
-	len = ft_strlen(s);
-	while (len > 0 && s[len] != (unsigned char)c)
-		len--;
-	if (s[len] == (unsigned char)c)
-		return ((char *)s + len);
-	return (0);
+    struct termios termios;
+    
+    tcgetattr(0, &terminal);
 }

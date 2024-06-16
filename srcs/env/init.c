@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 13:40:54 by nchebbi           #+#    #+#             */
-/*   Updated: 2024/06/16 16:50:30 by racinedelar      ###   ########.fr       */
+/*   Created: 2024/06/14 22:30:10 by racinedelar       #+#    #+#             */
+/*   Updated: 2024/06/16 16:47:07 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
-#include <stdio.h>
+#include <minishell.h>
 
-char	*ft_strrchr(const char *s, int c)
+int init_term(char **envp, t_termios *new, t_termios *copy)
 {
-	size_t	len;
-
-	len = ft_strlen(s);
-	while (len > 0 && s[len] != (unsigned char)c)
-		len--;
-	if (s[len] == (unsigned char)c)
-		return ((char *)s + len);
-	return (0);
+    
 }
