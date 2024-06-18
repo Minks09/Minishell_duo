@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 02:21:34 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/10 16:22:43 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:13:49 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,3 +110,4 @@ t_bool queue_is_empty(t_queue *queue)
 //     }
 //     free(queue);
 // }
+

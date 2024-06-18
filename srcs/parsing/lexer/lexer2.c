@@ -6,32 +6,32 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 01:57:52 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/10 16:35:33 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:37:13 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "../../../includes/minishell.h"
 
-void    copy_envp(t_queue *queue_env, char **env)
+t_queue    *copy_envp(t_queue *queue, char **env)
 {
     int i;
     char *key;
     char *value;
 
     i = 0;
-    queue_env = init_queue();
+    queue = init_queue();
     while (env[i])
     {
         key = return_key(env[i]);
         //printf("key : %s", key);
         value = return_value(env[i]);
         //printf("value: %s", value);
-        enqueue(queue_env, key, value);
+        enqueue(queue, key, value);
         free(key);
         free(value);
         i++;
     }
-    return ;
+    return (queue);
 }
 
 char    *return_key(char *str)
@@ -71,25 +71,27 @@ char    *return_value(char *str)
     return (value);
 }
 
-int main(int ac, char **av, char **env)
-{
-    (void)ac;
-    (void)av;
-    int i;
-    t_queue *queue_env;
-    copy_envp(queue_env, env);
-    if (!queue_is_empty(queue_env))
-        printf("queue is not empty\n");
-    i = 0;
-    while (queue_env->size >= i)
-    {
-        printf("key: %s\n", queue_env->head->key);
-        printf("value: %s\n", queue_env->head->value);
-        queue_env->head = queue_env->head->next;
-        i++;
-    }
-    return (0);
-}
+// int main(int ac, char **av, char **env)
+// {
+//     (void)ac;
+//     (void)av;
+//     int i;
+//     t_queue *queue_env;
+
+//     queue_env = copy_envp(queue_env, env);
+//     if (!queue_is_empty(queue_env))
+//         printf("queue is not empty\n");
+//     i = 0;
+//     // while (queue_env->size >= i)
+//     {
+//         if (!queue_is_empty(queue_env))
+//             printf("key: %s\n", queue_env->head->key);
+//         printf("value: %s\n", queue_env->head->value);
+//         //queue_env->head = queue_env->head->next;
+//         i++;
+//     }
+//     return (0);
+// }
 
 // int main(int ac, char **av, char **env)
 // {
