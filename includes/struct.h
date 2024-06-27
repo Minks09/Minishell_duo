@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:16:13 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/06/27 12:48:29 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/06/27 13:27:36 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ typedef struct s_token
     char	*command;
     char    *path;
     char	**argument;
-    char  	*operator;
+    char	*operator;
     char   	*file;
     int    	type;
-	int		fd;
+	int		fd[2];
     struct s_token	*next;
 }	t_token;
 
