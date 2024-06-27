@@ -31,13 +31,19 @@ CFLAGS 			= 	-I $(HEADER) -I$(HEADER_LIBFT) -Wall -Wextra -Werror -fsanitize=add
 SRCS = 	main.c\
 		builtins/export.c\
 		env/env.c\
+		env/init.c\
+		error/utils_error.c\
+		exec/exec.c\
 		parsing/lexer/ft_split.c\
 		parsing/lexer/heredoc.c\
 		parsing/lexer/lexer.c\
 		parsing/lexer/lexer2.c\
 		parsing/lexer/utils.c\
+		setup/setup.c\
 		utils/env_utils.c\
-		utils/env_utils2.c
+		utils/env_utils2.c\
+		utils/free_struct.c\
+		utils/signal.c
 		
 #CI dessus sont definis tous les fichiers sources du projet #
 #il faut les lister ici en pensant que le chemin des src est deja /srcs/#
@@ -98,8 +104,8 @@ $(NAME): $(_OBJS)
 	@exit 0
 #CI dessus est la regle qui permet de compiler le projet#
 $(OBJS_DIR)/%.o: $(SRC_PATH)/%.c
-		@mkdir -p $(dir $@)
-		@${CC} $(CFLAGS) -c $< -o $@ -g3
+	@mkdir -p $(dir $@)
+	@${CC} $(CFLAGS) -c $< -o $@ -g3
 #CI dessus est la regle qui permet de compiler les .o#
 clean:
 			@$(RM) $(OBS)

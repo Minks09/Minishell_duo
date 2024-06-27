@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:22:20 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/04 18:21:32 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/06/16 21:21:21 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include <minishell.h>
 
 t_bool	check_both_quotes(char *input)
 {
@@ -61,16 +61,6 @@ void	escape_single_quote(char *input)
 			break;
 		i++;
 	}
-}
-
-int main(void)
-{
-	char *str;
-
-	str = strdup("je suis * 'un mendiant *' bonjour");
-	escape_single_quote(str);
-	printf("%s\n", str);
-	return (0);
 }
 
 void	escape_double_quote(char *input)
@@ -136,3 +126,13 @@ char	*expand(char *str)
 	var = strdup(temp);
 	return (var);
 }
+
+// int main(void)
+// {
+// 	char *str;
+
+// 	str = strdup("je suis * 'un mendiant *' bonjour");
+// 	escape_single_quote(str);
+// 	printf("%s\n", str);
+// 	return (0);
+// }

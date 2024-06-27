@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 01:58:28 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/04 16:29:21 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/06/20 00:29:51 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*expand(char *str);
 t_bool	search_semi_back(char *str);
 t_queue    *init_queue(void);
 void    enqueue(t_queue *queue, char *key, char *value);
+void    copy_envp(t_queue *queue_env, char **env);
 char    *return_key(char *str);
 char    *return_value(char *str);
-
 #endif

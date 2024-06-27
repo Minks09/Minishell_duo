@@ -6,17 +6,23 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 23:22:11 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/06/09 22:36:52 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/06/26 22:09:04 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void ft_err_malloc(void)
+int ft_err_(int R_CODE)
 {
-    ft_putstr_fd("process terminated early due to malloc error");
-    exit(R_MALLOC);
+    perror(strerror(R_CODE));
+    exit;
+    //free_all();
 }
 
-
-// to do : void print_error()
+int put_error(char *msg)
+{
+    ft_putstr_fd(C_RED, STDERR_FILENO);
+    ft_putstr_fd(msg, STDERR_FILENO);
+    ft_putstr_fd(C_RESET, STDERR_FILENO);
+    exit (R_ERROR);
+}

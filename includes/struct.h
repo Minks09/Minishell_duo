@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:16:13 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/06/16 17:24:01 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/06/27 12:48:29 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@
 //definition des type de redirections
 # define STDIN 0
 # define STDOUT 1
-# define STDERR 2
+# define STDERR_FILENO 2
 //definition des types dexecution	
 # define SKIP 1
 # define NOSKIP 0
 //definition of types of potential errors
 # define R_MALLOC 2
+# define R_ERROR 9
 # define R_CMD_NOT_FOUND 126// If a command is found but is not executable,the return status is 126
 # define R_CHILD_ABORTED 127//If a command is not found, the child process created to execute it returns a status of 127
 	//-> // output : Command not found
@@ -44,8 +45,6 @@
 # define SUCCESS 0
 # define IS_DIRECTORY 126
 # define UNKNOWN_COMMAND 127
-
-# define FALSE 0
 
 
 typedef struct s_quotes
@@ -70,10 +69,11 @@ typedef struct s_token
 {
     char	*command;
     char    *path;
-    char	*argument;
+    char	**argument;
     char  	*operator;
     char   	*file;
     int    	type;
+	int		fd;
     struct s_token	*next;
 }	t_token;
 
@@ -98,11 +98,14 @@ typedef struct s_shell
 	int		fd_out;
 	int		proc_lvl;
 	int		exit_status;
-	char	*tmpfile;
 	int		shlvl;
+	char	*prompt;
+	t_token	*token;
+	t_envs_lst	*envs;
 	bool	executed;
 	bool	is_running;
 }	t_shell;
 
+typedef struct termios t_termios;
 #endif
 

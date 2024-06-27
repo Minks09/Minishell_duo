@@ -6,12 +6,12 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 01:57:52 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/04 19:43:26 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/06/16 21:20:52 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../../../includes/minishell.h"
-#include "../../../includes/minishell.h"
+#include <minishell.h>
+#include <minishell.h>
 
 void    copy_envp(t_queue *queue_env, char **env)
 {
@@ -72,17 +72,17 @@ char    *return_value(char *str)
     return (value);
 }
 
-int main(int ac, char **av, char **env)
-{
-    (void) ac;
-    (void) av;
-    t_queue *queue_env = NULL;
-    copy_envp(queue_env, env);
-    while (queue_env->tail->next)
-    {
-        printf("key: %s\n", queue_env->tail->key);
-        printf("value: %s\n", queue_env->tail->value);
-        queue_env->tail = queue_env->tail->next;
-    }
-    return (0);
-}
+// int main(int ac, char **av, char **env)
+// {
+//     (void) ac;
+//     (void) av;
+//     t_queue *queue_env = NULL;
+//     copy_envp(queue_env, env);
+//     while (queue_env->tail->next)
+//     {
+//         printf("key: %s\n", queue_env->tail->key);
+//         printf("value: %s\n", queue_env->tail->value);
+//         queue_env->tail = queue_env->tail->next;
+//     }
+//     return (0);
+// }
