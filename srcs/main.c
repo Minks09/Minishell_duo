@@ -10,12 +10,11 @@
 /*                          */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include <minishell.h>
 
 int  set_prompt(t_shell *shell)
 {
 	char *tmp;
-
 
    tmp = ft_strdup(">42_minibash< $ ");
    shell->prompt = malloc(ft_strlen(tmp) + 1);

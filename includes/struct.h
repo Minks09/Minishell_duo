@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:16:13 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/06/27 13:27:36 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/06/27 16:19:29 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,32 @@
 # define STDIN 0
 # define STDOUT 1
 # define STDERR_FILENO 2
-//definition des types dexecution	
-# define SKIP 1
-# define NOSKIP 0
 //definition of types of potential errors
 # define R_MALLOC 2
 # define R_ERROR 9
-# define R_CMD_NOT_FOUND 126// If a command is found but is not executable,the return status is 126
-# define R_CHILD_ABORTED 127//If a command is not found, the child process created to execute it returns a status of 127
-	//-> // output : Command not found
-# define R_FILE_NOT_FOUND 255
+# define R_PERM 			126
+// If a command is found but is not executable,the return status is 126
+# define R_PATH 			127
+//If a command is not found, the child process created to execute it returns a status of 127
+# define R_FILE_NOT_FOUND 	255
+# define BUFF_SIZE 			4096
+# define EXPANSION 			-36
 
-# define BUFF_SIZE 4096
-# define EXPANSION -36
-# define ERROR 1
-# define SUCCESS 0
-# define IS_DIRECTORY 126
-# define UNKNOWN_COMMAND 127
+/* ERROR CODES */
+# define ERROR 				1
+# define SUCCESS 			0
+# define IS_DIRECTORY 		126
+# define UNKNOWN_COMMAND 	127
+# define QUIT_CHILD			130
+# define UNDEFINED_ERROR	255
 
+/* BOOLEANS CODE */
+# define NO 0
+# define YES 1
+/* EXECUTION TYPE */
+# define READ 0
+# define EXEC 1
+# define HERE_DOC 2
 
 typedef struct s_quotes
 {
@@ -92,20 +100,17 @@ typedef struct s_envs_lst
 typedef struct s_shell
 {
 	pid_t	pid;
-	int		std_in;
-	int		std_out;
-	int		fd_in;
-	int		fd_out;
-	int		proc_lvl;
-	int		exit_status;
+	int		quit_child;
+	int		exit;
+	int		status;
 	int		shlvl;
 	char	*prompt;
 	t_token	*token;
 	t_envs_lst	*envs;
-	bool	executed;
-	bool	is_running;
+	
 }	t_shell;
 
 typedef struct termios t_termios;
+extern int last_error;
 #endif
 
