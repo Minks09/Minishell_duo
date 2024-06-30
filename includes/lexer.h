@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 01:58:28 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/16 16:28:44 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/06/27 13:23:36 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_token
 {
     char	*command;
     char    *path;
-    char	*argument;
+    char	**argument;
     char   *operator;
     char   *file;
     int    type;
@@ -54,10 +54,23 @@ void	escape_single_quote(char *input);
 void	escape_double_quote(char *input);
 char	*expand(char *str);
 t_bool	search_semi_back(char *str);
+//lexer2.c
 t_queue    *init_queue(void);
 void    enqueue(t_queue *queue, char *key, char *value);
 char    *return_key(char *str);
 char    *return_value(char *str);
 t_bool  queue_is_empty(t_queue *queue);
+//utils2.c
+t_token *init_token_struct(void);
+void    free_token_struct(t_token **token);
+//env
+void    insert_node_env(t_envp **root, char *key, char *value);
+void    free_env(t_envp **root);
+
+
+//bultins
+//export.c
+void    export(t_envp **root, char *new_var);
+char    *return_value_quoted(char *str);
 
 #endif
