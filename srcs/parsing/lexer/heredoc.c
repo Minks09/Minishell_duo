@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 17:16:03 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/16 21:18:34 by nigateau         ###   ########.fr       */
+/*   Created: 2024/06/19 15:34:31 by nigateau          #+#    #+#             */
+/*   Updated: 2024/06/19 19:17:41 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include  "../../../includes/minishell.h"
 
@@ -51,7 +53,31 @@
 //     return ;
 // }
 
-void    heredoc(t_token *token, t_queue *queue_env)
+t_bool search_EOF(char *haystack, char *needle)
+{
+    int i;
+    int cmp;
+    char *tmp;
+
+    i = 0;
+    tmp = haystack;
+    while (*haystack != '\0')
+    {
+        cmp = strncmp(haystack, needle, strlen(needle));
+        if (cmp == 0)
+        {
+            *haystack = '\0';
+            return(TRUE);
+        }
+        haystack++;
+        i++;
+    }
+    haystack = tmp;
+    free (tmp);
+    return (FALSE);
+}
+
+void    heredoc(t_token *token)
 {
     int fd;
     char *line;
@@ -65,44 +91,24 @@ void    heredoc(t_token *token, t_queue *queue_env)
         line = readline("> ");
         if (!line)
             break ;
-        if (ft_strcmp(line, token->argument) == 0)
-            break ;
-        write(fd, line, ft_strlen(line));
-        write(fd, "\n", 1);
-        free(line);
-    }
-    line = readline("> ");
-}
-
-void search_EOF(char *haystack, char *needle)
-{
-    int i;
-    int cmp;
-    char tmp;
-
-    i = 0;
-    tmp = haystack;
-    while (*haystack != NULL)
-    {
-        cmp = ft_strncmp(haystack, needle, ft_strlen(needle));
-        if (cmp == 0 && *haystack + 1 == ' ')
-        {
-            *haystack = '\0';
+        if (search_EOF(line, token->argument))
             break;
-        }
-        haystack++;
+        write(fd, line, strlen(line));
+        write(fd, "\n", 1);
     }
-    haystack = tmp;
-    free (tmp);
+    if (line)
+    {
+    write(fd, line, strlen(line));
+    write(fd, "\n", 1);
+    free (line);
+    line = NULL;
+    }
 }
 int main()
 {
-    char *hay;
-    char *nee;
-
-    hay = ft_strdup("cest moi le chaud");
-    nee = ft_strdup("le");
-    search_EOF(hay, nee);
-    printf("haystack : %s", hay);
+    t_token *token;
+    token = init_token_struct();
+    heredoc(token);
+    free_token_struct(&token);
     return (1);
 }

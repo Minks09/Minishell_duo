@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:29:10 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/18 19:43:18 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/06/30 16:00:20 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,36 @@ void    insert_node_env(t_envp **root, char *key, char *value)
     while (curr->next != NULL)
         curr = curr->next;
     curr->next = new_node;
+}
+
+void    remove_node_env(t_envp **root, char *key)
+{
+    t_envp  *curr;
+    t_envp  *to_remove;
+
+    curr = *root;
+    if (*root == NULL)
+        return;
+    if (strcmp((*root)->key, key) == 0)
+    {
+        to_remove = *root;
+        *root = (*root)->next;
+        free(to_remove->key);
+        free(to_remove->value);
+        free(to_remove);
+    }
+    while (curr->next != NULL)
+    {
+        if (strcmp(curr->next->key, key) == 0)
+        {
+            to_remove = curr->next;
+            curr->next = curr->next->next;
+            free(to_remove->key);
+            free(to_remove->value);
+            free(to_remove);
+        }
+        curr = curr->next;
+    }
 }
 
 void    free_env(t_envp **root)
@@ -51,31 +81,35 @@ void    free_env(t_envp **root)
     *root = NULL;
 }
 
-int main(int argc, char **argv, char **env)
-{
-    int     i;
-    t_envp  *root;
+// int main(int argc, char **argv, char **env)
+// {
+//     int     i;
+//     t_envp  *root;
+//     t_envp  *curr;
+//     char    *new_var;
 
-    i = 1;
-    root = malloc(sizeof(t_envp));
-    if (!root)
-        exit(1);
-    root->key = return_key(env[0]);
-    root->value = return_value(env[0]);
-    root->next = NULL;
-    while (env[i])
-    {
-        insert_node_env(&root, return_key(env[i]), return_value(env[i]));
-        i++;
-    }
-    t_envp *curr;
-    curr = root;
-    while (curr != NULL)
-    {
-        printf("key : %s\n", curr->key);
-        printf("value : %s\n", curr->value);
-        curr = curr->next;
-    }
-    free_env(&root);
-    return (1);
-}
+//     i = 1;
+//     new_var = strdup("POULET=ambition");
+//     root = malloc(sizeof(t_envp));
+//     if (!root)
+//         exit(1);
+//     root->key = return_key(env[0]);
+//     root->value = return_value(env[0]);
+//     root->next = NULL;
+//     while (env[i])
+//     {
+//         insert_node_env(&root, return_key(env[i]), return_value(env[i]));
+//         i++;
+//     }
+//     export(&root, "POULET=\"ambition\"");
+//     remove_node_env(&root, "LOGNAME");
+//     curr = root;
+//     while (curr != NULL)
+//     {
+//         printf("key : %s\n", curr->key);
+//         printf("value : %s\n", curr->value);
+//         curr = curr->next;
+//     }
+//     free_env(&root);
+//     return (1);
+// }
