@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 20:21:14 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/06 00:30:36 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/06 01:19:51 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,4 @@ char *full_path(t_shell *shell)
 		}
 		shell->token = shell->token->next;
 	}
-	p
 }
