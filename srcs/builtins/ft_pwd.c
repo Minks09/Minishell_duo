@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_error.c                                      :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 23:22:11 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/04 02:17:05 by racinedelar      ###   ########.fr       */
+/*   Created: 2024/07/06 00:41:38 by racinedelar       #+#    #+#             */
+/*   Updated: 2024/07/06 00:49:30 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+# include <minishell.h>
 
-int ft_err_(int R_CODE)
+int ft_pwd(t_shell *shell)
 {
-    perror(strerror(R_CODE));
-    exit(R_CODE);
-    //free_all();
-}
+	char *pwd;
 
-int put_error(char *msg)
-{
-    ft_putstr_fd(C_RED, STDERR_FILENO);
-    ft_putstr_fd(msg, STDERR_FILENO);
-    ft_putstr_fd(C_RESET, STDERR_FILENO);
-    exit(R_ERROR);
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+		return (ft_err_(R_ERROR));
+	ft_putendl_fd(pwd, shell->fd_out);
+	free(pwd);
+	return (SUCCESS);
 }

@@ -12,15 +12,15 @@
 
 #include <minishell.h>
 
-int  set_prompt(t_shell *shell)
+int  set_prompt(t_shell **shell)
 {
 	char *tmp;
 
    tmp = ft_strdup(">42_minibash< $ ");
-   shell->prompt = malloc(ft_strlen(tmp) + 1);
-   if (!shell->prompt)
+   (*shell)->prompt = malloc(ft_strlen(tmp) + 1);
+   if (!(*shell)->prompt)
       return(ft_err_(R_MALLOC));
-   ft_strlcpy(shell->prompt, tmp, ft_strlen(shell->prompt));
+   ft_strlcpy((*shell)->prompt, tmp, ft_strlen((*shell)->prompt));
    return SUCCESS;
 }
 
@@ -35,12 +35,20 @@ int init_termios(t_termios *termios_new, t_termios *termios_copy)
 	return (SUCCESS);
 }
 
-int shell_init(t_shell *shell, t_termios *new, t_termios *copy)
+int shell_init(t_shell **shell, t_termios *new, t_termios *copy)
 {
-	shell->pid = 0;
-	shell->fd_in = -1;
-	shell->fd_out = -1;
-	shell->proc_lvl = 0;
+	*shell = malloc(sizeof(t_shell));
+    if (!(*shell))
+        return ERROR;
+	(*shell)->pid = 0;
+	(*shell)->fd_in = -1;
+	(*shell)->fd_out = -1;
+	(*shell)->exit_status = 0;
+	(*shell)->status = WAIT;
+	if (isatty(STDIN_FILENO))
+		(*shell)->shlvl = ft_atoi(getenv("SHLVL")) + 1;
+	else
+	(*shell)->shlvl = 0;
 	set_prompt(shell);
   	if (!isatty(STDOUT) && isatty(STDIN))
       put_error("WARNING: STDOUT is not a terminal,'\n'\
@@ -53,12 +61,15 @@ int shell_init(t_shell *shell, t_termios *new, t_termios *copy)
 
 void  main_shell(t_shell *shell)
 {
-	t_token		*commands;
+	//t_token		*commands;
 	char 		**buff;
-	int			len;
-	while (!shell->exit_status)
+
+	buff = malloc(sizeof(char*) * BUFF_SIZE);
+	if(!buff)
+		return;
+	while (shell->status != QUIT)
 	{
-		signal();
+		signal_main();
 		if(isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
 			*buff = readline(shell->prompt);
 		else
@@ -72,6 +83,7 @@ void  main_shell(t_shell *shell)
 			if (isatty(STDIN_FILENO))
 				add_history(*buff);
 			// commands = get_command(*buff, '|', &len)
+			signals_child();
 			// main_exec(len, commands, int[2] {0, 1});
 		}
 		free(*buff);
@@ -79,20 +91,22 @@ void  main_shell(t_shell *shell)
 }
 
 int main(int argc, char **argv, char **envp)
-{  
-   //t_queue		*queue_env;
-   t_shell		*shell;
-   t_termios	new;
-   t_termios	copy;
-      
+{
+	t_queue		*queue_env;
+	t_shell		*shell;
+	t_termios	new;
+	t_termios	copy;
+
+
 	(void) envp;
 	(void) argv;
-   	//queue_env = NULL;
-   	shell = NULL;
-   	if (argc != 1)
+	queue_env = NULL;
+	shell = NULL;
+	if (argc != 1)
 	return (put_error("TO MANY ARGUMENTS, FOLLOW THE PROJECT GUIDELINES"));
-   	//copy_envp(queue_env, envp);
-   	shell_init(shell, &new, &copy);
-   	//main_shell(&shell);
-   	return (0);
+	copy_envp(queue_env, envp);
+	shell_init(&shell, &new, &copy);
+	set_bin_path(envp, shell);
+	main_shell(shell);
+	return (0);
 }

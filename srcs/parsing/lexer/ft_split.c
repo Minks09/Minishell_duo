@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:32:37 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/16 21:19:29 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/05 23:26:34 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ char	*ft_stringdup(const char *str, char sep)
 	return (string);
 }
 
-char	**ft_split(const char *str, char sep)
+char	**ft_split_parse(const char *str, char sep)
 {
 	int		i;
 	int		nbr_of_strs;

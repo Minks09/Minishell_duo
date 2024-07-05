@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/06/20 02:13:43 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/05 23:25:31 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,21 @@
 int put_error(char *msg);
 
 //env
-int is_alnum(char *key);
-int valid_env_key(char *key);
-char  get_env_value(char *key, t_queue *queue);
+int		is_alnum(char *key);
+int		valid_env_key(char *key);
+char	*get_env_value(char *key, t_queue *queue);
 
 //error
-int ft_err_(int R_CODE);
+int		ft_err_(int R_CODE);
+//signals
+void	CTRL_C(int sig);
+void	CTRL_else(int sig);
+void	signal_main(void);
+void	CTRL_C_child(int sig);
+void	CTRL_else_child(int sig);
+void	signal_child(void);
+
+//setup
+void	set_bin_path(char **envp, t_shell *shell);
 
 #endif /* MINISHELL_H */

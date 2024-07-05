@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 16:43:46 by nchebbi           #+#    #+#             */
-/*   Updated: 2024/05/27 21:45:22 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/05 01:13:07 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	read_to_string(char **buffer, int fd)
 
 	while (ft_strchr_i(*buffer, '\n') == -1)
 	{
-		tmp = (char *)ft_calloc((BUFFER_SIZE + 1), sizeof(char));
+		tmp = (char *)ft_calloc_GNL((BUFFER_SIZE + 1), sizeof(char));
 		rd_bytes = read(fd, tmp, BUFFER_SIZE);
 		if (rd_bytes == -1)
 		{
@@ -61,9 +61,9 @@ int	read_to_string(char **buffer, int fd)
 			return (0);
 		}
 		else if (*buffer == NULL)
-			*buffer = ft_strndup(tmp, rd_bytes);
+			*buffer = ft_strndup_GNL(tmp, rd_bytes);
 		else
-			*buffer = ft_strjoin(*buffer, tmp);
+			*buffer = ft_strjoin_GNL(*buffer, tmp);
 		free(tmp);
 	}
 	return (0);
@@ -76,18 +76,18 @@ char	*cpybufftoline(char **buffer)
 	char	*tmp;
 
 	eol = ft_strchr_i(*buffer, '\n');
-	if (eol == -1 || eol == ft_strlen(*buffer))
+	if (eol == -1 || eol == ft_strlen_GNL(*buffer))
 	{
-		line = ft_strndup(*buffer, ft_strlen(*buffer));
+		line = ft_strndup_GNL(*buffer, ft_strlen_GNL(*buffer));
 		free(*buffer);
 		*buffer = NULL;
 	}
 	else
 	{
-		line = ft_strndup(*buffer, eol + 1);
-		tmp = ft_strndup(*buffer + eol + 1, (ft_strlen(*buffer) - eol));
+		line = ft_strndup_GNL(*buffer, eol + 1);
+		tmp = ft_strndup_GNL(*buffer + eol + 1, (ft_strlen_GNL(*buffer) - eol));
 		free(*buffer);
-		*buffer = ft_strndup(tmp, ft_strlen(tmp));
+		*buffer = ft_strndup_GNL(tmp, ft_strlen_GNL(tmp));
 		free(tmp);
 	}
 	return (line);

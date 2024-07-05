@@ -30,25 +30,24 @@ int valid_env_key(char *key)
     return(SUCCESS);
 }
 
-char  get_env_value(char *key, t_queue *queue)
+char  *get_env_value(char *key, t_queue *queue)
 {
-    t_envp *tmp_head;
-    char *found;
-
-    if (valid_env_key(key))
-    *tmp_head = *queue->head;
-    while (queue->head)
+    t_envp *tmp_head = queue->head;
+    char *found = NULL;
+	
+    if (!valid_env_key(key))
+        return NULL;
+    while (!queue->head->next)
     {
         if(ft_strncmp(key, queue->head->key, ft_strlen(key)) == 0)
         {
-            found = malloc(sizeof(char) * (ft_strlen(queue->head->value) + 1));
-            if (!found)
-                return(ft_err_(R_MALLOC));
             found = ft_strdup(queue->head->value);
-            return(*found);
+            if (!found)
+                return NULL;
+            break;
         }
-        else 
-            queue->head = queue->head->next;
+        queue->head = queue->head->next;
     }
     queue->head = tmp_head;
-} 
+    return (found);
+}

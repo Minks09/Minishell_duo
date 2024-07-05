@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:16:13 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/06/27 16:19:29 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/06 00:40:08 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@
 # define R_PATH 			127
 //If a command is not found, the child process created to execute it returns a status of 127
 # define R_FILE_NOT_FOUND 	255
-# define BUFF_SIZE 			4096
+# define BUFF_SIZE 			1042
 # define EXPANSION 			-36
 
 /* ERROR CODES */
-# define ERROR 				1
+# define ERROR 				-1
 # define SUCCESS 			0
 # define IS_DIRECTORY 		126
 # define UNKNOWN_COMMAND 	127
@@ -50,11 +50,11 @@
 /* BOOLEANS CODE */
 # define NO 0
 # define YES 1
-/* EXECUTION TYPE */
-# define READ 0
-# define EXEC 1
-# define HERE_DOC 2
-
+/* SHELL STATUS TYPE */
+# define WAIT 0
+# define READ 1
+# define EXEC 2
+# define QUIT 3
 typedef struct s_quotes
 {
 	bool	dble;
@@ -81,7 +81,6 @@ typedef struct s_token
     char	*operator;
     char   	*file;
     int    	type;
-	int		fd[2];
     struct s_token	*next;
 }	t_token;
 
@@ -99,13 +98,17 @@ typedef struct s_envs_lst
 
 typedef struct s_shell
 {
-	pid_t	pid;
-	int		quit_child;
-	int		exit;
-	int		status;
-	int		shlvl;
-	char	*prompt;
-	t_token	*token;
+	char		*prompt;
+	char 		**path_bin; // tableau de chemin d'acces terminer par null
+	pid_t		pid;
+	int			fd[2];
+	int			fd_in;
+	int			fd_out;
+	int			quit_child;
+	int			exit_status;
+	int			status;
+	int			shlvl;
+	t_token		*token;
 	t_envs_lst	*envs;
 	
 }	t_shell;

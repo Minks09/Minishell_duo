@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 01:57:52 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/16 21:20:52 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/05 01:30:38 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+
 #include <minishell.h>
 
 void    copy_envp(t_queue *queue_env, char **env)

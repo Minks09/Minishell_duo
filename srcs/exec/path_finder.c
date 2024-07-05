@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setup.c                                            :+:      :+:    :+:   */
+/*   path_finder.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 22:49:02 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/05 23:31:00 by racinedelar      ###   ########.fr       */
+/*   Created: 2024/07/05 20:21:14 by racinedelar       #+#    #+#             */
+/*   Updated: 2024/07/06 00:30:36 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	set_bin_path(char **envp, t_shell *shell)
+char *full_path(t_shell *shell)
 {
-	char	*tmp;
-	int		i;
-
-	i = 0;
-	while (envp[i] != NULL)
+	char *tmp;
+	
+	*tmp = NULL;
+	while (shell->token->command != NULL)
 	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+		while (shell->path_bin != NULL)
 		{
-			tmp = ft_strtrim(envp[i], "PATH=");
-			shell->path_bin = ft_split(tmp, ':');
+			tmp = ft_strjoin(shell->path_bin, shell->token->command);
+			if (access(tmp, F_OK) == 0)
+			{
+				shell->token->path = ft_strdup(tmp);
+				if (access(shell->token->path, X_OK) != 0)
+				return (ft_err_(R_PERM));
+			}
 			free(tmp);
-			break;
+			shell->path_bin++;
 		}
-		i++;
+		shell->token = shell->token->next;
 	}
-	i = 0;
-	while (shell->path_bin[i] != NULL)
-	{
-		tmp = ft_strjoin(shell->path_bin[i], "/");
-		free(shell->path_bin[i]);
-		shell->path_bin[i] = tmp;
-		i++;
-	}
+	p
 }

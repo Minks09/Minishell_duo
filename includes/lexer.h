@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 01:58:28 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/20 00:29:51 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/05 22:19:11 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ typedef struct s_envp
 
 typedef struct s_queue
 {
-    t_envp    *head;
-    t_envp    *tail;
-    int		    size;
+	t_envp		*head;
+	t_envp		*tail;
+	int			size;
 }	t_queue;
 
 t_bool	check_both_quotes(char *input);
