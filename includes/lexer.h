@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 01:58:28 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/27 13:23:36 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/10 19:14:17 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_token
 {
     char	*command;
     char    *path;
-    char	**argument;
+    char	*argument;
     char   *operator;
     char   *file;
     int    type;
@@ -66,11 +66,31 @@ void    free_token_struct(t_token **token);
 //env
 void    insert_node_env(t_envp **root, char *key, char *value);
 void    free_env(t_envp **root);
+//split_command.c
+int	check_sep_cmd(char c, char sep);
+int	count_strings_cmd(const char *str, char sep);
+int	size_of_strings_cmd(const char *str, char sep);
+char	*ft_strdup_cmd(const char *str, char sep);
+char	**ft_split_command(const char *str, char sep);
+void print_string_array(char **array);
+const char *skip_quotes(const char *str);
+//check_prompt.c
+int     is_inside_quote(const char *str, int index);
+// token.c
+void    parse_token(t_token **token, char **commands);
+void    insert_node_token(t_token **root, char *command);
+
 
 
 //bultins
 //export.c
 void    export(t_envp **root, char *new_var);
 char    *return_value_quoted(char *str);
+//echo.c
+char    *expandz(char *str);
+char    *get_value(char *str);
+int     size_var_value(char *str);
+int     size_var_key(char *str);
+void    echo(t_token **token);
 
 #endif

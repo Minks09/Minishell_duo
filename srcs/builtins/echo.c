@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:02:14 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/27 16:39:16 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/10 19:16:07 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void    echo(t_token **token)
     }
     //if (strcmp(curr->argument[0], "-n") == 0)
     //    echo_n(token);
-    while (curr->argument[i] != NULL)
+    while (curr->argument[i] != '\0')
     {
-        printf("%s", curr->argument[i]);
+        printf("%c", curr->argument[i]);
         i++;
     }   
 }
@@ -121,6 +121,20 @@ char    *get_value(char *str)
 //     return var;
 // }
 
+int is_there_dollar(char *str)
+{
+    int i;
+
+    i = 0;
+    while(str[i] != '\0')
+    {
+        if (str[i] == '$')
+            return(TRUE);
+        i++;
+    }
+    return (FALSE);
+}
+
 char    *expandz(char *str)
 {
     int     i;
@@ -131,6 +145,8 @@ char    *expandz(char *str)
 
     i = 0;
     j = 0;
+    if(!is_there_dollar(str))
+        return (str);
     value = get_value(str);
     size_var = size_var_key(str);
     new_str = (char *)malloc((sizeof(char) * strlen(str)) -size_var_key(str) +size_var_value(str));
@@ -157,14 +173,14 @@ char    *expandz(char *str)
     return (new_str);
 }
 
-int main()
-{
-    char *str;
+// int main()
+// {
+//     char *str;
 
-    str = strdup("bonjour je suis $USER !");
-    str = expandz(str);
+//     str = strdup("bonjour je suis $USER !");
+//     str = expandz(str);
 
-    printf("%s\n", str);
-    free(str);
-    return (1);
-}
+//     printf("%s\n", str);
+//     free(str);
+//     return (1);
+// }

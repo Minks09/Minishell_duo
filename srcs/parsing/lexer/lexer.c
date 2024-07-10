@@ -6,11 +6,11 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:22:20 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/27 14:23:00 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/06/30 17:05:32 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include  "../../../includes/minishell.h"
 
 t_bool	check_both_quotes(char *input)
 {
@@ -63,16 +63,6 @@ void	escape_single_quote(char *input)
 	}
 }
 
-int main(void)
-{
-	char *str;
-
-	str = strdup("je suis * 'un mendiant *' bonjour");
-	escape_single_quote(str);
-	printf("%s\n", str);
-	return (0);
-}
-
 void	escape_double_quote(char *input)
 {
 	int i;
@@ -80,7 +70,7 @@ void	escape_double_quote(char *input)
 	
 	i = 0;
 	len = strlen(input);
-	while (input[i] != '\'' && input[i] != '\0')
+	while (input[i] != '\"' && input[i] != '\0')
 			i++;
 	if (input[i] == '\0')
 		return;
@@ -96,7 +86,7 @@ void	escape_double_quote(char *input)
 			input[i++] = '\\';
 			len++;
 		}
-		if (input[i] == '\'')
+		if (input[i] == '\"')
 			break;
 		i++;
 	}
@@ -111,7 +101,7 @@ t_bool	search_semi_back(char *str)
 		if (str[i] == '\'' || str[i] == '\"')
 		{
 			i++;
-			while (str[i] != '\'' || str[i] != '\"')
+			while (str[i] != '\'' && str[i] != '\"')
 				i++;
 		}
 		if (str[i] == ';' || str[i] == '\\')
@@ -136,3 +126,13 @@ char	*expand(char *str)
 	var = strdup(temp);
 	return (var);
 }
+
+// int main(void)
+// {
+// 	char *str;
+
+// 	str = strdup("je suis * 'un mendiant *' bonjour");
+// 	escape_single_quote(str);
+// 	printf("%s\n", str);
+// 	return (0);
+// }

@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 14:07:16 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/19 15:58:21 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/09 22:50:21 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,3 +55,4 @@ void    free_token_struct(t_token **token)
     }
     *token = NULL;
 }
+
