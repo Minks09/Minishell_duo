@@ -5,109 +5,65 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 02:21:34 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/18 15:13:49 by nigateau         ###   ########.fr       */
+/*   Created: 2024/07/11 15:44:42 by nigateau          #+#    #+#             */
+/*   Updated: 2024/07/11 15:46:03 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "../../../includes/minishell.h"
 
-t_queue    *init_queue(void)
+char *skip_quotes(char *str)
 {
-    t_queue	*queue;
-
-    queue = malloc(sizeof(t_queue));
-    if (!queue)
-        return (NULL);
-    queue->head = NULL;
-    queue->tail = NULL;
-    queue->size = 0;
-    return (queue);
-}
-void    push_queue(t_queue *queue, t_envp *token)
-{
-    if (!queue || !token)
-        return ;
-    if (!queue->head)
+    if (*str == '\"')
     {
-        queue->head = token;
-        queue->tail = token;
+        str++;
+        while(*str != '\"')
+            str++;
     }
-    else
+    if (*str == '\"')
     {
-        queue->tail->next = token;
-        queue->tail = token;
+        str++;
+        str++;
     }
-    queue->size++;
-}
-
-void    push_queue_envp(t_queue *queue, t_envp *token)
-{
-    //if (!queue || !token)
-    //    return ;
-    if (!queue->head)
+    if (*str == '\'')
     {
-        queue->head = token;
-        queue->tail = token;
+        str++;
+        while(*str != '\'')
+            str++;
     }
-    else
+    if (*str == '\'')
     {
-        queue->tail->next = token;
-        queue->tail = token;
+        str++;
+        str++;
     }
-    queue->size++;
+    return(str);
 }
 
-t_envp    *pop_queue(t_queue *queue)
+int     is_inside_quote(const char *str, int index)
 {
-    t_envp	*token;
+    int i;
+    int left;
+    int right;
 
-    if (!queue || !queue->head)
-        return (NULL);
-    token = queue->head;
-    queue->head = queue->head->next;
-    queue->size--;
-    return (token);
+    left = 0;
+    right = 0;
+    i = 0;
+    while (i < index)
+    {
+        if (*(str - i) == '\'' || *(str - i) == '\"')
+            left++;
+        i++;
+    }
+    i = 1;
+    if (str[0])
+    {
+        while(str[i])
+        {
+            if (*(str + i) == '\'' || *(str + i) == '\"')
+            right++;
+            i++;
+        }
+    }
+    return(right % 2 == 1 && left % 2 == 1);
 }
-
-void    enqueue(t_queue *queue, char *key, char *value)
-{
-    t_envp	*token;
-
-    token = malloc(sizeof(t_envp));
-    if (!token)
-        return ;
-    token->key = key;
-    token->value = value;
-    token->next = NULL;
-    push_queue_envp(queue, token);
-}
-
-t_bool queue_is_empty(t_queue *queue)
-{
-    if (queue == NULL)
-        return (1);
-    if (queue->size == 0)
-        return (1);
-    return (0);
-}
-
-// void    free_queue(t_queue *queue)
-// {
-//     t_token	*token;
-//     t_token	*tmp;
-
-//     if (!queue)
-//         return ;
-//     token = queue->head;
-//     while (token)
-//     {
-//         tmp = token->next;
-//         free(token->value);
-//         free(token->type);
-//         free(token);
-//         token = tmp;
-//     }
-//     free(queue);
-// }
 

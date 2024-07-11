@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:29:10 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/30 16:00:20 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:55:52 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,57 @@ void    free_env(t_envp **root)
         tmp = NULL;
     }
     *root = NULL;
+}
+char    *return_key(char *str)
+{
+    int     i;
+    int     size;
+    char    *key;
+
+    i = 0;
+    size = 0;
+    if (!str)
+        return (NULL);
+    while (str[size] != '=')
+        size++;
+    key = (char *)malloc(sizeof(char) * size + 1);
+    if (!key)
+        return (NULL);
+    while (i < size)
+    {
+        key[i] = str[i];
+        i++;
+    }
+    key[i] = '\0';
+    return (key);    
+}
+
+char    *return_value(char *str)
+{
+    char    *tmp;
+    char    *value;
+
+    if (!str)
+        return (NULL);
+    tmp = strchr(str, '=');
+    tmp++;
+    value = strdup(tmp);
+    return (value);
+}
+
+t_envp  *return_env(char **env)
+{
+    t_envp *root;
+    int i;
+
+    i = 1;
+    root = malloc(sizeof(t_envp));
+    root->key = return_key(env[0]);
+    root->value = return_value(env[0]);
+    root->next = NULL;
+     while (env[i++])
+        insert_node_env(&root, return_key(env[i]), return_value(env[i]));
+    return (root);
 }
 
 // int main(int argc, char **argv, char **env)

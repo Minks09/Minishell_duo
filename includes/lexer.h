@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 01:58:28 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/10 19:14:17 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:16:49 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ int     is_inside_quote(const char *str, int index);
 // token.c
 void    parse_token(t_token **token, char **commands);
 void    insert_node_token(t_token **root, char *command);
+void    parse_token2(t_token **token, char **commands);
+//heredoc.c
+void    heredoc(t_token *token);
 
 
 

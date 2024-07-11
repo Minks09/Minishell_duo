@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:34:31 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/19 19:17:41 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/11 01:18:51 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,11 @@ void    heredoc(t_token *token)
     line = NULL;
     }
 }
-int main()
-{
-    t_token *token;
-    token = init_token_struct();
-    heredoc(token);
-    free_token_struct(&token);
-    return (1);
-}
+// int main()
+// {
+//     t_token *token;
+//     token = init_token_struct();
+//     heredoc(token);
+//     free_token_struct(&token);
+//     return (1);
+// }

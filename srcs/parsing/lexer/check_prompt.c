@@ -6,39 +6,12 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 16:18:24 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/10 22:00:05 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:16:03 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "../../../includes/minishell.h"
 
-int     is_inside_quote(const char *str, int index)
-{
-    int i;
-    int left;
-    int right;
-
-    left = 0;
-    right = 0;
-    i = 0;
-    while (i < index)
-    {
-        if (*(str - i) == '\'' || *(str - i) == '\"')
-            left++;
-        i++;
-    }
-    i = 1;
-    if (str[0])
-    {
-        while(str[i])
-        {
-            if (*(str + i) == '\'' || *(str + i) == '\"')
-            right++;
-            i++;
-        }
-    }
-    return(right % 2 == 1 && left % 2 == 1);
-}
 char    *check_prompt(char *prompt)
 {
     char    *clean_prompt;
@@ -50,29 +23,33 @@ char    *check_prompt(char *prompt)
     return(clean_prompt);
 }
 
-void    parsing(char *prompt)
+t_bool    parsing(t_shell *shell, char *prompt)
 {
     char    *clean_prompt;
     char     **commands;
     int i;
-    t_token     *root;
-    t_token     *curr;
+    t_token     *root_token;
+    t_envp      *root_env;
+    //t_token     *curr;
 
     i = 0;
     clean_prompt = check_prompt(prompt);
     if (!clean_prompt)
-        return;
+        return(FALSE);
     commands = ft_split_command(clean_prompt, ' ');
     root = init_token_struct();
-    parse_token(&root, commands);
-    curr = root;
-    while (curr != NULL)
-    {
-        printf("command : %s\n", curr->command);
-        curr = curr->next;
-    }
-    free_token_struct(&root);
-    return;
+    parse_token2(&root_token, commands);
+    root_env = 
+    //curr = root;
+    // while (curr != NULL)
+    // {
+    //     printf("command : %s\n", curr->command);
+    //     printf("argument : %s\n", curr->argument);
+    //     printf("type : %d\n", curr->type);
+    //     curr = curr->next;
+    // }
+    // free_token_struct(&root);
+    return(TRUE);
 }
 
 int main()
@@ -80,8 +57,9 @@ int main()
     char *prompt;
     char *new_prompt;
     char **commands;
+    t_shell     *shell;
 
     prompt = strdup("ls -la | grep \"je suis un test\"");
-    parsing(prompt);
+    parsing(shell, prompt);
     return (1);
 }

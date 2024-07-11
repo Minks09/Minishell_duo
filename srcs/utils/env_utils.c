@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
+/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 01:45:28 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/05/31 18:29:40 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/11 15:47:12 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_env_var create_new(char *string)
 	int	j;
 	t_env_var *new;
 	
-	new = malloc(sizeof(t_env_var))
+	new = malloc(sizeof(t_env_var));
 	if (!new)
-		return 
+		return;
 }
 void    ft_envs_to_lst(char **envp, t_envs_lst **envs)
 {
@@ -29,7 +29,5 @@ void    ft_envs_to_lst(char **envp, t_envs_lst **envs)
         return;
     i = 0;
     while (!(envp[i]))
-		ft_add_var(envs, envp[i++])
+		ft_add_var(envs, envp[i++]);
 }
-
-    
