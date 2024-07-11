@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:16:13 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/11 21:13:49 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/11 23:29:19 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@
 # define SUCCESS 0
 # define IS_DIRECTORY 126
 # define UNKNOWN_COMMAND 127
+
+# define FALSE 0
+# define TRUE 1
+# define t_bool int
+
+/* SHELL STATUS TYPE */
+# define WAIT 0
+# define READ 1
+# define EXEC 2
+# define QUIT 3
 
 
 typedef struct s_quotes
@@ -114,6 +124,8 @@ typedef struct s_shell
 	int			status;
 	int			shlvl;
 	int			nb_pipe;
+	int			fd_in;
+	int			fd_out;
 	pid_t		pid;
 	t_pipe		pipe;
 	t_token		*token;
@@ -121,5 +133,6 @@ typedef struct s_shell
 	
 }	t_shell;
 
-#endif
+typedef struct termios t_termios;
 
+#endif

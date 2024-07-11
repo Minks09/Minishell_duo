@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:59:35 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/11 15:27:06 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/12 00:23:27 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@ t_token *init_token_struct(void)
     token = malloc(sizeof(t_token));
     if (!token)
         exit(1);
-    token->command = strdup("");
-    token->path = strdup("");
-    token->argument = strdup(" EOF ");
-    token->operator = strdup("");
-    token->file = strdup("");
+    
+    token->command = NULL;
+    token->path = NULL;
+    token->argument = NULL;
+    token->operator = NULL;
+    token->file = NULL;
+
     token->type = 0;
     token->fd = -1;
     token->next = NULL;
@@ -102,7 +104,7 @@ Dans command < file.txt, le signe < fait que command lit son entrée à partir d
 Dans command1 | command2, le signe | pipe la sortie de command1 à l'entrée de command2.
 Donc, dans votre fonction parse_token, lorsque vous rencontrez un signe de redirection, vous devriez généralement traiter le prochain élément dans str comme l'argument de la redirection.*/
 
-void    parse_token2(t_token **token, char **str)
+void    parse_token(t_token **token, char **str)
 {
     int i;
 	t_token *curr;
@@ -128,27 +130,7 @@ void    parse_token2(t_token **token, char **str)
 
     }
 }
-// void    parse_token(t_token **token, char **str)
-// {
-//     int i;
-// 	t_token *curr;
 
-//     i = 0;
-// 	curr = *token;
-// 	(*token)->command = str[i++];
-//     while (str[i] != NULL)
-//     {
-// 		printf("%d\n", i);
-// 		if (strncmp(str[i] , "<<", 2) == 0)
-// 			heredoc(*token);
-// 		if (strncmp(str[i], "|", 1) != 0)
-// 			curr->argument = str[i++];
-// 		insert_node_token(token, str[i]);
-// 		i++;
-// 		curr = curr->next;
-//     }
-// }
-//
 // int main()
 // {
 //     t_token *root;
@@ -162,35 +144,5 @@ void    parse_token2(t_token **token, char **str)
 //         printf("key : %s\n", curr->command);
 //         printf("value : %s\n", curr->argument);
 //         curr = curr->next;
-//     }
-// }
-// void    parse_token(t_token **token, char **str)
-// {
-//     int i;
-// 	t_token *curr;
-
-//     i = 0;
-// 	curr = *token;
-// 	(*token)->command = str[i++];
-//     while (str[i] != NULL)
-//     {
-// 		printf("%d\n", i);
-// 		if (strncmp(str[i] , ">>", 3) == 0)
-// 			heredoc(*token);
-// 		if (strncmp(str[i], "|", 2) == 0)
-// 		{
-// 			insert_node_token(token, str[i++]);
-// 			curr = curr->next;
-// 			continue;
-// 		}
-// 		else{
-// 			curr->argument = str[i++];
-// 			if (str[i++] != NULL)
-// 			{
-// 				insert_node_token(token, str[i]);
-// 				curr = curr->next;
-// 			}
-// 		}
-// 		i++;
 //     }
 // }

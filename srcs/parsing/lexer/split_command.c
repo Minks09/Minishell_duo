@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 23:28:11 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/11 21:43:38 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/11 22:01:23 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,22 +120,6 @@ char	**ft_split_command(const char *str, char sep)
 	}
 	strings[i] = NULL;
 	return (strings);
-}
-
-void print_string_array(char **array) 
-{
-    int i;
-
-    if (array == NULL) {
-        printf("Array is NULL\n");
-        return;
-    }
-    
-    i = 0;
-    while (array[i] != NULL) {
-        printf("%s\n", array[i]);
-        i++;
-    }
 }
 
 // int main()

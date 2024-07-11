@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:29:10 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/11 21:30:02 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/12 00:24:01 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,42 +80,6 @@ void    free_env(t_envp **root)
     }
     *root = NULL;
 }
-char    *return_key(char *str)
-{
-    int     i;
-    int     size;
-    char    *key;
-
-    i = 0;
-    size = 0;
-    if (!str)
-        return (NULL);
-    while (str[size] != '=')
-        size++;
-    key = (char *)malloc(sizeof(char) * size + 1);
-    if (!key)
-        return (NULL);
-    while (i < size)
-    {
-        key[i] = str[i];
-        i++;
-    }
-    key[i] = '\0';
-    return (key);    
-}
-
-char    *return_value(char *str)
-{
-    char    *tmp;
-    char    *value;
-
-    if (!str)
-        return (NULL);
-    tmp = strchr(str, '=');
-    tmp++;
-    value = strdup(tmp);
-    return (value);
-}
 
 t_envp  *return_env(t_shell *shell, char **env)
 {
@@ -123,7 +87,6 @@ t_envp  *return_env(t_shell *shell, char **env)
     int i;
 
     i = 1;
-    // init le tableau shell->env pour naim avec getenv
     shell->env_tab = return_env_tab(env);
     root = malloc(sizeof(t_envp));
     root->key = return_key(env[0]);
@@ -135,6 +98,25 @@ t_envp  *return_env(t_shell *shell, char **env)
         i++;
      }
     return (root);
+}
+
+char    **return_env_tab(char **envp)
+{
+    int i;
+    char **env;
+
+    i = 0;
+    while (envp[i])
+        i++;
+    env = malloc(sizeof(char *) * i + 1);
+    i = 0;
+    while (envp[i])
+    {
+        env[i] = strdup(envp[i]);
+        i++;
+    }
+    env[i] = NULL;
+    return(env);
 }
 
 // int main(int argc, char **argv, char **env)
@@ -169,22 +151,3 @@ t_envp  *return_env(t_shell *shell, char **env)
 //     free_env(&root);
 //     return (1);
 // }
-
-char    **return_env_tab(char **envp)
-{
-    int i;
-    char **env;
-
-    i = 0;
-    while (envp[i])
-        i++;
-    env = malloc(sizeof(char *) * i + 1);
-    i = 0;
-    while (envp[i])
-    {
-        env[i] = strdup(envp[i]);
-        i++;
-    }
-    env[i] = NULL;
-    return(env);
-}
