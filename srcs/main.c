@@ -41,8 +41,7 @@ int shell_init(t_shell **shell, t_termios *new, t_termios *copy)
     if (!(*shell))
         return ERROR;
 	(*shell)->pid = 0;
-	(*shell)->fd_in = -1;
-	(*shell)->fd_out = -1;
+	(*shell)->quit_child = 0;
 	(*shell)->exit_status = 0;
 	(*shell)->status = WAIT;
 	if (isatty(STDIN_FILENO))
@@ -51,8 +50,8 @@ int shell_init(t_shell **shell, t_termios *new, t_termios *copy)
 	(*shell)->shlvl += 1;
 	set_prompt(shell);
   	if (!isatty(STDOUT) && isatty(STDIN))
-      put_error("WARNING: STDOUT is not a terminal,'\n'\
-      WARNING: Prompt history are disable");
+		ft_putstr_fd("WARNING: STDOUT is not a terminal,'\n'\
+		WARNING: Prompt history are disable", STDERR_FILENO);
    	if (isatty(STDIN_FILENO) && init_termios(new, copy))
    		return SUCCESS;
 	else 
@@ -61,35 +60,38 @@ int shell_init(t_shell **shell, t_termios *new, t_termios *copy)
 
 void  main_shell(t_shell *shell, char **envp)
 {
+	(void)envp;
 	//t_token		*commands;
-	char 		**buff;
+	char 		*buff;
 
-	buff = malloc(sizeof(char*) * BUFF_SIZE);
-	if(!buff)
-		return;
+	buff = NULL;
+	//malloc(sizeof(char*) * BUFF_SIZE);
+	// if(!buff)
+	// 	return;
 	while (shell->status != QUIT)
 	{
 		signal_main();
 		if(isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
-			*buff = readline(shell->prompt);
+			buff = readline(shell->prompt);
 		else
-			*buff = get_next_line(STDIN_FILENO);
-		if (!(*buff))
+			buff = get_next_line(STDIN_FILENO);
+		if (!buff)
 			return;
 		// if (handle_wrong_input(buff))
 			continue;
-		if (*buff && **buff)
+		if (buff && *buff)
 		{
 			if (isatty(STDIN_FILENO))
-				add_history(*buff);
+				add_history(buff);
 			else
-				ft_putendl_fd(*buff, STDOUT_FILENO);
+				ft_putendl_fd(buff, STDOUT_FILENO);
 			// commands = get_command(*buff, '|', &len)
 			signal_child();
-			main_exec(shell, envp);
+			main_exec(shell);
 		}
-		free(*buff);
+		free(buff);
 	}
+	rl_clear_history();
 	// quit_shell(shell);
 }
 
@@ -105,8 +107,10 @@ int main(int argc, char **argv, char **envp)
 	(void) argv;
 	queue_env = NULL;
 	shell = NULL;
-	if (argc != 1)
-	return (put_error("TO MANY ARGUMENTS, FOLLOW THE PROJECT GUIDELINES"));
+	if (argc != 1){
+		perror("TO MANY ARGUMENTS, FOLLOW THE PROJECT GUIDELINES");
+		return (ERROR);
+	}
 	copy_envp(queue_env, envp);
 	shell_init(&shell, &new, &copy);
 	set_bin_path(envp, shell);

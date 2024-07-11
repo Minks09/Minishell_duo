@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 01:22:52 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/11 01:27:18 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/11 23:47:32 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	handle_redirection(t_token *token)
 {
 	int file_fd;
+	file_fd = -1;
 	if (token->type == T_TRUNC)
 		file_fd = open(token->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (token->type == T_APPEND)

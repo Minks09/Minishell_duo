@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:16:13 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/11 16:09:10 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/11 23:44:55 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@
 //definition of types of potential errors
 # define R_MALLOC 			2
 # define R_ERROR 			9
-# define R_PERM 			126
-// If a command is found but is not executable,the return status is 126
-# define R_PATH 			127
-//If a command is not found, the child process created to execute it returns a status of 127
+# define R_PERM 			126 // If a command is found but is not executable,the return status is 126
+# define R_PATH 			127 //If a command is not found, the child process created to execute it returns a status of 127
 # define R_FILE_NOT_FOUND 	255
 # define BUFF_SIZE 			1042
 # define EXPANSION 			-36
@@ -92,6 +90,8 @@ typedef struct s_token
 	char	*operator;
 	char	*file;
 	int		type;
+	int		fd_in;
+	int		fd_out;
 	struct s_token	*next;
 }	t_token;
 
@@ -106,7 +106,7 @@ typedef struct s_shell
 {
 	char		*prompt;
 	char		**path_bin; // tableau de chemin d'acces terminer par null
-	char 		*env;
+	char 		**env;
 	int			quit_child;
 	int			exit_status;
 	int			status;

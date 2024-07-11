@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/10 22:23:38 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/11 23:10:04 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 //builtins
 int is_builtins(char *cmd);
-int do_builtins(t_token cmd, t_shell *shell);
+int do_builtins(t_shell *shell);
 int ft_pwd(t_shell *shell);
 
 //env
@@ -51,12 +51,20 @@ char	*get_env_value(char *key, t_queue *queue);
 
 //error
 int		ft_err_(int R_CODE);
-int		put_error(char *msg);
+int		put_error(t_shell *shell, char *msg, int R_CODE);
 
 //exec
-void	expand_dollars(t_shell *shell);
-void	main_exec(t_shell *shell, char **envp);
-
+void	init_first_pipe(t_shell *shell);
+void	init_mid_pipe(t_shell *shell);
+void	close_pipes(t_pipe *pipe);
+void	execute_first_pipe(t_shell *shell, t_token *curr);
+void	execute_mid_pipe(t_shell *shell, t_token *curr);
+void	execute_last_pipe(t_shell *shell, t_token *curr);
+void	pipe_exec(t_shell *shell);
+void	simple_exec(t_shell *shell);
+void	main_exec(t_shell *shell);
+//redir.c
+void	handle_redirection(t_token *token);
 
 //signals
 void	CTRL_C(int sig);

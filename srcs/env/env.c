@@ -25,7 +25,10 @@ int valid_env_key(char *key)
         if (is_alnum(key) || key[i] == '_')
             i++;
         else
-            return(put_error("invalid key character, use only alphanum or '_'"));
+        {
+            ft_putstr_fd("invalid key character, use only alphanum or '_'", STDERR_FILENO);
+            return(ERROR);
+        }
     }
     return(SUCCESS);
 }

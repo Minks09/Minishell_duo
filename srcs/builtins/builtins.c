@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 22:22:24 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/10 22:22:27 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/11 22:26:06 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,16 @@ int is_builtins(char *cmd)
 	!ft_strncmp(cmd, "exit", 5));
 }
 
-int do_builtins(t_token *token, t_shell *shell)
+int do_builtins(t_shell *shell)
 {
-	char *cmd;
-	cmd = ft_strdup(shell->token->command);
-	if (!cmd)
+	if (!shell->token->command)
 		return (ft_err_(R_MALLOC));
 	printf("do_builtins\n");
 	// if(!ft_strncmp(cmd, "echo", 5))
 	// 	return (echo(cmd));
 	// if(!ft_strncmp(cmd, "cd", 3))
 	// 	return (cd(cmd.argument));
-	if(!ft_strncmp(cmd,"pwd", 4))
+	if(!ft_strncmp(shell->token->command,"pwd", 4))
 		return (ft_pwd(shell));
 	// if(!ft_strncmp(cmd, "export", 7))
 	// 	return (export(cmd.argument));
@@ -44,6 +42,5 @@ int do_builtins(t_token *token, t_shell *shell)
 	// 	return (print_env(cmd.argument));
 	// if(!ft_strncmp(cmd, "exit", 5))
 	// 	return (ft_exit(cmd.argument));
-	free(cmd);
 	return (SUCCESS);
 }
