@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/05 23:25:31 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/10 22:23:38 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <limits.h>
 # include <errno.h>
 # include <signal.h>
+# include <sys/wait.h>
 # include <sys/termios.h>
 
 ////////COLORS////////
@@ -38,8 +39,10 @@
 
 /////////////PROTOTYPES////////////////
 
-//error
-int put_error(char *msg);
+//builtins
+int is_builtins(char *cmd);
+int do_builtins(t_token cmd, t_shell *shell);
+int ft_pwd(t_shell *shell);
 
 //env
 int		is_alnum(char *key);
@@ -48,6 +51,13 @@ char	*get_env_value(char *key, t_queue *queue);
 
 //error
 int		ft_err_(int R_CODE);
+int		put_error(char *msg);
+
+//exec
+void	expand_dollars(t_shell *shell);
+void	main_exec(t_shell *shell, char **envp);
+
+
 //signals
 void	CTRL_C(int sig);
 void	CTRL_else(int sig);

@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 20:20:09 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/05 01:06:40 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/09 20:55:24 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 void	CTRL_C(int sig)
 {
 	(void)sig;
-	//rl_replace_line("", 0);
-	// rl_on_new_line();
-	// write(1, "\n", 1);
-	// rl_redisplay();
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	write(1, "\n", 1);
+	rl_redisplay();
 }
 
 void	CTRL_else(int sig)
 {
 	(void)sig;
+	rl_redisplay();
 }
 
 void 	signal_main(void)

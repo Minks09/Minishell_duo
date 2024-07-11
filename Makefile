@@ -22,7 +22,11 @@ DEPENDENCIES 	= 	$(HEADER)/minishell.h $(HEADER_LIBFT)/libft.h
 #Ci dessus sont definis tous les headers dont depend le projet#
 #/////////////////////////////SRCS////////////////////////////////////////
 SRCS = 	main.c\
+		builtins/builtins.c\
 		builtins/export.c\
+		builtins/ft_cd.c\
+		builtins/ft_exit.c\
+		builtins/ft_pwd.c\
 		env/env.c\
 		env/init.c\
 		error/utils_error.c\
@@ -47,7 +51,7 @@ RM 				= 	rm -f
 
 CC 				= 	gcc
 
-CFLAGS 			= 	-I $(HEADER) -I$(HEADER_LIBFT) -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS 			= 	-I$(HEADER) -I$(HEADER_LIBFT) -Wall -Wextra -Werror -fsanitize=address -g
 #CI dessus sont definis les variable utiles a la compilation comme les flags ou certaine commande#
 #//////////////////////////OBEJCTS/////////////////////////////////////////#
 OBJS 		= $(SRCS:c=o)
@@ -67,7 +71,8 @@ _OBJS		= $(addprefix $(OBJS_DIR)/, $(OBJS))
 # macOS with Homebrew
 ifeq ($(shell uname -s), Darwin)
 	READLINE_PATH = /opt/homebrew/opt/readline
-    RL_FLAGS = -I$(READLINE_PATH)/include -L$(READLINE_PATH)/lib
+	RL_FLAGS = -I$(READLINE_PATH)/include
+	RL_LDFLAGS = -L$(READLINE_PATH)/lib -lreadline -lhistory
 # Pour 42: 
 # READLINE_PATH = $(HOME)/.brew/opt/readline
 # CFLAGS += -I $(READLINE_PATH)/include -L$(READLINE_PATH)/lib
@@ -101,12 +106,11 @@ lib :
 #CI dessus est une condition qui permet de verifier si la libft est deja compilee ou non#
 $(NAME): check lib $(_OBJS)
 	@echo "$(COLOUR_CYAN)Compiling minishell..."
-	@$(CC) $(_OBJS) libft.a $(CFLAGS) $(RL_FLAGS) -Lincludes/Libft -lreadline -o $@
-	@exit
+	@$(CC) $(_OBJS) libft.a $(CFLAGS) $(RL_LDFLAGS) -Lincludes/LIBFT -o $@
 #CI dessus est la regle qui permet de compiler le projet#
 $(OBJS_DIR)/%.o: $(SRC_PATH)/%.c
 	@mkdir -p $(dir $@)
-	@${CC} $(CFLAGS) -c $< -o $@ -g3
+	@${CC} $(CFLAGS) $(RL_FLAGS) -c $< -o $@ -g3
 #CI dessus est la regle qui permet de compiler les .o#
 clean:
 			@$(RM) $(OBS)

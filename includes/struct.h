@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:16:13 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/06 00:40:08 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/11 16:09:10 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@
 # include <stdbool.h>
 # include <sys/types.h>
 //definition des types possible de token 
-# define T_EMPTY 0
-# define T_CMD 1
-# define T_ARG 2
-# define T_TRUNC 3
-# define T_APPEND 4
-# define T_INPUT 5
-# define T_PIPE 6
-# define T_END 7
+# define T_EMPTY 			0
+# define T_CMD 				1
+# define T_ARG 				2 // = " "/ -{}
+# define T_TRUNC 			3 // = >
+# define T_APPEND 			4 // = >>
+# define T_INPUT 			5 // = <
+# define T_PIPE 			6 // = |
+# define T_END 				7
 //definition des type de redirections
-# define STDIN 0
-# define STDOUT 1
-# define STDERR_FILENO 2
+# define STDIN 				0
+# define STDOUT 			1
+# define STDERR_FILENO 		2
 //definition of types of potential errors
-# define R_MALLOC 2
-# define R_ERROR 9
+# define R_MALLOC 			2
+# define R_ERROR 			9
 # define R_PERM 			126
 // If a command is found but is not executable,the return status is 126
 # define R_PATH 			127
@@ -72,18 +72,6 @@ typedef struct s_parse
 	int			token_amount;
 	int			index_token;
 }			t_parse;
-
-typedef struct s_token
-{
-    char	*command;
-    char    *path;
-    char	**argument;
-    char	*operator;
-    char   	*file;
-    int    	type;
-    struct s_token	*next;
-}	t_token;
-
 typedef struct s_env_var
 {
 	char	*key;
@@ -96,24 +84,42 @@ typedef struct s_envs_lst
 	struct s_envs_lst	*next;
 }	t_envs_lst;
 
+typedef struct s_token
+{
+	char	*command;
+	char	*path;
+	char	**argument;
+	char	*operator;
+	char	*file;
+	int		type;
+	struct s_token	*next;
+}	t_token;
+
+typedef struct s_pipe
+{
+	int		nb_pipes;
+	int		in[2];
+	int		out[2];
+}	t_pipe;
+
 typedef struct s_shell
 {
 	char		*prompt;
-	char 		**path_bin; // tableau de chemin d'acces terminer par null
-	pid_t		pid;
-	int			fd[2];
-	int			fd_in;
-	int			fd_out;
+	char		**path_bin; // tableau de chemin d'acces terminer par null
+	char 		*env;
 	int			quit_child;
 	int			exit_status;
 	int			status;
 	int			shlvl;
+	int			nb_pipe;
+	pid_t		pid;
+	t_pipe		pipe;
 	t_token		*token;
 	t_envs_lst	*envs;
 	
 }	t_shell;
 
-typedef struct termios t_termios;
-extern int last_error;
+typedef	struct termios t_termios;
+extern	int g_errno;
 #endif
 

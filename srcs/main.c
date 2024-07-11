@@ -48,7 +48,7 @@ int shell_init(t_shell **shell, t_termios *new, t_termios *copy)
 	if (isatty(STDIN_FILENO))
 		(*shell)->shlvl = ft_atoi(getenv("SHLVL")) + 1;
 	else
-	(*shell)->shlvl = 0;
+	(*shell)->shlvl += 1;
 	set_prompt(shell);
   	if (!isatty(STDOUT) && isatty(STDIN))
       put_error("WARNING: STDOUT is not a terminal,'\n'\
@@ -59,7 +59,7 @@ int shell_init(t_shell **shell, t_termios *new, t_termios *copy)
 	return ERROR;
 }
 
-void  main_shell(t_shell *shell)
+void  main_shell(t_shell *shell, char **envp)
 {
 	//t_token		*commands;
 	char 		**buff;
@@ -82,13 +82,18 @@ void  main_shell(t_shell *shell)
 		{
 			if (isatty(STDIN_FILENO))
 				add_history(*buff);
+			else
+				ft_putendl_fd(*buff, STDOUT_FILENO);
 			// commands = get_command(*buff, '|', &len)
-			signals_child();
-			// main_exec(len, commands, int[2] {0, 1});
+			signal_child();
+			main_exec(shell, envp);
 		}
 		free(*buff);
 	}
+	// quit_shell(shell);
 }
+
+int g_errno = 0;
 
 int main(int argc, char **argv, char **envp)
 {
@@ -97,8 +102,6 @@ int main(int argc, char **argv, char **envp)
 	t_termios	new;
 	t_termios	copy;
 
-
-	(void) envp;
 	(void) argv;
 	queue_env = NULL;
 	shell = NULL;
@@ -107,6 +110,6 @@ int main(int argc, char **argv, char **envp)
 	copy_envp(queue_env, envp);
 	shell_init(&shell, &new, &copy);
 	set_bin_path(envp, shell);
-	main_shell(shell);
-	return (0);
+	main_shell(shell, envp);
+	return (g_errno % 255);
 }

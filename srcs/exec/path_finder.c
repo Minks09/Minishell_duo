@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 20:21:14 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/06 01:19:51 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/07 14:36:14 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,36 @@ char *full_path(t_shell *shell)
 			tmp = ft_strjoin(shell->path_bin, shell->token->command);
 			if (access(tmp, F_OK) == 0)
 			{
-				shell->token->path = ft_strdup(tmp);
-				if (access(shell->token->path, X_OK) != 0)
+				if (access(tmp, X_OK) != 0)
 				return (ft_err_(R_PERM));
+				else 
+					shell->token->path = ft_strdup(tmp);
 			}
 			free(tmp);
 			shell->path_bin++;
 		}
 		shell->token = shell->token->next;
+	}
+}
+
+void find_access(t_shell *shell)
+{
+	int		i;
+	char	*tmp;
+	
+	i = 0;
+	tmp = ft_strjoin(shell->path_bin[i], shell->token->command);
+	while (shell->token != NULL && is_builtins(shell->token->command) != 0)
+	{
+		if (shell->path_bin == NULL)
+			full_path(shell);
+		while (access(tmp, X_OK) != 0)
+		{
+			free(tmp);
+			i++;
+			tmp = ft_strjoin(shell->path_bin[i], shell->token->command);
+		}
+		shell->token->path = ft_strdup(tmp);
+		free(tmp);
 	}
 }
