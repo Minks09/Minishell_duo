@@ -6,13 +6,13 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:44:42 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/11 15:46:03 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/11 21:43:34 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "../../../includes/minishell.h"
 
-char *skip_quotes(char *str)
+const char *skip_quotes(const char *str)
 {
     if (*str == '\"')
     {
@@ -23,7 +23,8 @@ char *skip_quotes(char *str)
     if (*str == '\"')
     {
         str++;
-        str++;
+        if (*str == ' ')
+            str++;
     }
     if (*str == '\'')
     {
@@ -34,7 +35,8 @@ char *skip_quotes(char *str)
     if (*str == '\'')
     {
         str++;
-        str++;
+        if (*str == ' ')
+            str++;
     }
     return(str);
 }

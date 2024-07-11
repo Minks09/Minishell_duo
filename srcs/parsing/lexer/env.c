@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:29:10 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/11 15:55:52 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/11 21:30:02 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,18 +117,23 @@ char    *return_value(char *str)
     return (value);
 }
 
-t_envp  *return_env(char **env)
+t_envp  *return_env(t_shell *shell, char **env)
 {
     t_envp *root;
     int i;
 
     i = 1;
+    // init le tableau shell->env pour naim avec getenv
+    shell->env_tab = return_env_tab(env);
     root = malloc(sizeof(t_envp));
     root->key = return_key(env[0]);
     root->value = return_value(env[0]);
     root->next = NULL;
-     while (env[i++])
+     while (env[i])
+     {
         insert_node_env(&root, return_key(env[i]), return_value(env[i]));
+        i++;
+     }
     return (root);
 }
 
@@ -164,3 +169,22 @@ t_envp  *return_env(char **env)
 //     free_env(&root);
 //     return (1);
 // }
+
+char    **return_env_tab(char **envp)
+{
+    int i;
+    char **env;
+
+    i = 0;
+    while (envp[i])
+        i++;
+    env = malloc(sizeof(char *) * i + 1);
+    i = 0;
+    while (envp[i])
+    {
+        env[i] = strdup(envp[i]);
+        i++;
+    }
+    env[i] = NULL;
+    return(env);
+}

@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 23:28:11 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/10 15:55:11 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/11 21:43:38 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,34 +138,6 @@ void print_string_array(char **array)
     }
 }
 
-const char *skip_quotes(const char *str)
-{
-    if (*str == '\"')
-    {
-        str++;
-        while(*str != '\"')
-            str++;
-    }
-    if (*str == '\"')
-    {
-        str++;
-        if (*str == ' ')
-            str++;
-    }
-    if (*str == '\'')
-    {
-        str++;
-        while(*str != '\'')
-            str++;
-    }
-    if (*str == '\'')
-    {
-        str++;
-        if (*str == ' ')
-            str++;
-    }
-    return(str);
-}
 // int main()
 // {
 //     char *str;

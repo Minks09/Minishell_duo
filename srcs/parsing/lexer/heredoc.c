@@ -6,11 +6,9 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:34:31 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/11 01:18:51 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/11 21:06:55 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include  "../../../includes/minishell.h"
 

@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:32:37 by nigateau          #+#    #+#             */
-/*   Updated: 2024/05/28 17:13:16 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/11 21:38:20 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,25 +177,25 @@ char	**ft_split(const char *str, char sep)
 // }
 
 
-int	main(int argc, char **argv)
-{
-	int		i;
-    char	sep;
-	//char	**strs;
+// int	main(int argc, char **argv)
+// {
+// 	int		i;
+//     char	sep;
+// 	//char	**strs;
 
-	(void)argc;
-	i = 0;
-	sep = '|';
-	//strs = ft_split(argv[1], sep);
-	// while (strs[i] != 0)
-	// {
-	// 	printf("%s\n", strs[i]);
-	// 	i++;
-	// }
-    i = size_of_strings2(argv[1], sep);
-    i = count_strings2(argv[1], sep);
-    printf("%d\n", i);
+// 	(void)argc;
+// 	i = 0;
+// 	sep = '|';
+// 	//strs = ft_split(argv[1], sep);
+// 	// while (strs[i] != 0)
+// 	// {
+// 	// 	printf("%s\n", strs[i]);
+// 	// 	i++;
+// 	// }
+//     i = size_of_strings2(argv[1], sep);
+//     i = count_strings2(argv[1], sep);
+//     printf("%d\n", i);
 
-	return (0);
-}
+// 	return (0);
+// }
 
