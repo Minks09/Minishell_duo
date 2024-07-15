@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:44:42 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/11 22:01:33 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/12 11:29:08 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,3 +122,15 @@ void print_string_array(char **array)
     }
 }
 
+void    ft_putstr(char *str)
+{
+    int i;
+
+    i = 0;
+    while (str[i])
+    {
+        write(1, &str[i], 1);
+        i++;
+    }
+    write(1, "\n", 1);
+}

@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/12 00:20:41 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/15 16:19:33 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char        *return_key(char *str);
 char        *return_value(char *str);
 int         is_inside_quote(const char *str, int index);
 const char  *skip_quotes(const char *str);
+void        ft_putstr(char *str);
 //check_prompt.c
 t_bool      parsing(t_shell *shell, char *prompt, char **env);
 char        *check_prompt(char *prompt);
@@ -63,6 +64,12 @@ void        remove_node_env(t_envp **root, char *key);
 //heredoc.c
 void        heredoc(t_token *token);
 t_bool      search_EOF(char *haystack, char *needle);
+//utils2.c
+void        free_tab(char **tab);
+t_bool      get_pathname(t_shell *shell, char *command);
+t_bool      check_command(t_shell *shell);
+//error.c
+t_bool    command_not_valid(char *command);
 
 /*************************************************************************************/
 
