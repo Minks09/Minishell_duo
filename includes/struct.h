@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:16:13 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/06/27 13:27:36 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/23 15:10:04 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 # define STRUCT_H
 
 # include <stdbool.h>
-# include <sys/types.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+
+
 //definition des types possible de token 
 # define T_EMPTY 0
 # define T_CMD 1
@@ -46,6 +49,16 @@
 # define IS_DIRECTORY 126
 # define UNKNOWN_COMMAND 127
 
+# define FALSE 0
+# define TRUE 1
+# define t_bool int
+
+/* SHELL STATUS TYPE */
+# define WAIT 0
+# define READ 1
+# define EXEC 2
+# define QUIT 3
+
 
 typedef struct s_quotes
 {
@@ -65,47 +78,51 @@ typedef struct s_parse
 	int			index_token;
 }			t_parse;
 
+typedef struct s_pipe
+{
+	int		nb_pipes;
+	int		in[2];
+	int		out[2];
+}	t_pipe;
+
 typedef struct s_token
 {
     char	*command;
     char    *path;
-    char	**argument;
-    char	*operator;
-    char   	*file;
-    int    	type;
-	int		fd[2];
+    char	*argument;
+    char   *operator;
+    char   *file;
+    int    type;
+    int    fd;
     struct s_token	*next;
 }	t_token;
 
-typedef struct s_env_var
+typedef struct s_envp
 {
-	char	*key;
-	char	*val;
-}	t_env_var;
-
-typedef struct s_envs_lst
-{
-	t_env_var			*key;
-	struct s_envs_lst	*next;
-}	t_envs_lst;
+    char	*key;
+    char	*value;
+    struct s_envp	*next;
+}	t_envp;
 
 typedef struct s_shell
 {
-	pid_t	pid;
-	int		std_in;
-	int		std_out;
-	int		fd_in;
-	int		fd_out;
-	int		proc_lvl;
-	int		exit_status;
-	int		shlvl;
-	char	*prompt;
-	t_token	*token;
-	t_envs_lst	*envs;
-	bool	executed;
-	bool	is_running;
+	char		*prompt;
+	char		**path_bin; // tableau de chemin d'acces terminer par null
+	char 		**env_tab;
+	int			quit_child;
+	int			exit_status;
+	int			status;
+	int			shlvl;
+	int			nb_pipe;
+	int			fd_in;
+	int			fd_out;
+	pid_t		pid;
+	t_pipe		pipe;
+	t_token		*token;
+	t_envp		*env;
+	
 }	t_shell;
 
 typedef struct termios t_termios;
-#endif
 
+#endif

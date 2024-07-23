@@ -1,14 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.c                                        :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/30 01:45:28 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/06/16 21:15:01 by racinedelar      ###   ########.fr       */
+/*   Created: 2024/06/21 17:50:58 by nigateau          #+#    #+#             */
+/*   Updated: 2024/07/23 15:10:57 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <minishell.h>
+#include "../../includes/minishell.h"
 
+void    unset(t_envp **root, char *key)
+{
+    remove_node_env(root, key);
+    return;
+}

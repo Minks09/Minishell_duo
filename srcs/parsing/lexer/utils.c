@@ -5,100 +5,132 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 02:21:34 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/04 19:43:42 by racinedelar      ###   ########.fr       */
+/*   Created: 2024/07/11 15:44:42 by nigateau          #+#    #+#             */
+/*   Updated: 2024/07/23 15:12:02 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "../../../includes/minishell.h"
-#include "../../../includes/minishell.h"
 
-t_queue    *init_queue(void)
+const char *skip_quotes(const char *str)
 {
-    t_queue	*queue;
+    if (*str == '\"')
+    {
+        str++;
+        while(*str != '\"')
+            str++;
+    }
+    if (*str == '\"')
+    {
+        str++;
+        if (*str == ' ')
+            str++;
+    }
+    if (*str == '\'')
+    {
+        str++;
+        while(*str != '\'')
+            str++;
+    }
+    if (*str == '\'')
+    {
+        str++;
+        if (*str == ' ')
+            str++;
+    }
+    return(str);
+}
 
-    queue = malloc(sizeof(t_queue));
-    if (!queue)
+int     is_inside_quote(const char *str, int index)
+{
+    int i;
+    int left;
+    int right;
+
+    left = 0;
+    right = 0;
+    i = 0;
+    while (i < index)
+    {
+        if (*(str - i) == '\'' || *(str - i) == '\"')
+            left++;
+        i++;
+    }
+    i = 1;
+    if (str[0])
+    {
+        while(str[i])
+        {
+            if (*(str + i) == '\'' || *(str + i) == '\"')
+            right++;
+            i++;
+        }
+    }
+    return(right % 2 == 1 && left % 2 == 1);
+}
+
+char    *return_value(char *str)
+{
+    char    *tmp;
+    char    *value;
+
+    if (!str)
         return (NULL);
-    queue->head = NULL;
-    queue->tail = NULL;
-    queue->size = 0;
-    return (queue);
-}
-void    push_queue(t_queue *queue, t_envp *token)
-{
-    if (!queue || !token)
-        return ;
-    if (!queue->head)
-    {
-        queue->head = token;
-        queue->tail = token;
-    }
-    else
-    {
-        queue->tail->next = token;
-        queue->tail = token;
-    }
-    queue->size++;
+    tmp = strchr(str, '=');
+    tmp++;
+    value = strdup(tmp);
+    return (value);
 }
 
-void    push_queue_envp(t_queue *queue, t_envp *token)
+char    *return_key(char *str)
 {
-    if (!queue || !token)
-        return ;
-    if (!queue->head)
-    {
-        queue->head = token;
-        queue->tail = token;
-    }
-    else
-    {
-        queue->tail->next = token;
-        queue->tail = token;
-    }
-    queue->size++;
-}
+    int     i;
+    int     size;
+    char    *key;
 
-t_envp    *pop_queue(t_queue *queue)
-{
-    t_envp	*token;
-
-    if (!queue || !queue->head)
+    i = 0;
+    size = 0;
+    if (!str)
         return (NULL);
-    token = queue->head;
-    queue->head = queue->head->next;
-    queue->size--;
-    return (token);
+    while (str[size] != '=')
+        size++;
+    key = (char *)malloc(sizeof(char) * size + 1);
+    if (!key)
+        return (NULL);
+    while (i < size)
+    {
+        key[i] = str[i];
+        i++;
+    }
+    key[i] = '\0';
+    return (key);    
 }
 
-void    enqueue(t_queue *queue, char *key, char *value)
+void print_string_array(char **array) 
 {
-    t_envp	*token;
+    int i;
 
-    token = malloc(sizeof(t_envp));
-    if (!token)
-        return ;
-    token->key = key;
-    token->value = value;
-    token->next = NULL;
-    push_queue_envp(queue, token);
+    if (array == NULL) {
+        printf("Array is NULL\n");
+        return;
+    }
+    
+    i = 0;
+    while (array[i] != NULL) {
+        printf("%s\n", array[i]);
+        i++;
+    }
 }
 
-// void    free_queue(t_queue *queue)
-// {
-//     t_token	*token;
-//     t_token	*tmp;
+void    ft_putstr(char *str)
+{
+    int i;
 
-//     if (!queue)
-//         return ;
-//     token = queue->head;
-//     while (token)
-//     {
-//         tmp = token->next;
-//         free(token->value);
-//         free(token->type);
-//         free(token);
-//         token = tmp;
-//     }
-//     free(queue);
-// }
+    i = 0;
+    while (str[i])
+    {
+        write(1, &str[i], 1);
+        i++;
+    }
+    write(1, "\n", 1);
+}

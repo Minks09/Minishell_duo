@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:22:20 by nigateau          #+#    #+#             */
-/*   Updated: 2024/06/16 21:21:21 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/23 15:15:44 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	escape_double_quote(char *input)
 	
 	i = 0;
 	len = strlen(input);
-	while (input[i] != '\'' && input[i] != '\0')
+	while (input[i] != '\"' && input[i] != '\0')
 			i++;
 	if (input[i] == '\0')
 		return;
@@ -86,7 +86,7 @@ void	escape_double_quote(char *input)
 			input[i++] = '\\';
 			len++;
 		}
-		if (input[i] == '\'')
+		if (input[i] == '\"')
 			break;
 		i++;
 	}
@@ -101,7 +101,7 @@ t_bool	search_semi_back(char *str)
 		if (str[i] == '\'' || str[i] == '\"')
 		{
 			i++;
-			while (str[i] != '\'' || str[i] != '\"')
+			while (str[i] != '\'' && str[i] != '\"')
 				i++;
 		}
 		if (str[i] == ';' || str[i] == '\\')
