@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:16:13 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/11 23:44:55 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/12 00:56:15 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,7 @@ typedef struct s_parse
 	int			token_amount;
 	int			index_token;
 }			t_parse;
-typedef struct s_env_var
-{
-	char	*key;
-	char	*val;
-}	t_env_var;
 
-typedef struct s_envs_lst
-{
-	t_env_var			*key;
-	struct s_envs_lst	*next;
-}	t_envs_lst;
 
 typedef struct s_token
 {
@@ -102,11 +92,18 @@ typedef struct s_pipe
 	int		out[2];
 }	t_pipe;
 
+typedef struct s_envp
+{
+    char	*key;
+    char	*value;
+    struct s_envp	*next;
+}	t_envp;
+
 typedef struct s_shell
 {
 	char		*prompt;
 	char		**path_bin; // tableau de chemin d'acces terminer par null
-	char 		**env;
+	char 		**env_tab;
 	int			quit_child;
 	int			exit_status;
 	int			status;
@@ -115,7 +112,7 @@ typedef struct s_shell
 	pid_t		pid;
 	t_pipe		pipe;
 	t_token		*token;
-	t_envs_lst	*envs;
+	t_envp		*env;
 	
 }	t_shell;
 

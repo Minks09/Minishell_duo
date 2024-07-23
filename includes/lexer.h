@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 01:58:28 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/05 22:19:11 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/12 03:43:26 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,6 @@
 #define FALSE 0
 #define TRUE 1
 #define t_bool int
-
-typedef struct s_envp
-{
-    char	*key;
-    char	*value;
-    struct s_envp	*next;
-}	t_envp;
 
 typedef struct s_queue
 {

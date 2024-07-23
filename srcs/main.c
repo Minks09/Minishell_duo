@@ -77,7 +77,7 @@ void  main_shell(t_shell *shell, char **envp)
 			buff = get_next_line(STDIN_FILENO);
 		if (!buff)
 			return;
-		// if (handle_wrong_input(buff))
+		//check_prompt(buff);
 			continue;
 		if (buff && *buff)
 		{
