@@ -6,14 +6,14 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:08:11 by nchebbi           #+#    #+#             */
-/*   Updated: 2024/05/27 21:45:25 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/05 01:14:25 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-char	*ft_strndup(char *str, int size)
+char	*ft_strndup_GNL(char *str, int size)
 {
 	char	*ret;
 
@@ -41,7 +41,7 @@ int	ft_strchr_i(const char *s, int c)
 	i = 0;
 	if (!s)
 		return (-1);
-	len = ft_strlen(s);
+	len = ft_strlen_GNL(s);
 	while (s[i] != '\0' && s[i] != (unsigned char)c && i < len)
 	{
 		i++;
@@ -51,7 +51,7 @@ int	ft_strchr_i(const char *s, int c)
 	return (-1);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_GNL(char *s1, char *s2)
 {
 	char	*str;
 	int		len;
@@ -60,7 +60,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = -1;
 	j = -1;
-	len = ft_strlen(s1) + ft_strlen(s2);
+	len = ft_strlen_GNL(s1) + ft_strlen_GNL(s2);
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (0);
@@ -73,7 +73,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-int	ft_strlen(const char *str)
+int	ft_strlen_GNL(const char *str)
 {
 	int	len;
 
@@ -85,7 +85,7 @@ int	ft_strlen(const char *str)
 	return (len);
 }
 
-void	*ft_calloc(size_t count, size_t size)
+void	*ft_calloc_GNL(size_t count, size_t size)
 {
 	void	*ptr;
 	size_t	i;

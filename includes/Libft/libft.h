@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 13:20:21 by nchebbi           #+#    #+#             */
-/*   Updated: 2024/05/25 17:52:57 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/04 00:53:51 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIBFT_H
 # include <unistd.h>
 # include <stdlib.h>
-
+# include "./GNL/src/get_next_line.h"
 int		ft_atoi(const char *str);
 void	ft_bzero(void *dest, size_t n);
 void	*ft_calloc(size_t count, size_t size);

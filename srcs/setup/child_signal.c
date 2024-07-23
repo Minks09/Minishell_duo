@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setup.c                                            :+:      :+:    :+:   */
+/*   child_signal.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/05 22:49:02 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/05 23:31:00 by racinedelar      ###   ########.fr       */
+/*   Created: 2024/07/05 00:38:15 by racinedelar       #+#    #+#             */
+/*   Updated: 2024/07/05 01:06:55 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	set_bin_path(char **envp, t_shell *shell)
+void CTRL_C_child(int sig)
 {
-	char	*tmp;
-	int		i;
+	(void)sig;
+	// rl_replace_line("", 0);
+	// rl_on_new_line();
+	write(1, "\n", 1);
+}
 
-	i = 0;
-	while (envp[i] != NULL)
-	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-		{
-			tmp = ft_strtrim(envp[i], "PATH=");
-			shell->path_bin = ft_split(tmp, ':');
-			free(tmp);
-			break;
-		}
-		i++;
-	}
-	i = 0;
-	while (shell->path_bin[i] != NULL)
-	{
-		tmp = ft_strjoin(shell->path_bin[i], "/");
-		free(shell->path_bin[i]);
-		shell->path_bin[i] = tmp;
-		i++;
-	}
+void CTRL_else_child(int sig)
+{
+	(void)sig;
+}
+
+void	signal_child(void)
+{
+	signal(SIGINT, &CTRL_C_child);
+	signal(SIGQUIT, &CTRL_else_child);
 }

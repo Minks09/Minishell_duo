@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/15 15:14:48 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/23 15:14:42 by racinedelar      ###   ########.fr       */
+/*   Created: 2024/05/24 16:32:37 by nigateau          #+#    #+#             */
+/*   Updated: 2024/07/23 16:44:02 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*ft_stringdup(const char *str, char sep)
 	return (string);
 }
 
-char	**ft_split(const char *str, char sep)
+char	**ft_split_parse(const char *str, char sep)
 {
 	int		i;
 	int		nbr_of_strs;
