@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 12:09:31 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/15 16:19:02 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/23 20:17:25 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../../../includes/minishell.h"
+#include  <minishell.h>
 
 t_bool  check_command(t_shell *shell)
 {
-    int i;
     t_token *curr;
 
-    i = 1;
     curr = shell->token;
     while (curr != NULL)
     {   
@@ -80,14 +78,12 @@ char	*ft_strjoin(const char *s1, const char *s2)
 {
 	int		i;
 	int		j;
-	int		len_s1;
 	int		tot_len;
 	char	*str;
 
 	i = -1;
 	j = -1;
 	tot_len = strlen(s1) + strlen(s2);
-	len_s1 = strlen(s1);
 	str = (char *)malloc(sizeof(char) * tot_len + 1);
 	if (str == NULL)
 		return (NULL);

@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils2.c                                       :+:      :+:    :+:   */
+/*   error_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 19:56:08 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/23 15:16:40 by racinedelar      ###   ########.fr       */
+/*   Created: 2024/07/24 03:30:57 by racinedelar       #+#    #+#             */
+/*   Updated: 2024/07/24 04:09:51 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <minishell.h>
+#include <minishell.h>
 
-void	ft_envs_lst_add_back(t_envs_lst **lst, t_envs_lst *new)
+int ft_err_(int R_CODE)
 {
-    t_envs_lst	*last;
+    perror(strerror(R_CODE));
+    exit(R_CODE);
+}
 
-    if (lst)
-    {
-        if (*lst)
-        {
-            last = *lst;
-            while (last->next)
-                last = last->next;
-            last->next = new;
-        }
-        else
-            *lst = new;
-    }
+int put_error(t_shell *shell, char *msg, int R_CODE)
+{
+    ft_putstr_fd(msg, STDERR_FILENO);
+    ft_putchar_fd('\n', STDERR_FILENO);
+    shell->exit_status = R_CODE;
+    exit(R_CODE);
 }

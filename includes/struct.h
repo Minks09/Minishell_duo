@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:16:13 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/23 16:42:17 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/27 16:46:49 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,15 @@
 # define STDOUT 			1
 # define STDERR_FILENO 		2
 //definition of types of potential errors
-# define R_MALLOC 			2
-# define R_ERROR 			9
+# define R_ERROR			0
+# define R_FILES			2
+# define R_MALLOC			3
+# define R_ATTR_NF			93//No such file or directory 
+# define R_FD				9//bad file descriptor
+# define R_WRONGARGUMENTS	22
 # define R_PERM 			126 // If a command is found but is not executable,the return status is 126
 # define R_PATH 			127 //If a command is not found, the child process created to execute it returns a status of 127
-# define R_FILE_NOT_FOUND 	255
+# define R_FILE_NOT_FOUND	255
 # define BUFF_SIZE 			1042
 # define EXPANSION 			-36
 
@@ -106,13 +110,9 @@ typedef struct s_pipe
 
 typedef struct s_envp
 {
-    char	*key;
-    char	*value;
-    struct s_envp	*next;
-}	t_envp;
-    char	*key;
-    char	*value;
-    struct s_envp	*next;
+	char	*key;
+	char	*value;
+	struct s_envp	*next;
 }	t_envp;
 
 typedef struct s_shell
@@ -131,20 +131,6 @@ typedef struct s_shell
 	t_pipe		pipe;
 	t_token		*token;
 	t_envp		*env;
-	
-	char		*prompt;
-	char		**path_bin; // tableau de chemin d'acces terminer par null
-	char 		**env_tab;
-	int			quit_child;
-	int			exit_status;
-	int			status;
-	int			shlvl;
-	int			nb_pipe;
-	pid_t		pid;
-	t_pipe		pipe;
-	t_token		*token;
-	t_envp		*env;
-	
 }	t_shell;
 
 typedef	struct termios t_termios;

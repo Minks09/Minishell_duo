@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/23 16:39:27 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/24 04:09:38 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "struct.h"
-# include "lexer.h"
 # include "Libft/libft.h"
 # include <unistd.h>
 # include <stdio.h>
@@ -28,7 +26,7 @@
 # include <signal.h>
 # include <sys/wait.h>
 # include <sys/termios.h>
-
+# include "struct.h"
 ////////COLORS////////
 #define C_GREEN = "\033[0;32m";
 #define C_RED = "\033[0;91m";
@@ -47,11 +45,9 @@ int ft_pwd(t_shell *shell);
 //env
 int		is_alnum(char *key);
 int		valid_env_key(char *key);
-char	*get_env_value(char *key, t_queue *queue);
+char	*get_env_value(char *key, t_envp *queue);
 
 //error
-int		ft_err_(int R_CODE);
-int		put_error(t_shell *shell, char *msg, int R_CODE);
 
 //exec
 void	init_first_pipe(t_shell *shell);
@@ -76,6 +72,10 @@ void	signal_child(void);
 
 //setup
 void	set_bin_path(char **envp, t_shell *shell);
+
+//utils
+int		ft_err_(int R_CODE);
+int		put_error(t_shell *shell, char *msg, int R_CODE);
 
 //lexer.c
 t_bool	    check_both_quotes(char *input);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:59:35 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/12 00:23:27 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/23 20:16:19 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../../../includes/minishell.h"
+#include  <minishell.h>
 
 t_token *init_token_struct(void)
 {
@@ -60,9 +60,6 @@ void    free_token_struct(t_token **token)
 
 int	return_type(char *str)
 {
-	int	i;
-
-	i = 0;
 	if (strncmp(str, ">", 1) == 0)
 		return (T_TRUNC);
 	if (strncmp(str, ">>", 2) == 0)

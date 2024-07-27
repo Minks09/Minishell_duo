@@ -63,6 +63,7 @@ void  main_shell(t_shell *shell, char **envp)
 	(void)envp;
 	//t_token		*commands;
 	char 		*buff;
+	char		*prompt;
 
 	buff = NULL;
 	//malloc(sizeof(char*) * BUFF_SIZE);
@@ -77,17 +78,18 @@ void  main_shell(t_shell *shell, char **envp)
 			buff = get_next_line(STDIN_FILENO);
 		if (!buff)
 			return;
-		//check_prompt(buff);
-			continue;
-		if (buff && *buff)
-		{
+		if (buff && *buff){
 			if (isatty(STDIN_FILENO))
 				add_history(buff);
 			else
 				ft_putendl_fd(buff, STDOUT_FILENO);
-			// commands = get_command(*buff, '|', &len)
+			prompt = check_prompt(buff);
+			if (!prompt){
+			parsing(shell, buff, envp);
 			signal_child();
 			main_exec(shell);
+			free(prompt);
+			}
 		}
 		free(buff);
 	}
@@ -99,19 +101,17 @@ int g_errno = 0;
 
 int main(int argc, char **argv, char **envp)
 {
-	t_queue		*queue_env;
 	t_shell		*shell;
 	t_termios	new;
 	t_termios	copy;
 
 	(void) argv;
-	queue_env = NULL;
 	shell = NULL;
 	if (argc != 1){
 		perror("TO MANY ARGUMENTS, FOLLOW THE PROJECT GUIDELINES");
 		return (ERROR);
 	}
-	copy_envp(queue_env, envp);
+	shell->env = return_env(shell, envp);
 	shell_init(&shell, &new, &copy);
 	set_bin_path(envp, shell);
 	main_shell(shell, envp);

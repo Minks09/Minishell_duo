@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:29:10 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/12 00:24:01 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/23 20:15:11 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../../../includes/minishell.h"
+#include  <minishell.h>
 
 void    insert_node_env(t_envp **root, char *key, char *value)
 {
@@ -61,11 +61,9 @@ void    remove_node_env(t_envp **root, char *key)
 
 void    free_env(t_envp **root)
 {
-    int i;
     t_envp  *curr;
     t_envp  *tmp;
 
-    i = 0;
     curr = *root;
     while (curr != NULL)
     {

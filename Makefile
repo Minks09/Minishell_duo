@@ -6,7 +6,7 @@
 #    By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 23:08:02 by nigateau          #+#    #+#              #
-#    Updated: 2024/07/23 16:47:12 by racinedelar      ###   ########.fr        #
+#    Updated: 2024/07/27 15:46:26 by racinedelar      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,40 +34,35 @@ DEPENDENCIES 	= 	$(HEADER)/minishell.h $(HEADER_LIBFT)/libft.h
 #/////////////////////////////SRCS////////////////////////////////////////
 SRCS = 	main.c\
 		builtins/builtins.c\
-		builtins/export.c\
-		builtins/unset.c\
-		builtins/print_env.c\
 		builtins/echo.c\
+		builtins/export.c\
 		builtins/ft_cd.c\
 		builtins/ft_exit.c\
 		builtins/ft_pwd.c\
-		builtins/ft_cd.c\
-		builtins/ft_exit.c\
-		builtins/ft_pwd.c\
+		builtins/print_env.c\
+		builtins/unset.c\
 		env/env.c\
 		env/init.c\
-		error/utils_error.c\
 		exec/exec.c\
 		exec/fork.c\
 		exec/path_finder.c\
 		exec/pipe.c\
 		exec/redir.c\
-		parsing/lexer/check_prompt.c\
-		parsing/lexer/env.c\
-		parsing/lexer/heredoc.c\
-		parsing/lexer/lexer.c\
-		parsing/lexer/split_command.c\
-		parsing/lexer/token.c\
-		parsing/lexer/utils.c\
+		lexer/check_prompt.c\
+		lexer/env.c\
+		lexer/error.c\
+		lexer/ft_split.c\
+		lexer/heredoc.c\
+		lexer/lexer.c\
+		lexer/split_command.c\
+		lexer/token.c\
+		lexer/utils.c\
+		lexer/utils2.c\
 		setup/child_signal.c\
 		setup/init.c\
 		setup/main_signal.c\
 		setup/setup.c\
-		setup/main_signal.c\
-		setup/child_signal.c\
-		utils/env_utils.c\
-		utils/env_utils2.c\
-		utils/free_struct.c
+		utils/error_utils.c\
 
 #CI dessus sont definis tous les fichiers sources du projet #
 #il faut les lister ici en pensant que le chemin des src est deja /srcs/#
@@ -125,7 +120,6 @@ check_minishell: check_lib
 	fi
 
 $(NAME): $(_OBJS)
-	@echo "$(COLOUR_CYAN)Compiling minishell...$(COLOUR_END)"
 	@$(CC) $(_OBJS) libft.a $(CFLAGS) $(RL_LDFLAGS) -Lincludes/LIBFT -o $@
 	@echo "$(COLOUR_GREEN)minishell compiled.$(COLOUR_END)"
 

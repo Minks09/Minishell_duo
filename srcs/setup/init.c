@@ -6,13 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 22:32:17 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/10 22:47:32 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/23 19:46:15 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include <minishell.h>
-
-// #include  "../../../includes/minishell.h"
 
 // t_token *init_token_struct(t_token *token)
 // {
