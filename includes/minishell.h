@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/15 16:19:33 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/28 13:37:07 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,28 @@ t_envp      *return_env(t_shell *shell, char **env);
 char        **return_env_tab(char **envp);
 void        remove_node_env(t_envp **root, char *key);
 //heredoc.c
-void        heredoc(t_token *token);
+int         heredoc(char *argument);
 t_bool      search_EOF(char *haystack, char *needle);
 //utils2.c
 void        free_tab(char **tab);
 t_bool      get_pathname(t_shell *shell, char *command);
 t_bool      check_command(t_shell *shell);
+char        *end_with_pipe(char *str);
+//ft_split.c
+char	    *ft_stringdup(const char *str, char sep);
+int	        size_of_strings(const char *str, char sep);
+int	        count_strings(const char *str, char sep);
+int	        check_sep(char c, char sep);
+//split_pipe.c
+char	    *ft_strdup(const char *s1);
+void        fill_new_tab(char **str,char **tab, int size);
+char        **split_pipe(char **str);
+char	    **ft_split_pipe(const char *str, char sep);
+int	        count_strings_pipe(const char *str, char sep);
+//redirection.c
+int         check_redirection(char  *command, char *argument);
+int         redirect_output(char *command, char *argument);
+int         redirect_input(char *command, char *argument);
 //error.c
 t_bool    command_not_valid(char *command);
 

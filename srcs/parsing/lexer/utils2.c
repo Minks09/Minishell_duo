@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 12:09:31 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/15 16:19:02 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/31 16:37:15 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,18 @@ t_bool  get_pathname(t_shell *shell, char *command)
     return (FALSE);
 }
 
-void free_tab(char **tab)
-{
-    int i;
+// void free_tab(char **tab)
+// {
+//     int i;
     
-    i = 0;
-    while (tab[i] != NULL)
-    {
-        free(tab[i]);
-        i++;
-    }
-    free(tab);
-}
+//     i = 0;
+//     while (tab[i] != NULL)
+//     {
+//         free(tab[i]);
+//         i++;
+//     }
+//     free(tab);
+// }
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
@@ -97,4 +97,31 @@ char	*ft_strjoin(const char *s1, const char *s2)
 		str[i + j] = s2[j];
 	str[i + j] = '\0';
 	return (str);
+}
+
+char    *end_with_pipe(char *str)
+{
+    int i;
+    char tmp;
+    char *temp;
+    char *newline;
+
+    i = strlen(str);
+    while(str[i] == ' ' && i > 0)
+        i--;
+    tmp = str[i - 1];
+    while (tmp == '|')
+    {
+        newline = readline("> ");
+        temp = ft_strjoin(str, " ");
+        free (str);
+        str = ft_strjoin(temp, newline);
+        free(temp);
+        free(newline);
+        i = strlen(str);
+        while(str[i] == ' ' && i > 0)
+        i--;
+        tmp = str[i - 1];
+    }
+    return (str);
 }

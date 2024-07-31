@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:29:10 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/12 00:24:01 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/28 18:55:08 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ char    **return_env_tab(char **envp)
     i = 0;
     while (envp[i])
         i++;
-    env = malloc(sizeof(char *) * i + 1);
+    env = malloc(sizeof(char *) * (i + 1));
     i = 0;
     while (envp[i])
     {
@@ -150,4 +150,22 @@ char    **return_env_tab(char **envp)
 //     }
 //     free_env(&root);
 //     return (1);
+// }
+
+// int main(int argc, char **argv, char **envp)
+// {
+//     t_shell *shell;
+//     t_envp *curr;
+//
+//     shell->env = return_env(shell, envp);
+//     curr = shell->env;
+//     while (curr != NULL)
+//     {
+//         printf("key : %s\n", curr->key);
+//         printf("value : %s\n", curr->value);
+//         curr = curr->next;
+//     }
+//     free_env(&shell->env);
+//     free_tab(shell->env_tab);
+//     return(1);
 // }

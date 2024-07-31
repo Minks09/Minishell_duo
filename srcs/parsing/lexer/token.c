@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:59:35 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/12 00:23:27 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/31 18:08:18 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,18 +91,13 @@ void    insert_node_token(t_token **root, char *command)
     new_node->file = NULL;
     new_node->type = type;
     new_node->fd = 0;
+    new_node->next = NULL;
 
     curr = *root;
     while (curr->next != NULL)
         curr = curr->next;
     curr->next = new_node;
 }
-//noter les type de chaque command (T_CMD, T_EMPTY/T_END  T_CMD  T_TRUNC  T_APPEND  T_INPUT)
-/*Dans une commande shell, un signe de redirection est généralement suivi par le nom du fichier ou le descripteur de fichier avec lequel il doit interagir. Par exemple :
-Dans command > file.txt, le signe > redirige la sortie de command vers file.txt.
-Dans command < file.txt, le signe < fait que command lit son entrée à partir de file.txt.
-Dans command1 | command2, le signe | pipe la sortie de command1 à l'entrée de command2.
-Donc, dans votre fonction parse_token, lorsque vous rencontrez un signe de redirection, vous devriez généralement traiter le prochain élément dans str comme l'argument de la redirection.*/
 
 void    parse_token(t_token **token, char **str)
 {
@@ -117,9 +112,11 @@ void    parse_token(t_token **token, char **str)
 	tmp = (*token)->command[0];
     while (str[i] != NULL)
     {
-		if (strncmp(str[i] , ">>", 2) == 0)
-			heredoc(*token);
-		if (tmp != '|')
+		if(check_redirection(str[i - 1], str[i]) != 0)
+        {
+            curr->fd = check_redirection(str[i - 1], str[i]);
+        }
+		if (tmp != '|' && str[i][0] != '|')
 			curr->argument = str[i++];
 		if (str[i] == NULL)
 			break;
@@ -127,7 +124,6 @@ void    parse_token(t_token **token, char **str)
 		curr = curr->next;
 		tmp = curr->command[0];
 		i++;
-
     }
 }
 
@@ -137,7 +133,7 @@ void    parse_token(t_token **token, char **str)
 //     t_token *curr;
 
 //     root = init_token_struct();
-//     parse_token(&root, str)
+//     parse_token(&root, str);
 //     curr = root;
 //     while (curr != NULL)
 //     {

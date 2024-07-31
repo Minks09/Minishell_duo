@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:44:42 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/12 11:29:08 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/27 17:43:21 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,4 +133,16 @@ void    ft_putstr(char *str)
         i++;
     }
     write(1, "\n", 1);
+}
+void free_tab(char **tab)
+{
+    int i;
+    
+    i = 0;
+    while (tab[i] != NULL)
+    {
+        free(tab[i]);
+        i++;
+    }
+    free(tab);
 }
