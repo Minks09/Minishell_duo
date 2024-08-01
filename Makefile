@@ -6,7 +6,7 @@
 #    By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 23:08:02 by nigateau          #+#    #+#              #
-#    Updated: 2024/08/01 01:43:41 by racinedelar      ###   ########.fr        #
+#    Updated: 2024/08/01 03:07:20 by racinedelar      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,9 @@ SRCS = 	main.c\
 		lexer/ft_split.c\
 		lexer/heredoc.c\
 		lexer/lexer.c\
+		lexer/redirection.c\
 		lexer/split_command.c\
+		lexer/split_pipe.c\
 		lexer/token.c\
 		lexer/utils.c\
 		lexer/utils2.c\

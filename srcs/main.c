@@ -10,7 +10,7 @@
 /*                          */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/minishell.h"
 
 int  set_prompt(t_shell **shell)
 {
@@ -83,8 +83,11 @@ void  main_shell(t_shell *shell, char **envp)
 			else
 				ft_putendl_fd(buff, STDOUT_FILENO);
 			prompt = check_prompt(buff);
-			if (!prompt){
-			parsing(shell, buff, envp);
+			printf("Debug: prompt = %s\n", prompt);
+			if (!prompt)
+				break;
+			else if (parsing(shell, prompt, envp) == 0)
+			{
 			signal_child();
 			main_exec(shell);
 			free(prompt);

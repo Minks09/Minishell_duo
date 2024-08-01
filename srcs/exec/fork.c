@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:04:58 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/01 00:25:47 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 17:01:55 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/minishell.h"
 
 void execute_first_pipe(t_shell *shell, t_token *curr) {
     init_first_pipe(shell);

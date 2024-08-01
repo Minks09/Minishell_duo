@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:34:31 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 02:23:49 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 17:01:05 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  <minishell.h>
+#include "../../includes/minishell.h"
 
 t_bool search_EOF(char *haystack, char *needle)
 {
@@ -41,7 +41,7 @@ int    heredoc(char *argument)
     line = NULL;
     fd = open("heredoc", O_CREAT | O_RDWR | O_TRUNC, 0644);
     if (fd == -1)
-        return(0);
+        return (ERROR);
     while (1)
     {
         line = readline("> ");

@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 22:49:02 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/28 15:43:05 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 17:00:02 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/minishell.h"
 
 void	set_bin_path(char **envp, t_shell *shell)
 {

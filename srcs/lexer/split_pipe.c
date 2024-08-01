@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 18:32:09 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 02:31:55 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 17:00:45 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/minishell.h"
 
 int	count_strings_pipe(const char *str, char sep)
 {
@@ -85,7 +85,6 @@ char    **split_pipe(char **str)
     int i;
     int size;
     char **tab;
-    char **tmp;
 
     i = 0;
     size = 0;

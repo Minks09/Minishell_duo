@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 01:22:52 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/31 22:43:06 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 17:01:38 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <minishell.h>
+#include "../../includes/minishell.h"
 
 int	handle_redirection(t_token *token)
 {

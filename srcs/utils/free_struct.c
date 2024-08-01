@@ -6,12 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 14:14:30 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/01 01:45:34 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 16:59:40 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
-
+#include "../../includes/minishell.h"
 void free_shell(t_shell *shell)
 {
 	if (shell != NULL)

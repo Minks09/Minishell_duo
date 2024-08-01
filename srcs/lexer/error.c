@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 16:01:38 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/23 20:15:23 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 17:01:18 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  <minishell.h>
+#include "../../includes/minishell.h"
 
 t_bool    command_not_valid(char *command)
 {

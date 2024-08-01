@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 03:30:57 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/24 04:09:51 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 16:59:57 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/minishell.h"
 
 int ft_err_(int R_CODE)
 {

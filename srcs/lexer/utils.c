@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:44:42 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 02:24:08 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 17:00:34 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  <minishell.h>
+#include "../../includes/minishell.h"
 
 const char *skip_quotes(const char *str)
 {

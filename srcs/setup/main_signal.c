@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 20:20:09 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/30 02:01:42 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 17:00:07 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/minishell.h"
 
 void	CTRL_C(int sig)
 {

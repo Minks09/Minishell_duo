@@ -1,4 +1,17 @@
-#include <minishell.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/01 17:02:04 by racinedelar       #+#    #+#             */
+/*   Updated: 2024/08/01 17:02:12 by racinedelar      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "../../includes/minishell.h"
 
 void simple_exec(t_shell *shell) {
     pid_t pid;

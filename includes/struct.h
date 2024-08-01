@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:16:13 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/01 02:16:18 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 16:48:41 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ typedef struct s_token
 
 typedef struct s_pipe
 {
-	int		nb_pipes;
+	int		pipe_nbr;
 	int		in[2];
 	int		out[2];
 }	t_pipe;

@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:29:10 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 02:18:44 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 17:01:24 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  <minishell.h>
+#include "../../includes/minishell.h"
 
 void    insert_node_env(t_envp **root, char *key, char *value)
 {

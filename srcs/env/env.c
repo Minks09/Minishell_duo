@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 03:38:00 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/24 13:58:05 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 17:08:24 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/minishell.h"
 
 int is_alnum(char *key)
 {
@@ -27,6 +27,7 @@ int is_alnum(char *key)
     }
     return SUCCESS;
 }
+
 int valid_env_key(char *key)
 {
     int i;

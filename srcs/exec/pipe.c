@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 00:26:14 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/01 00:29:00 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 17:01:47 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/minishell.h"
 
 void init_first_pipe(t_shell *shell) {
 	if (pipe(shell->pipe.in) == -1) {

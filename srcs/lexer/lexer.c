@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:22:20 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/30 02:30:41 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 17:40:28 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/minishell.h"
 
 t_bool	check_both_quotes(char *input)
 {

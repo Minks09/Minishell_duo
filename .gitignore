@@ -51,5 +51,6 @@ Module.symvers
 Mkfile.old
 dkms.conf
 .vscode
+*/.DS_Store
 
-srcs/lexer/.DS_Store
+

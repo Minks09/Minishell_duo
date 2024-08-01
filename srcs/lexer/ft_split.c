@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:41:30 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/23 20:13:47 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 17:01:11 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include "../../includes/minishell.h"
 
 int	check_sep(char c, char sep)
 {

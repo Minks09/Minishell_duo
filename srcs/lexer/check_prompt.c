@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 16:18:24 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 02:21:04 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 18:33:47 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	<minishell.h>
+#include "../../includes/minishell.h"
 
 char    *check_prompt(char *prompt)
 {
@@ -23,7 +23,6 @@ char    *check_prompt(char *prompt)
     escape_single_quote(prompt);
     tmp = end_with_pipe(prompt);
     clean_prompt = expandz(tmp);
-    //free(tmp);
     return(clean_prompt);
 }
 

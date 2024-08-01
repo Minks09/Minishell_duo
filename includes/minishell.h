@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/01 02:31:10 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 03:02:25 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int			size_of_strings(const char *str, char sep);
 char		*ft_stringdup(const char *str, char sep);
 char		**ft_split_parse(const char *str, char sep);
 //heredoc.c
-void		heredoc(t_token *token);
+int			heredoc(char *delimiter);
 t_bool		search_EOF(char *haystack, char *needle);
 //lexer.c
 t_bool		check_both_quotes(char *input);
@@ -110,18 +110,26 @@ void	    escape_single_quote(char *input);
 void	    escape_double_quote(char *input);
 t_bool	    search_semi_back(char *str);
 char	    *expand(char *str);
+//redirection.c
+int         check_redirection(char  *command, char *argument);
+int         redirect_output(char *command, char *argument);
+int         redirect_input(char *command, char *argument);
 //split_command.c
 int	        check_sep_cmd(char c, char sep);
 int	        count_strings_cmd(const char *str, char sep);
 int	        size_of_strings_cmd(const char *str, char sep);
 char	    *ft_strdup_cmd(const char *str, char sep);
 char	    **ft_split_command(const char *str, char sep);
+//split_pipe.c
+int count_strings_pipe(const char *str, char sep);
+char *ft_strdup(const char *s1);
+char **ft_split_pipe(const char *str, char sep);
 //token.c
-void        parse_token(t_token **token, char **commands);
-void        insert_node_token(t_token **root, char *command);
-int	        return_type(char *str);
-void        free_token_struct(t_token **token);
 t_token     *init_token_struct(void);
+void        free_token_struct(t_token **token);
+int	        return_type(char *str);
+void        insert_node_token(t_token **root, char *str);
+void        parse_token(t_token **token, char **str);
 //utils.c
 void        print_string_array(char **array);
 char        *return_key(char *str);
