@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 12:09:31 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 20:31:26 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 21:39:36 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ t_bool  get_pathname(t_shell *shell, char *command)
 
 char *find_path(t_envp *shell_env)
 {
-    int i;
     char *pathname;
     t_envp *curr;
 
+    pathname = NULL;
     curr = shell_env;
-    while (curr != NULL)
+    while (curr->key != NULL)
     {
         if (strncmp(curr->key, "PATH", 4) == 0)
         {
@@ -127,24 +127,3 @@ char    *end_with_pipe(char *str)
     return (str);
 }
 
-t_bool is_builtin(char *str)
-{
-    int i;
-
-    i = 0;
-    if (strncmp(str, "cd", 2))
-        return(TRUE);
-    if (strncmp(str, "cd", 2))
-        return(TRUE);
-    if (strncmp(str, "cd", 2))
-        return(TRUE);
-    if (strncmp(str, "cd", 2))
-        return(TRUE);
-    if (strncmp(str, "cd", 2))
-        return(TRUE);
-    if (strncmp(str, "cd", 2))
-        return(TRUE);
-    if (strncmp(str, "cd", 2))
-        return(TRUE);
-    return (FALSE);
-}

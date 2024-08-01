@@ -6,7 +6,7 @@
 #    By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 23:08:02 by nigateau          #+#    #+#              #
-#    Updated: 2024/08/01 03:07:20 by racinedelar      ###   ########.fr        #
+#    Updated: 2024/08/01 23:33:31 by racinedelar      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ RM 				= 	rm -f
 CC 				= 	gcc
 
 CFLAGS 			= 	-I$(HEADER) -I$(HEADER_LIBFT) -Wall -Wextra -Werror -fsanitize=address -g
+TFLAGS			=	-I$(HEADER) -I$(HEADER_LIBFT)
 #CI dessus sont definis les variable utiles a la compilation comme les flags ou certaine commande#
 #//////////////////////////OBEJCTS/////////////////////////////////////////#
 OBJS 		= $(SRCS:c=o)
@@ -139,7 +140,20 @@ clean:
 fclean: clean
 	@$(RM) *.a
 	@echo "$(COLOUR_RED)minishell Fcleaned$(COLOUR_END)"
-
+	
+test:	$(_OBJS)
+	@$(CC) $(_OBJS) libft.a $(TFLAGS) $(RL_LDFLAGS) -Lincludes/LIBFT -o $@
+	@echo "$(COLOUR_GREEN)minishell compiled.$(COLOUR_END)"
+	
+stest: check_lib
+	@echo "$(COLOUR_YELLOW)Compiling minishell...$(COLOUR_END)"
+	@if [ -f $(NAME) ]; then \
+		echo "$(COLOUR_GREEN)minishell already compiled.$(COLOUR_END)"; \
+		else \
+		echo "$(COLOUR_YELLOW)Compiling minishell...$(COLOUR_END)"; \
+		$(MAKE) $(TEST); \
+	fi
+	
 re: fclean all
 
 .PHONY: re fclean clean all

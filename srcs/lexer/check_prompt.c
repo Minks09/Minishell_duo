@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 16:18:24 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 18:33:47 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 23:10:40 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ char    *check_prompt(char *prompt)
     escape_double_quote(prompt);
     escape_single_quote(prompt);
     tmp = end_with_pipe(prompt);
-    clean_prompt = expandz(tmp);
+    //clean_prompt = expandx(tmp);
+    clean_prompt = tmp;
+    free(tmp);
     return(clean_prompt);
 }
 

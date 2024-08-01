@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/01 20:27:24 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 23:03:17 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int			size_var_key(char *str);
 int			size_var_value(char *str);
 char		*get_value(char *str);
 int			is_there_dollar(char *str);
-char		*expandz(char *str);
+void		expandx(t_shell *shell);
 //export.c
 char		*return_value_quoted(char *str);
 int			export(t_envp **root, char *new_var);
@@ -121,13 +121,13 @@ int	        size_of_strings_cmd(const char *str, char sep);
 char	    *ft_strdup_cmd(const char *str, char sep);
 char	    **ft_split_command(const char *str, char sep);
 //split_pipe.c
-int count_strings_pipe(const char *str, char sep);
-char *ft_strdup(const char *s1);
-char **ft_split_pipe(const char *str, char sep);
+int			count_strings_pipe(const char *str, char sep);
+char 		*ft_strdup(const char *s1);
+char 		**ft_split_pipe(const char *str, char sep);
 //token.c
-t_token     *init_token_struct(void);
-void        free_token_struct(t_token **token);
-int	        return_type(char *str);
+t_token		*init_token_struct(void);
+void		free_token_struct(t_token **token);
+int			return_type(char *str);
 char        *join_argument(char *argument, char *str);
 void        insert_node_token(t_token **root, char *str);
 void        parse_token(t_token **token, char **str);
