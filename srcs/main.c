@@ -44,6 +44,7 @@ int shell_init(t_shell **shell, t_termios *new, t_termios *copy)
 	(*shell)->quit_child = 0;
 	(*shell)->exit_status = 0;
 	(*shell)->status = WAIT;
+	(*shell)->env_tab = NULL;
 	if (isatty(STDIN_FILENO))
 		(*shell)->shlvl = ft_atoi(getenv("SHLVL")) + 1;
 	else
@@ -60,15 +61,13 @@ int shell_init(t_shell **shell, t_termios *new, t_termios *copy)
 
 void  main_shell(t_shell *shell, char **envp)
 {
-	(void)envp;
 	//t_token		*commands;
 	char 		*buff;
 	char		*prompt;
 
-	buff = NULL;
-	//malloc(sizeof(char*) * BUFF_SIZE);
-	// if(!buff)
-	// 	return;
+	buff = malloc(sizeof(char*) * BUFF_SIZE);
+	if(!buff)
+		return;
 	while (shell->status != QUIT)
 	{
 		signal_main();
@@ -111,9 +110,11 @@ int main(int argc, char **argv, char **envp)
 		perror("TO MANY ARGUMENTS, FOLLOW THE PROJECT GUIDELINES");
 		return (ERROR);
 	}
-	shell->env = return_env(shell, envp);
 	shell_init(&shell, &new, &copy);
+	shell->env = return_env(shell, envp);
 	set_bin_path(envp, shell);
 	main_shell(shell, envp);
+	free(shell->env);
+	free(shell->env_tab);
 	return (g_errno % 255);
 }

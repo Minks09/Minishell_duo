@@ -6,7 +6,7 @@
 #    By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 23:08:02 by nigateau          #+#    #+#              #
-#    Updated: 2024/07/27 15:46:26 by racinedelar      ###   ########.fr        #
+#    Updated: 2024/08/01 01:43:41 by racinedelar      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,6 @@ SRCS = 	main.c\
 		builtins/print_env.c\
 		builtins/unset.c\
 		env/env.c\
-		env/init.c\
 		exec/exec.c\
 		exec/fork.c\
 		exec/path_finder.c\
@@ -59,10 +58,10 @@ SRCS = 	main.c\
 		lexer/utils.c\
 		lexer/utils2.c\
 		setup/child_signal.c\
-		setup/init.c\
 		setup/main_signal.c\
 		setup/setup.c\
 		utils/error_utils.c\
+		utils/free_struct.c
 
 #CI dessus sont definis tous les fichiers sources du projet #
 #il faut les lister ici en pensant que le chemin des src est deja /srcs/#

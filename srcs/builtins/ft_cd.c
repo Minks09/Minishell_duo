@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 00:37:17 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/27 17:01:23 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 01:17:47 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,42 +27,65 @@ int	update_wd_value(char *key, char *path, t_envp *env)
 	return ERROR;
 }
 
-void 	update_wd(char *wd, t_shell *shell){
+int	update_wd(char *wd, t_shell *shell){
 	char	*oldpwd;
 	char	*new_wd;
 	
 	oldpwd = get_env_value("PWD", shell->env);
-	new_wd = get_env_value("PWD", shell->env);
 	getcwd(wd, 4096);
+	new_wd = get_env_value("PWD", shell->env);
+	update_wd_value("OLDPWD", oldpwd, shell->env);
+	update_wd_value("PWD", new_wd, shell->env);
+	free(oldpwd);
+	free(new_wd);
+	return SUCCESS;
 }
 
-void	do_cd(char *wd, char new_path, t_shell *shell)
+void	do_cd(char *pwd, char *new_path, t_shell *shell)
 {
-	
-	if(ft_strncmp(&new_path, "-", 1) == 0)
+	char *tmp;
+	tmp = NULL;
+	if(ft_strncmp(new_path, "-", 1) == 0)
 	{
 		chdir(getenv("OLDPWD"));
-		update_wd(wd, shell->env);
+		update_wd(pwd, shell);
 		return;
 	}
-	if (update_wd_value("OLDPWD", wd, shell->env) != SUCCESS)
+	if (new_path[0] == '~')
+	{
+		chdir(get_env_value("HOME", shell->env));
+		update_wd(pwd, shell);
+		return;
+	}
+	else if (new_path[0] != '/')
+	{
+		tmp = ft_strjoin(get_env_value("HOME", shell->env), new_path);
+		free(new_path);
+		new_path = ft_strdup(tmp);
+		free(tmp);
+	}
+	if (update_wd(pwd, shell) != SUCCESS)
 		put_error(shell, "error during cd (set new value):\n", R_ATTR_NF);
-	chdir(&new_path);
-	getcwd(wd, 4096);
-	update_wd_value("PWD", wd, shell->env);
+	chdir(new_path);
+	getcwd(pwd, 4096);
+	update_wd_value("PWD", pwd, shell->env);
 }
 
-void ft_cd(char *new_path, t_shell *shell)
+int ft_cd(char *new_path, t_shell *shell)
 {
-	char pwd[4096];
+	size_t size = 4096;
+	char pwd[size];
 	char *home;
 	
 	home = get_env_value("HOME", shell->env);
-	if (!new_path || !ft_strncmp(new_path, "~", 2))
+	if (!new_path || ft_strncmp(new_path, "~", 2)== 0)
 		chdir(home);
 	else if (getcwd(pwd, 4096))
-		do_cd(pwd, *new_path, shell);
-	else
-		put_error(shell, "error during cd (use only a relative or absolute path):\n", R_FILES);
+		do_cd(pwd, new_path, shell);
+	else{
+		put_error(shell, "minishell : cd: '&new_path' such file or directory", R_FILES);
+		return ERROR;
+	}
 	free(home);
+	return SUCCESS;
 }

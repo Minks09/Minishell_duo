@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:16:13 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/27 16:46:49 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 02:05:26 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,19 +118,19 @@ typedef struct s_envp
 typedef struct s_shell
 {
 	char		*prompt;
-	char		**path_bin; // tableau de chemin d'acces terminer par null
-	char 		**env_tab;
-	int			quit_child;
-	int			exit_status;
-	int			status;
-	int			shlvl;
-	int			nb_pipe;
-	int			fd_in;
-	int			fd_out;
-	pid_t		pid;
-	t_pipe		pipe;
-	t_token		*token;
-	t_envp		*env;
+	char			**path_bin; // tableau de chemin d'acces terminer par null
+	char 			**env_tab;
+	int				quit_child;
+	int				exit_status;
+	int				status;
+	int				shlvl;
+	int				nb_pipe;
+	int				fd_in;
+	int				fd_out;
+	pid_t			pid;
+	t_pipe			pipe;
+	t_token			*token;
+	t_envp			*env;
 }	t_shell;
 
 typedef	struct termios t_termios;

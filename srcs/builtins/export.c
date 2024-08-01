@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:08:17 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/27 16:52:53 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 01:16:18 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*return_value_quoted(char *str)
 	return (value);
 }
 
-void	export(t_envp **root, char *new_var)
+int	export(t_envp **root, char *new_var)
 {
 	int		i;
 	char	*key;
@@ -45,7 +45,7 @@ void	export(t_envp **root, char *new_var)
 		value = return_value(new_var);
 	key = return_key(new_var);
 	insert_node_env(root, key, value);
-	return;
+	return SUCCESS;
 }
 
 // char **copy_tab(char **tab)

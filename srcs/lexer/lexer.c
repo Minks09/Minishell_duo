@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:22:20 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/23 15:15:44 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/30 02:30:41 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,14 @@ char	*expand(char *str)
 	int	i;
 	char *temp;
 	char *var;
+	char *key;
 
 	i = 0;
 	if (str[i] == '$')
 		str++;
-	temp = getenv(str);
+	while (str[i] != '\0' && str[i] != ' ')
+		key = &str[i++];
+	temp = getenv(key);
 	if (temp == NULL)
 		perror("variable not found");
 	var = strdup(temp);

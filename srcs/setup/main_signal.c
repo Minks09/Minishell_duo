@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 20:20:09 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/09 20:55:24 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/07/30 02:01:42 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	CTRL_C(int sig)
 void	CTRL_else(int sig)
 {
 	(void)sig;
-	rl_redisplay();
 }
 
 void 	signal_main(void)
