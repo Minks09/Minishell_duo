@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 18:32:09 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 17:00:45 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 20:30:16 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	count_strings_pipe(const char *str, char sep)
 
 	i = 0;
 	count = 0;
+	if (strncmp(str, "|\0", 2) == 0)
+		return (1);
 	while (str[i] != '\0')
 	{
 		while (str[i] != '\0' && check_sep(str[i], sep) == 1)

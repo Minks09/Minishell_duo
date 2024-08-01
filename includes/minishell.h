@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/01 03:02:25 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 20:27:24 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ char **ft_split_pipe(const char *str, char sep);
 t_token     *init_token_struct(void);
 void        free_token_struct(t_token **token);
 int	        return_type(char *str);
+char        *join_argument(char *argument, char *str);
 void        insert_node_token(t_token **root, char *str);
 void        parse_token(t_token **token, char **str);
 //utils.c
@@ -142,6 +143,7 @@ void        free_tab(char **tab);
 t_bool      get_pathname(t_shell *shell, char *command);
 t_bool      check_command(t_shell *shell);
 char        *end_with_pipe(char *str);
+char        *find_path(t_envp *shell_env);
 //ft_split.c
 char	    *ft_stringdup(const char *str, char sep);
 int	        size_of_strings(const char *str, char sep);

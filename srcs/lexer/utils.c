@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:44:42 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 17:00:34 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 20:31:13 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,34 +106,6 @@ char    *return_key(char *str)
     return (key);    
 }
 
-void print_string_array(char **array) 
-{
-    int i;
-
-    if (array == NULL) {
-        printf("Array is NULL\n");
-        return;
-    }
-    
-    i = 0;
-    while (array[i] != NULL) {
-        printf("%s\n", array[i]);
-        i++;
-    }
-}
-
-void    ft_putstr(char *str)
-{
-    int i;
-
-    i = 0;
-    while (str[i])
-    {
-        write(1, &str[i], 1);
-        i++;
-    }
-    write(1, "\n", 1);
-}
 void free_tab(char **tab)
 {
     int i;
