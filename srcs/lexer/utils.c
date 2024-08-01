@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:44:42 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/23 20:14:40 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 02:24:08 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,4 +133,16 @@ void    ft_putstr(char *str)
         i++;
     }
     write(1, "\n", 1);
+}
+void free_tab(char **tab)
+{
+    int i;
+    
+    i = 0;
+    while (tab[i] != NULL)
+    {
+        free(tab[i]);
+        i++;
+    }
+    free(tab);
 }

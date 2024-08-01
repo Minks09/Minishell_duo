@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:29:10 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/30 01:13:02 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 02:18:44 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,4 +162,22 @@ char    **return_env_tab(char **envp)
 //     }
 //     free_env(&root);
 //     return (1);
+// }
+
+// int main(int argc, char **argv, char **envp)
+// {
+//     t_shell *shell;
+//     t_envp *curr;
+//
+//     shell->env = return_env(shell, envp);
+//     curr = shell->env;
+//     while (curr != NULL)
+//     {
+//         printf("key : %s\n", curr->key);
+//         printf("value : %s\n", curr->value);
+//         curr = curr->next;
+//     }
+//     free_env(&shell->env);
+//     free_tab(shell->env_tab);
+//     return(1);
 // }

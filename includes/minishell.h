@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/01 01:42:08 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 02:31:10 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,25 @@ void        ft_putstr(char *str);
 void        free_tab(char **tab);
 t_bool      get_pathname(t_shell *shell, char *command);
 t_bool      check_command(t_shell *shell);
+char        *end_with_pipe(char *str);
+//ft_split.c
+char	    *ft_stringdup(const char *str, char sep);
+int	        size_of_strings(const char *str, char sep);
+int	        count_strings(const char *str, char sep);
+int	        check_sep(char c, char sep);
+//split_pipe.c
+char	    *ft_strdup(const char *s1);
+void        fill_new_tab(char **str,char **tab, int size);
+char        **split_pipe(char **str);
+char	    **ft_split_pipe(const char *str, char sep);
+int	        count_strings_pipe(const char *str, char sep);
+//redirection.c
+int         check_redirection(char  *command, char *argument);
+int         redirect_output(char *command, char *argument);
+int         redirect_input(char *command, char *argument);
+//error.c
+t_bool    command_not_valid(char *command);
+
 /***************************************SETUP***************************************/
 //child_signal.c
 void		CTRL_C_child(int sig);

@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:34:31 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/23 20:16:02 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 02:22:38 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 //     unlink("heredoc");
 //     return ;
 // }
+#include  "../../../includes/minishell.h"
 
 t_bool search_EOF(char *haystack, char *needle)
 {
@@ -72,7 +73,7 @@ t_bool search_EOF(char *haystack, char *needle)
     return (FALSE);
 }
 
-void    heredoc(t_token *token)
+int    heredoc(char *argument)
 {
     int fd;
     char *line;
@@ -80,13 +81,13 @@ void    heredoc(t_token *token)
     line = NULL;
     fd = open("heredoc", O_CREAT | O_RDWR | O_TRUNC, 0644);
     if (fd == -1)
-        return ;
+        return(0);
     while (1)
     {
         line = readline("> ");
         if (!line)
             break ;
-        if (search_EOF(line, token->argument))
+        if (search_EOF(line, argument))
             break;
         write(fd, line, strlen(line));
         write(fd, "\n", 1);
@@ -98,6 +99,7 @@ void    heredoc(t_token *token)
     free (line);
     line = NULL;
     }
+    return(fd);
 }
 // int main()
 // {

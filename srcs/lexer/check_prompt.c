@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 16:18:24 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/23 20:12:59 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 02:21:04 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,17 @@
 char    *check_prompt(char *prompt)
 {
     char    *clean_prompt;
+    char    *tmp;
     if (!check_both_quotes(prompt) || !search_semi_back(prompt))
         return (NULL);
+    //ft_strtrim(prompt, '\t');
     escape_double_quote(prompt);
     escape_single_quote(prompt);
-    clean_prompt = expandz(prompt);
+    tmp = end_with_pipe(prompt);
+    clean_prompt = expandz(tmp);
+    //free(tmp);
     return(clean_prompt);
 }
-
-// t_bool  check_command(t_shell *shell)
-// {
-//     int i;
-//     char    *tmp;
-//     t_token *curr;
-
-//     i = 1;
-//     curr = shell->token;
-//     while (curr != NULL)
-//     {   
-//         if (strncmp(curr->command, "|\0", 2) != 0)
-//         {
-//             if (access(curr->command, X_OK | F_OK) != 0)
-//                 return (ft_putstr("command not valid"), FALSE);
-//         }
-//         curr = curr->next;
-//     }
-//     return (TRUE);
-// }
 
 t_bool    parsing(t_shell *shell, char *prompt, char **env)
 {
@@ -62,7 +46,9 @@ t_bool    parsing(t_shell *shell, char *prompt, char **env)
 	if (!check_command(shell))
 		return (FALSE);
 	shell->nb_pipe = return_pipe_nbr(clean_prompt);
+    free(clean_prompt);
 	return(TRUE);
+
 }
 
 int     return_pipe_nbr(char *prompt)
