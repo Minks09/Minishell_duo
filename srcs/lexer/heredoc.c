@@ -6,51 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:34:31 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 02:22:38 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 02:23:49 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  <minishell.h>
-
-// void    heredoc1(t_token *token, t_queue *queue_env)
-// {
-//     char    *line;
-//     char    *heredoc;
-//     int     fd;
-//     int     ret;
-
-//     line = NULL;
-//     heredoc = ft_strdup("");
-//     fd = open("heredoc", O_CREAT | O_RDWR | O_TRUNC, 0644);
-//     if (fd == -1)
-//         return ;
-//     while (1)
-//     {
-//         line = readline("> ");
-//         if (!line)
-//             break ;
-//         if (ft_strcmp(line, token->argument) == 0)
-//             break ;
-//         heredoc = ft_strjoin(heredoc, line);
-//         heredoc = ft_strjoin(heredoc, "\n");
-//         free(line);
-//     }
-//     write(fd, heredoc, ft_strlen(heredoc));
-//     free(heredoc);
-//     close(fd);
-//     fd = open("heredoc", O_RDONLY);
-//     if (fd == -1)
-//         return ;
-//     ret = get_next_line(fd, &line);
-//     if (ret == 0)
-//         return ;
-//     token->argument = ft_strdup(line);
-//     free(line);
-//     close(fd);
-//     unlink("heredoc");
-//     return ;
-// }
-#include  "../../../includes/minishell.h"
 
 t_bool search_EOF(char *haystack, char *needle)
 {
