@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 12:09:31 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 21:39:36 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/02 00:13:54 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ char *find_path(t_envp *shell_env)
 
     pathname = NULL;
     curr = shell_env;
-    while (curr->key != NULL)
+    pathname = NULL;
+    while (curr != NULL)
     {
         if (strncmp(curr->key, "PATH", 4) == 0)
         {
@@ -126,4 +127,3 @@ char    *end_with_pipe(char *str)
     }
     return (str);
 }
-

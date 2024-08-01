@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:22:20 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 17:40:28 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/02 00:10:33 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,24 +111,21 @@ t_bool	search_semi_back(char *str)
 	return (TRUE);
 }
 
-char	*expand(char *str)
-{
-	int	i;
-	char *temp;
-	char *var;
-	char *key;
+// char	*expand(char *str)
+// {
+// 	int	i;
+// 	char *temp;
+// 	char *var;
 
-	i = 0;
-	if (str[i] == '$')
-		str++;
-	while (str[i] != '\0' && str[i] != ' ')
-		key = &str[i++];
-	temp = getenv(key);
-	if (temp == NULL)
-		perror("variable not found");
-	var = strdup(temp);
-	return (var);
-}
+// 	i = 0;
+// 	if (str[i] == '$')
+// 		str++;
+// 	temp = getenv(str);
+// 	if (temp == NULL)
+// 		perror("variable not found");
+// 	var = strdup(temp);
+// 	return (var);
+// }
 
 // int main(void)
 // {

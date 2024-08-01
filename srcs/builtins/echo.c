@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:02:14 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 23:03:08 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/01 23:48:20 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,50 +37,13 @@ int	echo(t_token **token)
 		return ERROR;
 }
 
-char	*get_env(t_shell *shell, char *str)
-{
-	int	size;
-	t_envp *curr;
 
-	str++;
-	curr = shell->env;
-	size = strlen(str) + 1;
-	while (curr != NULL)
-	{
-		if (strncmp(curr->key, str, size) == 0)
-		{
-			str--;
-			free(str);
-			return(strdup(curr->value));
-		}
-		curr = curr->next;
-	}
-	return (str);
-}
-
-void	expandx(t_shell *shell)
-{
-	t_token *curr_token;
-
-	curr_token = shell->token;
-	while (curr_token != NULL)
-	{
-		if (curr_token->command[0] == '$' && curr_token->command != NULL)
-			curr_token->command = get_env(shell, curr_token->command);
-		if (curr_token->argument != NULL)
-		{
-			if (curr_token->argument[0] == '$')
-				curr_token->argument = get_env(shell, curr_token->argument);
-		}
-		curr_token = curr_token->next;
-	}
-}
 
 // int     size_var_key(char *str)
 // {
 //     int     i;
 //     int     size;
-
+//
 //     i = 0;
 //     size = 0;
 //     while (str[i] != '$')
@@ -100,7 +63,7 @@ void	expandx(t_shell *shell)
 //     int size;
 // 	char *temp;
 //     char *ptr;
-
+//
 // 	i = 0;
 //     size = size_var_key(str);
 //     ptr = strdup(str);
@@ -202,3 +165,44 @@ void	expandx(t_shell *shell)
 //     free(str);
 //     return (1);
 // }
+
+void    expandx(t_shell *shell)
+{
+    //int	i;
+	//char *value;
+	t_token *curr_token;
+
+	curr_token = shell->token;
+	while (curr_token != NULL)
+	{
+		if (curr_token->command[0] == '$' && curr_token->command != NULL)
+			curr_token->command = get_env(shell, curr_token->command);
+		if (curr_token->argument != NULL)
+		{
+			if (curr_token->argument[0] == '$')
+				curr_token->argument = get_env(shell, curr_token->argument);
+		}
+		curr_token = curr_token->next;
+	}
+}
+
+char	*get_env(t_shell *shell, char *str)
+{
+	int	size;
+	t_envp *curr;
+
+	str++;
+	curr = shell->env;
+	size = strlen(str) + 1;
+	while (curr != NULL)
+	{
+		if (strncmp(curr->key, str, size) == 0)
+		{
+			str--;
+			free(str);
+			return(strdup(curr->value));
+		}
+		curr = curr->next;
+	}
+	return (str);
+}

@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/01 23:03:17 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/02 00:16:43 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,59 +63,25 @@ int			print_env(t_envp **root);
 //unset.c
 int			unset(t_envp **root, char *key);
 /**************************************PARSING*******************************************/
-//env
-int			is_alnum(char *key);
-int			valid_env_key(char *key);
-char		*get_env_value(char *key, t_envp *queue);
-/**************************************EXEC**********************************************/
-//exec.c
-void		simple_exec(t_shell *shell);
-void		main_exec(t_shell *shell);
-//fork.c
-void		execute_first_pipe(t_shell *shell, t_token *curr);
-void		execute_mid_pipe(t_shell *shell, t_token *curr);
-void		execute_last_pipe(t_shell *shell, t_token *curr);
-void		pipe_exec(t_shell *shell);
-//pipe.c
-void		init_first_pipe(t_shell *shell);
-void		init_mid_pipe(t_shell *shell);
-void		close_pipes(t_pipe *pipe);
-//redir.c
-int		handle_redirection(t_token *token);
-/**************************************LEXER**********************************************/
+
+//lexer.c
+t_bool	    check_both_quotes(char *input);
+void	    escape_single_quote(char *input);
+void	    escape_double_quote(char *input);
+char	    *expand(char *str);
+t_bool	    search_semi_back(char *str);
+//utils.c
+char        *return_key(char *str);
+char        *return_value(char *str);
+int         is_inside_quote(const char *str, int index);
+const char  *skip_quotes(const char *str);
+void        free_tab(char **tab);
 //check_prompt.c
 t_bool      parsing(t_shell *shell, char *prompt, char **env);
 char        *check_prompt(char *prompt);
 int         return_pipe_nbr(char *prompt);
-//env.c
-void        insert_node_env(t_envp **root, char *key, char *value);
-void        free_env(t_envp **root);
-t_envp      *return_env(t_shell *shell, char **env);
-char        **return_env_tab(char **envp);
-void        remove_node_env(t_envp **root, char *key);
-//error.c
-t_bool		command_not_valid(char *command);
-//ft_split.c
-int			check_sep(char c, char sep);
-int			count_strings(const char *str, char sep);
-int			size_of_strings(const char *str, char sep);
-char		*ft_stringdup(const char *str, char sep);
-char		**ft_split_parse(const char *str, char sep);
-//heredoc.c
-int			heredoc(char *delimiter);
-t_bool		search_EOF(char *haystack, char *needle);
-//lexer.c
-t_bool		check_both_quotes(char *input);
-void	    escape_single_quote(char *input);
-void	    escape_double_quote(char *input);
-t_bool	    search_semi_back(char *str);
-char	    *expand(char *str);
-//redirection.c
-int         check_redirection(char  *command, char *argument);
-int         redirect_output(char *command, char *argument);
-int         redirect_input(char *command, char *argument);
+t_bool      command_not_valid(char *command);
 //split_command.c
-int	        check_sep_cmd(char c, char sep);
 int	        count_strings_cmd(const char *str, char sep);
 int	        size_of_strings_cmd(const char *str, char sep);
 char	    *ft_strdup_cmd(const char *str, char sep);
@@ -125,9 +91,10 @@ int			count_strings_pipe(const char *str, char sep);
 char 		*ft_strdup(const char *s1);
 char 		**ft_split_pipe(const char *str, char sep);
 //token.c
-t_token		*init_token_struct(void);
-void		free_token_struct(t_token **token);
-int			return_type(char *str);
+void        parse_token(t_token **token, char **commands);
+void        insert_node_token(t_token **root, char *command);
+void        free_token_struct(t_token **token);
+t_token     *init_token_struct(void);
 char        *join_argument(char *argument, char *str);
 void        insert_node_token(t_token **root, char *str);
 void        parse_token(t_token **token, char **str);
@@ -139,11 +106,11 @@ int         is_inside_quote(const char *str, int index);
 const char  *skip_quotes(const char *str);
 void        ft_putstr(char *str);
 //utils2.c
-void        free_tab(char **tab);
 t_bool      get_pathname(t_shell *shell, char *command);
 t_bool      check_command(t_shell *shell);
 char        *end_with_pipe(char *str);
 char        *find_path(t_envp *shell_env);
+char	    *ft_strjoin(const char *s1, const char *s2);
 //ft_split.c
 char	    *ft_stringdup(const char *str, char sep);
 int	        size_of_strings(const char *str, char sep);
@@ -159,8 +126,8 @@ int	        count_strings_pipe(const char *str, char sep);
 int         check_redirection(char  *command, char *argument);
 int         redirect_output(char *command, char *argument);
 int         redirect_input(char *command, char *argument);
-//error.c
-t_bool    command_not_valid(char *command);
+int	        return_type(char *str);
+void        remove_node_env_extend(t_envp *to_remove);
 
 /***************************************SETUP***************************************/
 //child_signal.c

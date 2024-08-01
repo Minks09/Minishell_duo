@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 18:32:09 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 20:30:16 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/02 00:12:24 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,18 +129,6 @@ void    fill_new_tab(char **str,char **tab, int size)
     tab[i + z] = NULL;
     return;
 }
-// void free_tab(char **tab)
-// {
-//     int i;
-    
-//     i = 0;
-//     while (tab[i] != NULL)
-//     {
-//         free(tab[i]);
-//         i++;
-//     }
-//     free(tab);
-// }
 
 // int	main(int argc, char **argv)
 // {

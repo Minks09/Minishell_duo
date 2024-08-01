@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:59:35 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 20:31:06 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/02 00:13:06 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,6 @@ void    free_token_struct(t_token **token)
 	*token = NULL;
 }
 
-int	return_type(char *str)
-{
-	if (strncmp(str, ">", 1) == 0)
-		return (T_TRUNC);
-	if (strncmp(str, ">>", 2) == 0)
-		return (T_APPEND);
-	if (strncmp(str, "<", 1) == 0)
-		return (T_INPUT);
-	if (strncmp(str, "|", 1) == 0)
-		return (T_PIPE);
-	return (T_CMD);
-}
-
 void    insert_node_token(t_token **root, char *command)
 {
 	t_token *new_node;
@@ -104,15 +91,13 @@ void    parse_token(t_token **token, char **str)
 
 	i = 0;
 	curr = *token;
-	(*token)->command = strdup(str[i++]);
+	(*token)->command = strdup(str[i]);
 	(*token)->type = T_CMD;
 	tmp = (*token)->command[0];
-	while (str[i] != NULL)
-	{
+    while (str[++i] != NULL)
+    {
 		if(check_redirection(str[i - 1], str[i]) != 0)
-        {
             curr->fd = check_redirection(str[i - 1], str[i]);
-        }
 		while (tmp != '|' && str[i])
         {   
             if (str[i][0] == '|' || str[i][0] == '<' || str[i][0] == '>')
@@ -124,8 +109,7 @@ void    parse_token(t_token **token, char **str)
 		insert_node_token(token, str[i]);
 		curr = curr->next;
 		tmp = curr->command[0];
-		i++;
-	}
+    }
 }
 
 char    *join_argument(char *argument, char *str)
@@ -145,12 +129,11 @@ char    *join_argument(char *argument, char *str)
         return(NULL);
     while (argument[++i] != '\0')
         new_argument[i] = argument[i];
-    new_argument[i++] = ' ';
+    if (argument[i] != '\0')
+        new_argument[i++] = ' ';
     while (str[++j] != '\0')
         new_argument[i + j] = str[j];
     new_argument[i + j] = '\0';
-    //free(str);
-    //str = NULL;
     free(argument);
     argument = NULL;
     return(new_argument);
