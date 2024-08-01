@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 12:09:31 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 17:09:04 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:26:34 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 t_bool  check_command(t_shell *shell)
 {
-    int i;
     t_token *curr;
 
-    i = 1;
     curr = shell->token;
     while (curr != NULL)
     {   
@@ -64,11 +62,11 @@ t_bool  get_pathname(t_shell *shell, char *command)
 
 char *find_path(t_envp *shell_env)
 {
-    int i;
     char *pathname;
     t_envp *curr;
 
     curr = shell_env;
+    pathname = NULL;
     while (curr != NULL)
     {
         if (strncmp(curr->key, "PATH", 4) == 0)
@@ -85,14 +83,12 @@ char	*ft_strjoin(const char *s1, const char *s2)
 {
 	int		i;
 	int		j;
-	int		len_s1;
 	int		tot_len;
 	char	*str;
 
 	i = -1;
 	j = -1;
 	tot_len = strlen(s1) + strlen(s2);
-	len_s1 = strlen(s1);
 	str = (char *)malloc(sizeof(char) * tot_len + 1);
 	if (str == NULL)
 		return (NULL);
@@ -129,26 +125,4 @@ char    *end_with_pipe(char *str)
         tmp = str[i - 1];
     }
     return (str);
-}
-
-t_bool is_builtin(char *str)
-{
-    int i;
-
-    i = 0;
-    if (strncmp(str, "cd", 2))
-        return(TRUE);
-    if (strncmp(str, "cd", 2))
-        return(TRUE);
-    if (strncmp(str, "cd", 2))
-        return(TRUE);
-    if (strncmp(str, "cd", 2))
-        return(TRUE);
-    if (strncmp(str, "cd", 2))
-        return(TRUE);
-    if (strncmp(str, "cd", 2))
-        return(TRUE);
-    if (strncmp(str, "cd", 2))
-        return(TRUE);
-    return (FALSE);
 }

@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:02:14 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 16:34:38 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:15:20 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void    echo(t_token **token)
 // {
 //     int     i;
 //     int     size;
-
+//
 //     i = 0;
 //     size = 0;
 //     while (str[i] != '$')
@@ -58,7 +58,7 @@ void    echo(t_token **token)
 //     int size;
 // 	char *temp;
 //     char *ptr;
-
+//
 // 	i = 0;
 //     size = size_var_key(str);
 //     ptr = strdup(str);
@@ -163,8 +163,8 @@ void    echo(t_token **token)
 
 void    expandx(t_shell *shell)
 {
-    int	i;
-	char *value;
+    //int	i;
+	//char *value;
 	t_token *curr_token;
 
 	curr_token = shell->token;
@@ -183,7 +183,6 @@ void    expandx(t_shell *shell)
 
 char	*get_env(t_shell *shell, char *str)
 {
-	int	i;
 	int	size;
 	t_envp *curr;
 

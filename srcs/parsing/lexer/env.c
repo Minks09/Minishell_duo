@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:29:10 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/28 18:55:08 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:15:35 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ void    remove_node_env(t_envp **root, char *key)
     {
         to_remove = *root;
         *root = (*root)->next;
-        free(to_remove->key);
-        free(to_remove->value);
-        free(to_remove);
+        remove_node_env_extend(to_remove);
     }
     while (curr->next != NULL)
     {
@@ -51,9 +49,7 @@ void    remove_node_env(t_envp **root, char *key)
         {
             to_remove = curr->next;
             curr->next = curr->next->next;
-            free(to_remove->key);
-            free(to_remove->value);
-            free(to_remove);
+            remove_node_env_extend(to_remove);
         }
         curr = curr->next;
     }
@@ -61,11 +57,9 @@ void    remove_node_env(t_envp **root, char *key)
 
 void    free_env(t_envp **root)
 {
-    int i;
     t_envp  *curr;
     t_envp  *tmp;
 
-    i = 0;
     curr = *root;
     while (curr != NULL)
     {

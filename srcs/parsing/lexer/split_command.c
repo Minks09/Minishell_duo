@@ -6,18 +6,11 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 23:28:11 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/11 22:01:23 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:24:29 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "../../../includes/minishell.h"
-
-int	check_sep_cmd(char c, char sep)
-{
-	if (c == sep)
-		return (1);
-	return (0);
-}
 
 int	count_strings_cmd(const char *str, char sep)
 {
@@ -30,7 +23,7 @@ int	count_strings_cmd(const char *str, char sep)
 	count = 0;
 	while (str[i] != '\0')
 	{
-		while (str[i] != '\0' && (check_sep_cmd(sep, str[i]) == 1))
+		while (str[i] != '\0' && (check_sep(sep, str[i]) == 1))
 			i++;
         if (!is_inside_quote(&str[i], i) && inside_quote == 0)
         {
@@ -39,7 +32,7 @@ int	count_strings_cmd(const char *str, char sep)
         }
 		if (str[i] != '\0' && (!is_inside_quote(&str[i], i)))
 			count++;
-		while (str[i] != '\0' && (check_sep_cmd(sep, str[i]) == 0))
+		while (str[i] != '\0' && (check_sep(sep, str[i]) == 0))
 			i++;
 	}
 	return (count);
@@ -68,7 +61,7 @@ int	size_of_strings_cmd(const char *str, char sep)
             i++;
         return(i);
     }
-	while (str[i] != '\0' && (check_sep_cmd(str[i], sep) == 0 ))
+	while (str[i] != '\0' && (check_sep(str[i], sep) == 0 ))
 		i++;
 	return (i);
 }
@@ -106,7 +99,7 @@ char	**ft_split_command(const char *str, char sep)
 		return (NULL);
 	while (*str != '\0')
 	{
-		while (*str != '\0' && (check_sep_cmd(*str, sep) == 1))
+		while (*str != '\0' && (check_sep(*str, sep) == 1))
 			str++;
 		if (*str != '\0')
 		{
@@ -115,7 +108,7 @@ char	**ft_split_command(const char *str, char sep)
         if (*str == '\"')
             str = skip_quotes(str);
         else
-		    while (*str != '\0' && (check_sep_cmd(*str, sep) == 0))
+		    while (*str != '\0' && (check_sep(*str, sep) == 0))
 			    str++;
 	}
 	strings[i] = NULL;

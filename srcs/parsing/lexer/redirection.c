@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:08:14 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/24 15:07:26 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:20:59 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,27 @@ int    redirect_input(char *command, char *argument)
 {
     int i;
 
-    i = open(argument, O_RDONLY);
+    i = -1;
+    if (command)
+        i = open(argument, O_RDONLY);
     return(i);
+}
+
+int	return_type(char *str)
+{
+	if (strncmp(str, ">", 1) == 0)
+		return (T_TRUNC);
+	if (strncmp(str, ">>", 2) == 0)
+		return (T_APPEND);
+	if (strncmp(str, "<", 1) == 0)
+		return (T_INPUT);
+	if (strncmp(str, "|", 1) == 0)
+		return (T_PIPE);
+	return (T_CMD);
+}
+void    remove_node_env_extend(t_envp *to_remove)
+{
+    free(to_remove->key);
+    free(to_remove->value);
+    free(to_remove);
 }
