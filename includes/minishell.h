@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/07/28 13:37:07 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/01 02:17:48 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void        insert_node_token(t_token **root, char *command);
 int	        return_type(char *str);
 void        free_token_struct(t_token **token);
 t_token     *init_token_struct(void);
+char        *join_argument(char *argument, char *str);
 //env.c
 void        insert_node_env(t_envp **root, char *key, char *value);
 void        free_env(t_envp **root);
@@ -69,6 +70,7 @@ void        free_tab(char **tab);
 t_bool      get_pathname(t_shell *shell, char *command);
 t_bool      check_command(t_shell *shell);
 char        *end_with_pipe(char *str);
+char        *find_path(t_envp *shell_env);
 //ft_split.c
 char	    *ft_stringdup(const char *str, char sep);
 int	        size_of_strings(const char *str, char sep);
@@ -100,6 +102,8 @@ char        *get_value(char *str);
 int         size_var_value(char *str);
 int         size_var_key(char *str);
 void        echo(t_token **token);
+void        expandx(t_shell *shell);
+char	    *get_env(t_shell *shell, char *str);
 //export.c
 void        export(t_envp **root, char *new_var);
 char        *return_value_quoted(char *str);

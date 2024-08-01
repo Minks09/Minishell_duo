@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 12:09:31 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/31 16:37:15 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:09:04 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ t_bool  check_command(t_shell *shell)
     curr = shell->token;
     while (curr != NULL)
     {   
-        if (strncmp(curr->command, "|\0", 2) != 0)
+        if (strncmp(curr->command, "|\0", 2) != 0 &&
+         strncmp(curr->command, ">", 1) != 0 &&
+         strncmp(curr->command, "<", 1) != 0)
         {
             if (get_pathname(shell, curr->command) == 0)
                 return (command_not_valid(curr->command));
@@ -36,45 +38,48 @@ t_bool  get_pathname(t_shell *shell, char *command)
     int     i;
     char    **path_cmd;
     char    *pathname;
-    t_envp  *curr_env;
+    char    *tmp;
 
     i = 0;
-    curr_env = shell->env;
-    while (curr_env != NULL)
-    {
-        if (strncmp(curr_env->key, "PATH", 4) == 0)
-        {
-            pathname = curr_env->value;
-            break;
-        }
-        curr_env = curr_env->next;
-    }
+    pathname = find_path(shell->env);
     path_cmd = ft_split(pathname, ':');
-    i = 0;
+    free(pathname);
     while (path_cmd[i])
     {
-        pathname = ft_strjoin(path_cmd[i], "/");
-        pathname = ft_strjoin(pathname, command);
+        tmp = ft_strjoin(path_cmd[i], "/");
+        pathname = ft_strjoin(tmp, command);
+        free(tmp);
         if (access(pathname, X_OK | F_OK) == 0)
+        {
+			free(pathname);
+			free_tab(path_cmd);
             return (TRUE);
+        }
+        free(pathname);
         i++;
     }
     free_tab(path_cmd);
     return (FALSE);
 }
 
-// void free_tab(char **tab)
-// {
-//     int i;
-    
-//     i = 0;
-//     while (tab[i] != NULL)
-//     {
-//         free(tab[i]);
-//         i++;
-//     }
-//     free(tab);
-// }
+char *find_path(t_envp *shell_env)
+{
+    int i;
+    char *pathname;
+    t_envp *curr;
+
+    curr = shell_env;
+    while (curr != NULL)
+    {
+        if (strncmp(curr->key, "PATH", 4) == 0)
+        {
+            pathname = strdup(curr->value);
+            break;
+        }
+        curr = curr->next;
+    }
+    return(pathname);
+}
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
@@ -124,4 +129,26 @@ char    *end_with_pipe(char *str)
         tmp = str[i - 1];
     }
     return (str);
+}
+
+t_bool is_builtin(char *str)
+{
+    int i;
+
+    i = 0;
+    if (strncmp(str, "cd", 2))
+        return(TRUE);
+    if (strncmp(str, "cd", 2))
+        return(TRUE);
+    if (strncmp(str, "cd", 2))
+        return(TRUE);
+    if (strncmp(str, "cd", 2))
+        return(TRUE);
+    if (strncmp(str, "cd", 2))
+        return(TRUE);
+    if (strncmp(str, "cd", 2))
+        return(TRUE);
+    if (strncmp(str, "cd", 2))
+        return(TRUE);
+    return (FALSE);
 }

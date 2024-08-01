@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:59:35 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/31 18:08:18 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:22:01 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void    insert_node_token(t_token **root, char *command)
     new_node = malloc(sizeof(t_token));
     if (!new_node)
         exit(1);
-    new_node->command = command;
+    new_node->command = strdup(command);
     new_node->path = NULL;
     new_node->argument = NULL;
     new_node->operator = NULL;
@@ -107,7 +107,7 @@ void    parse_token(t_token **token, char **str)
 
     i = 0;
 	curr = *token;
-	(*token)->command = str[i++];
+	(*token)->command = strdup(str[i++]);
 	(*token)->type = T_CMD;
 	tmp = (*token)->command[0];
     while (str[i] != NULL)
@@ -116,8 +116,12 @@ void    parse_token(t_token **token, char **str)
         {
             curr->fd = check_redirection(str[i - 1], str[i]);
         }
-		if (tmp != '|' && str[i][0] != '|')
-			curr->argument = str[i++];
+		while (tmp != '|' && str[i])
+        {   
+            if (str[i][0] == '|' || str[i][0] == '<' || str[i][0] == '>')
+                break;
+			curr->argument = join_argument(curr->argument, str[i++]);
+        }
 		if (str[i] == NULL)
 			break;
 		insert_node_token(token, str[i]);
@@ -125,6 +129,34 @@ void    parse_token(t_token **token, char **str)
 		tmp = curr->command[0];
 		i++;
     }
+}
+
+char    *join_argument(char *argument, char *str)
+{
+    int i;
+    int j;
+    int lenght;
+    char *new_argument;
+
+    i = -1;
+    j = -1;
+    if (!argument)
+        argument = strdup("");
+    lenght = strlen(argument) + strlen(str) + 1;
+    new_argument = malloc(sizeof(char) * (lenght + 1));
+    if (!new_argument)
+        return(NULL);
+    while (argument[++i] != '\0')
+        new_argument[i] = argument[i];
+    new_argument[i++] = ' ';
+    while (str[++j] != '\0')
+        new_argument[i + j] = str[j];
+    new_argument[i + j] = '\0';
+    //free(str);
+    //str = NULL;
+    free(argument);
+    argument = NULL;
+    return(new_argument);
 }
 
 // int main()

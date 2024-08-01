@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 16:18:24 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/31 18:04:15 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/01 18:15:31 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ char    *check_prompt(char *prompt)
     //ft_strtrim(prompt, '\t');
     escape_double_quote(prompt);
     escape_single_quote(prompt);
-    tmp = end_with_pipe(prompt);
-    clean_prompt = expandz(tmp);
-    //free(tmp);
+    clean_prompt = end_with_pipe(prompt);
+    //clean_prompt = expandz(tmp);
     return(clean_prompt);
 }
 
@@ -40,15 +39,18 @@ t_bool    parsing(t_shell *shell, char *prompt, char **env)
     if (!clean_prompt)
         return(FALSE);
     commands = ft_split_command(clean_prompt, ' ');
+    commands = split_pipe(commands);
     root_token = init_token_struct();
     parse_token(&root_token, commands);
     root_env = return_env(shell, env);
     shell->token = root_token;
     shell->env = root_env;
-    // if (!check_command(shell))
-    //     return (FALSE);
     shell->nb_pipe = return_pipe_nbr(clean_prompt);
+    expandx(shell);
     free(clean_prompt);
+    free_tab(commands);
+    if (!check_command(shell))
+        return (FALSE);
     return(TRUE);
 }
 
@@ -76,12 +78,14 @@ int main(int argc, char **argv, char **envp)
     t_shell     *shell;
     t_token     *curr;
 
-    prompt = strdup("ls | ls | ls");
+    prompt = strdup("cat file1.txt | grep $USER > sorted_file1.txt");
     shell = malloc(sizeof(t_shell));
     if (!parsing(shell, prompt, envp))
         {
             free_token_struct(&shell->token);
-            free(prompt);
+            free_env(&shell->env);
+            free_tab(shell->env_tab);
+            free(shell);
             return(1);
         }
     curr = shell->token;

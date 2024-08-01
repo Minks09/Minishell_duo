@@ -6,7 +6,7 @@
 /*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 18:32:09 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/28 19:07:29 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/07/31 22:29:45 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	count_strings_pipe(const char *str, char sep)
 
 	i = 0;
 	count = 0;
+	if (strncmp(str, "|\0", 2) == 0)
+		return (1);
 	while (str[i] != '\0')
 	{
 		while (str[i] != '\0' && check_sep(str[i], sep) == 1)
