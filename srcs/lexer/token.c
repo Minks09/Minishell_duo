@@ -3,64 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:59:35 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 23:25:55 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/02 00:13:06 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../../../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 t_token *init_token_struct(void)
 {
-    t_token  *token;
+	t_token  *token;
 
-    token = malloc(sizeof(t_token));
-    if (!token)
-        exit(1);
-    
-    token->command = NULL;
-    token->path = NULL;
-    token->argument = NULL;
-    token->operator = NULL;
-    token->file = NULL;
+	token = malloc(sizeof(t_token));
+	if (!token)
+		exit(1);
+	
+	token->command = NULL;
+	token->path = NULL;
+	token->argument = NULL;
+	token->operator = NULL;
+	token->file = NULL;
 
-    token->type = 0;
-    token->fd = -1;
-    token->next = NULL;
-    return (token);
+	token->type = 0;
+	token->fd = -1;
+	token->next = NULL;
+	return (token);
 }
 
 void    free_token_struct(t_token **token)
 {
-    t_token  *curr;
-    t_token  *tmp;
+	t_token  *curr;
+	t_token  *tmp;
 
-    curr = *token;
-    while (curr != NULL)
-    {
-        tmp = curr;
-        curr = curr->next;
-        free (tmp->command);
-        tmp->command = NULL;
-        free (tmp->path);
-        tmp->path = NULL;
-        free (tmp->argument);
-        tmp->argument = NULL;
-        free (tmp->operator);
-        tmp->operator = NULL;
-        free (tmp->file);
-        tmp->file = NULL;
-        free (tmp);
-        tmp = NULL;
-    }
-    *token = NULL;
+	curr = *token;
+	while (curr != NULL)
+	{
+		tmp = curr;
+		curr = curr->next;
+		free (tmp->command);
+		tmp->command = NULL;
+		free (tmp->path);
+		tmp->path = NULL;
+		free (tmp->argument);
+		tmp->argument = NULL;
+		free (tmp->operator);
+		tmp->operator = NULL;
+		free (tmp->file);
+		tmp->file = NULL;
+		free (tmp);
+		tmp = NULL;
+	}
+	*token = NULL;
 }
 
 void    insert_node_token(t_token **root, char *command)
 {
-    t_token *new_node;
+	t_token *new_node;
 	t_token *curr;
 	int	type;
 
@@ -77,19 +77,19 @@ void    insert_node_token(t_token **root, char *command)
     new_node->fd = 0;
     new_node->next = NULL;
 
-    curr = *root;
-    while (curr->next != NULL)
-        curr = curr->next;
-    curr->next = new_node;
+	curr = *root;
+	while (curr->next != NULL)
+		curr = curr->next;
+	curr->next = new_node;
 }
 
 void    parse_token(t_token **token, char **str)
 {
-    int i;
+	int i;
 	t_token *curr;
 	char tmp;
 
-    i = 0;
+	i = 0;
 	curr = *token;
 	(*token)->command = strdup(str[i]);
 	(*token)->type = T_CMD;

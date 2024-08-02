@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   child_signal.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 13:40:54 by nchebbi           #+#    #+#             */
-/*   Updated: 2024/06/16 16:50:30 by racinedelar      ###   ########.fr       */
+/*   Created: 2024/07/05 00:38:15 by racinedelar       #+#    #+#             */
+/*   Updated: 2024/08/01 17:00:13 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
-#include <stdio.h>
+#include "../../includes/minishell.h"
 
-char	*ft_strrchr(const char *s, int c)
+void CTRL_C_child(int sig)
 {
-	size_t	len;
+	(void)sig;
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	write(1, "\n", 1);
+}
 
-	len = ft_strlen(s);
-	while (len > 0 && s[len] != (unsigned char)c)
-		len--;
-	if (s[len] == (unsigned char)c)
-		return ((char *)s + len);
-	return (0);
+void CTRL_else_child(int sig)
+{
+	(void)sig;
+	
+}
+
+void	signal_child(void)
+{
+	signal(SIGINT, CTRL_C_child);
+	signal(SIGQUIT, CTRL_else_child);
 }

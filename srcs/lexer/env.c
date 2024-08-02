@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:29:10 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 23:15:35 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/02 00:34:15 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../../../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void    insert_node_env(t_envp **root, char *key, char *value)
 {
@@ -83,6 +83,8 @@ t_envp  *return_env(t_shell *shell, char **env)
     i = 1;
     shell->env_tab = return_env_tab(env);
     root = malloc(sizeof(t_envp));
+    if (!root)
+        return (NULL);
     root->key = return_key(env[0]);
     root->value = return_value(env[0]);
     root->next = NULL;
@@ -103,10 +105,22 @@ char    **return_env_tab(char **envp)
     while (envp[i])
         i++;
     env = malloc(sizeof(char *) * (i + 1));
+    if (!env)
+        return NULL;
     i = 0;
     while (envp[i])
     {
         env[i] = strdup(envp[i]);
+        if (!env[i])
+        {
+// Libére la mémoire allouée précédemment en cas d'échec
+            while (i > 0)
+            {
+                free(env[--i]);
+            }
+            free(env);
+            return NULL;
+        }
         i++;
     }
     env[i] = NULL;

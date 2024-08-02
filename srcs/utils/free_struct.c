@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   free_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 13:40:54 by nchebbi           #+#    #+#             */
-/*   Updated: 2024/06/16 16:50:30 by racinedelar      ###   ########.fr       */
+/*   Created: 2024/07/24 14:14:30 by racinedelar       #+#    #+#             */
+/*   Updated: 2024/08/01 16:59:40 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
-#include <stdio.h>
-
-char	*ft_strrchr(const char *s, int c)
+#include "../../includes/minishell.h"
+void free_shell(t_shell *shell)
 {
-	size_t	len;
-
-	len = ft_strlen(s);
-	while (len > 0 && s[len] != (unsigned char)c)
-		len--;
-	if (s[len] == (unsigned char)c)
-		return ((char *)s + len);
-	return (0);
+	if (shell != NULL)
+	{
+		if (shell->prompt)
+			free(shell->prompt);
+		if (shell->path_bin != NULL)
+			free_tab(shell->path_bin);
+		free_tab(shell->env_tab);
+		if (shell->token != NULL)
+			free_token_struct(&shell->token);
+		if (shell->env != NULL)
+			free_env(&shell->env);
+		free(shell);
+	}
 }

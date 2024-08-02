@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   error_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 13:40:54 by nchebbi           #+#    #+#             */
-/*   Updated: 2024/06/16 16:50:30 by racinedelar      ###   ########.fr       */
+/*   Created: 2024/07/24 03:30:57 by racinedelar       #+#    #+#             */
+/*   Updated: 2024/08/01 16:59:57 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
-#include <stdio.h>
+#include "../../includes/minishell.h"
 
-char	*ft_strrchr(const char *s, int c)
+int ft_err_(int R_CODE)
 {
-	size_t	len;
+    perror(strerror(R_CODE));
+    exit(R_CODE);
+}
 
-	len = ft_strlen(s);
-	while (len > 0 && s[len] != (unsigned char)c)
-		len--;
-	if (s[len] == (unsigned char)c)
-		return ((char *)s + len);
-	return (0);
+int put_error(t_shell *shell, char *msg, int R_CODE)
+{
+    ft_putstr_fd(msg, STDERR_FILENO);
+    ft_putchar_fd('\n', STDERR_FILENO);
+    shell->exit_status = R_CODE;
+    exit(R_CODE);
 }

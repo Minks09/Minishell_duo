@@ -1,0 +1,69 @@
+Pour vous assurer que les modifications poussées sur la branche principale (main) soient également présentes sur les autres branches du projet, vous pouvez suivre ces étapes :
+
+Changer de branche :
+Tout d’abord, assurez-vous que vous êtes sur la branche principale (main) en utilisant la commande :
+git checkout main
+
+Récupérer les modifications :
+Ensuite, pour récupérer les dernières modifications de la branche principale (main) depuis le serveur distant (par exemple, GitHub), utilisez la commande :
+git pull origin main
+Cela mettra à jour votre copie locale de la branche principale avec les derniers commits.
+Changer de branche cible :
+Maintenant, basculez vers la branche sur laquelle vous souhaitez appliquer les mêmes modifications. Par exemple, si vous voulez que les modifications de la branche principale soient également présentes sur une autre branche nommée “feature”, utilisez :
+git checkout feature
+
+Fusionner les modifications :
+Fusionnez les modifications de la branche principale dans la branche cible :
+git merge main
+Cela appliquera les commits de la branche principale à votre branche cible.
+Répétez pour d’autres branches :
+Répétez ces étapes pour toutes les autres branches sur lesquelles vous souhaitez appliquer les mêmes modifications.
+Valider et pousser les modifications :
+Après avoir vérifié que tout est correct, validez les modifications en utilisant git commit et poussez-les vers le serveur distant avec :
+git push origin NOM-DE-VOTRE-BRANCHE
+
+Si vous souhaitez récupérer le code que votre collègue vient de pousser sur la branche principale (main), voici quelques étapes que vous pouvez suivre :
+
+Changer de branche :
+Tout d’abord, assurez-vous que vous êtes sur la branche principale (main) en utilisant la commande :
+git checkout main
+
+Récupérer les modifications :
+Ensuite, pour récupérer les dernières modifications de la branche principale (main) depuis le serveur distant (par exemple, GitHub), utilisez la commande :
+git pull origin main
+Cela mettra à jour votre copie locale de la branche principale avec les derniers commits.
+Vérifier les modifications :
+Vous pouvez maintenant vérifier les modifications apportées par votre collègue en examinant les fichiers dans votre espace de travail local.
+Gérer les conflits (si nécessaire) :
+Si vous avez des conflits avec les modifications de votre collègue, vous devrez les résoudre manuellement.
+Utilisez git status pour voir les fichiers en conflit et git diff pour afficher les différences entre les versions.
+Une fois les conflits résolus, utilisez git add pour marquer les fichiers comme résolus.
+Valider les modifications :
+Enfin, validez les modifications en utilisant git commit et poussez-les vers le serveur distant avec :
+git push origin main
+
+Envoyer les modifications de la branche debug vers la branche main :
+Assurez-vous que vous êtes sur la branche debug :
+git checkout debug
+
+Mettez à jour votre branche debug avec les dernières modifications (optionnel, mais recommandé pour éviter les conflits) :
+git pull origin debug
+
+Changez pour la branche main :
+git checkout main
+
+Mettez à jour la branche main avec les dernières modifications:
+git pull origin main
+
+Fusionnez la branche debug dans main :
+git merge debug
+
+Poussez les modifications fusionnées vers le serveur distant :
+git push origin main
+
+
+
+pour changer de branches sans commit ses changement git stash (toutes les fichiers modifier que l'on souhaite mettre de cote)
+git stash est une pile, donc si vous "stasher" plusieurs fois, vous pouvez utiliser 
+git stash list pour voir tous vos états stashed,
+git stash pop ou git stash apply avec le nom d'un état pour appliquer un état spécifique.

@@ -1,0 +1,109 @@
+Voici les codes derreur predefinis pour un systeme arm Drawin
+
+Code d'erreur 0: Undefined error: 0
+Code d'erreur 1: Operation not permitted
+Code d'erreur 2: No such file or directory
+Code d'erreur 3: No such process
+Code d'erreur 4: Interrupted system call
+Code d'erreur 5: Input/output error
+Code d'erreur 6: Device not configured
+Code d'erreur 7: Argument list too long
+Code d'erreur 8: Exec format error
+Code d'erreur 9: Bad file descriptor
+Code d'erreur 10: No child processes
+Code d'erreur 11: Resource deadlock avoided
+Code d'erreur 12: Cannot allocate memory
+Code d'erreur 13: Permission denied
+Code d'erreur 14: Bad address
+Code d'erreur 15: Block device required
+Code d'erreur 16: Resource busy
+Code d'erreur 17: File exists
+Code d'erreur 18: Cross-device link
+Code d'erreur 19: Operation not supported by device
+Code d'erreur 20: Not a directory
+Code d'erreur 21: Is a directory
+Code d'erreur 22: Invalid argument
+Code d'erreur 23: Too many open files in system
+Code d'erreur 24: Too many open files
+Code d'erreur 25: Inappropriate ioctl for device
+Code d'erreur 26: Text file busy
+Code d'erreur 27: File too large
+Code d'erreur 28: No space left on device
+Code d'erreur 29: Illegal seek
+Code d'erreur 30: Read-only file system
+Code d'erreur 31: Too many links
+Code d'erreur 32: Broken pipe
+Code d'erreur 33: Numerical argument out of domain
+Code d'erreur 34: Result too large
+Code d'erreur 35: Resource temporarily unavailable
+Code d'erreur 36: Operation now in progress
+Code d'erreur 37: Operation already in progress
+Code d'erreur 38: Socket operation on non-socket
+Code d'erreur 39: Destination address required
+Code d'erreur 40: Message too long
+Code d'erreur 41: Protocol wrong type for socket
+Code d'erreur 42: Protocol not available
+Code d'erreur 43: Protocol not supported
+Code d'erreur 44: Socket type not supported
+Code d'erreur 45: Operation not supported
+Code d'erreur 46: Protocol family not supported
+Code d'erreur 47: Address family not supported by protocol family
+Code d'erreur 48: Address already in use
+Code d'erreur 49: Can't assign requested address
+Code d'erreur 50: Network is down
+Code d'erreur 51: Network is unreachable
+Code d'erreur 52: Network dropped connection on reset
+Code d'erreur 53: Software caused connection abort
+Code d'erreur 54: Connection reset by peer
+Code d'erreur 55: No buffer space available
+Code d'erreur 56: Socket is already connected
+Code d'erreur 57: Socket is not connected
+Code d'erreur 58: Can't send after socket shutdown
+Code d'erreur 59: Too many references: can't splice
+Code d'erreur 60: Operation timed out
+Code d'erreur 61: Connection refused
+Code d'erreur 62: Too many levels of symbolic links
+Code d'erreur 63: File name too long
+Code d'erreur 64: Host is down
+Code d'erreur 65: No route to host
+Code d'erreur 66: Directory not empty
+Code d'erreur 67: Too many processes
+Code d'erreur 68: Too many users
+Code d'erreur 69: Disc quota exceeded
+Code d'erreur 70: Stale NFS file handle
+Code d'erreur 71: Too many levels of remote in path
+Code d'erreur 72: RPC struct is bad
+Code d'erreur 73: RPC version wrong
+Code d'erreur 74: RPC prog. not avail
+Code d'erreur 75: Program version wrong
+Code d'erreur 76: Bad procedure for program
+Code d'erreur 77: No locks available
+Code d'erreur 78: Function not implemented
+Code d'erreur 79: Inappropriate file type or format
+Code d'erreur 80: Authentication error
+Code d'erreur 81: Need authenticator
+Code d'erreur 82: Device power is off
+Code d'erreur 83: Device error
+Code d'erreur 84: Value too large to be stored in data type
+Code d'erreur 85: Bad executable (or shared library)
+Code d'erreur 86: Bad CPU type in executable
+Code d'erreur 87: Shared library version mismatch
+Code d'erreur 88: Malformed Mach-o file
+Code d'erreur 89: Operation canceled
+Code d'erreur 90: Identifier removed
+Code d'erreur 91: No message of desired type
+Code d'erreur 92: Illegal byte sequence
+Code d'erreur 93: Attribute not found
+Code d'erreur 94: Bad message
+Code d'erreur 95: EMULTIHOP (Reserved)
+Code d'erreur 96: No message available on STREAM
+Code d'erreur 97: ENOLINK (Reserved)
+Code d'erreur 98: No STREAM resources
+Code d'erreur 99: Not a STREAM
+Code d'erreur 100: Protocol error
+Code d'erreur 101: STREAM ioctl timeout
+Code d'erreur 102: Operation not supported on socket
+Code d'erreur 103: Policy not found
+Code d'erreur 104: State not recoverable
+Code d'erreur 105: Previous owner died
+Code d'erreur 106: Interface output queue is full

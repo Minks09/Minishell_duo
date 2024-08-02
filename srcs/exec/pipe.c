@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 13:40:54 by nchebbi           #+#    #+#             */
-/*   Updated: 2024/06/16 16:50:30 by racinedelar      ###   ########.fr       */
+/*   Created: 2024/08/01 00:26:14 by racinedelar       #+#    #+#             */
+/*   Updated: 2024/08/01 17:01:47 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
-#include <stdio.h>
+#include "../../includes/minishell.h"
 
-char	*ft_strrchr(const char *s, int c)
-{
-	size_t	len;
+void init_first_pipe(t_shell *shell) {
+	if (pipe(shell->pipe.in) == -1) {
+		perror("first pipe");
+		exit(EXIT_FAILURE);
+	}
+}
 
-	len = ft_strlen(s);
-	while (len > 0 && s[len] != (unsigned char)c)
-		len--;
-	if (s[len] == (unsigned char)c)
-		return ((char *)s + len);
-	return (0);
+void init_mid_pipe(t_shell *shell) {
+	if (pipe(shell->pipe.out) == -1) {
+		perror("mid pipe");
+		exit(EXIT_FAILURE);
+	}
+}
+
+void close_pipes(t_pipe *pipe) {
+	close(pipe->in[0]);
+	close(pipe->in[1]);
+	close(pipe->out[0]);
+	close(pipe->out[1]);
 }

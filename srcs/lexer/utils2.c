@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 12:09:31 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 23:26:34 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/02 00:13:54 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../../../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 t_bool  check_command(t_shell *shell)
 {
@@ -65,6 +65,7 @@ char *find_path(t_envp *shell_env)
     char *pathname;
     t_envp *curr;
 
+    pathname = NULL;
     curr = shell_env;
     pathname = NULL;
     while (curr != NULL)

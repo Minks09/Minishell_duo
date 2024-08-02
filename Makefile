@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+         #
+#    By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 23:08:02 by nigateau          #+#    #+#              #
-#    Updated: 2024/07/12 00:15:59 by nigateau         ###   ########.fr        #
+#    Updated: 2024/08/01 23:33:31 by racinedelar      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,32 +34,37 @@ DEPENDENCIES 	= 	$(HEADER)/minishell.h $(HEADER_LIBFT)/libft.h
 #/////////////////////////////SRCS////////////////////////////////////////
 SRCS = 	main.c\
 		builtins/builtins.c\
-		builtins/export.c\
-		builtins/unset.c\
-		builtins/print_env.c\
 		builtins/echo.c\
+		builtins/export.c\
 		builtins/ft_cd.c\
 		builtins/ft_exit.c\
 		builtins/ft_pwd.c\
+		builtins/print_env.c\
+		builtins/unset.c\
 		env/env.c\
-		env/init.c\
-		error/utils_error.c\
 		exec/exec.c\
-		parsing/lexer/check_prompt.c\
-		parsing/lexer/env.c\
-		parsing/lexer/heredoc.c\
-		parsing/lexer/lexer.c\
-		parsing/lexer/split_command.c\
-		parsing/lexer/token.c\
-		parsing/lexer/utils.c\
-		setup/setup.c\
-		setup/main_signal.c\
+		exec/fork.c\
+		exec/path_finder.c\
+		exec/pipe.c\
+		exec/redir.c\
+		lexer/check_prompt.c\
+		lexer/env.c\
+		lexer/error.c\
+		lexer/ft_split.c\
+		lexer/heredoc.c\
+		lexer/lexer.c\
+		lexer/redirection.c\
+		lexer/split_command.c\
+		lexer/split_pipe.c\
+		lexer/token.c\
+		lexer/utils.c\
+		lexer/utils2.c\
 		setup/child_signal.c\
-		utils/env_utils.c\
-		utils/env_utils2.c\
+		setup/main_signal.c\
+		setup/setup.c\
+		utils/error_utils.c\
 		utils/free_struct.c
-	
-		
+
 #CI dessus sont definis tous les fichiers sources du projet #
 #il faut les lister ici en pensant que le chemin des src est deja /srcs/#
 #/////////////////////////////FLAGS///////////////////////////////////////#
@@ -68,6 +73,7 @@ RM 				= 	rm -f
 CC 				= 	gcc
 
 CFLAGS 			= 	-I$(HEADER) -I$(HEADER_LIBFT) -Wall -Wextra -Werror -fsanitize=address -g
+TFLAGS			=	-I$(HEADER) -I$(HEADER_LIBFT)
 #CI dessus sont definis les variable utiles a la compilation comme les flags ou certaine commande#
 #//////////////////////////OBEJCTS/////////////////////////////////////////#
 OBJS 		= $(SRCS:c=o)
@@ -95,54 +101,60 @@ ifeq ($(shell uname -s), Darwin)
 endif
 #CI dessus est une condition qui permet de compiler le projet sur macos avec homebrew#
 #/////////////////////CI dessous sont les regles du makefile/////////////////////#
-all: $(NAME)
-	@echo "$(COLOUR_GREEN)minishell compiled.$(COLOUR_END)";
-#CI dessus est la regle par defaut du makefile#
-check: 
+all: check_lib check_minishell
+
+check_lib:
+	@if [ -f libft.a ]; then \
+		echo "$(COLOUR_GREEN)libft already compiled.$(COLOUR_END)"; \
+	else \
+		echo "$(COLOUR_YELLOW)Compiling libft...$(COLOUR_END)"; \
+		make -C $(HEADER_LIBFT); \
+		cp ./$(HEADER_LIBFT)/libft.a libft.a; \
+		echo "$(COLOUR_GREEN)libft compiled.$(COLOUR_END)"; \
+	fi
+
+check_minishell: check_lib
 	@if [ -f $(NAME) ]; then \
 		echo "$(COLOUR_GREEN)minishell already compiled.$(COLOUR_END)"; \
-		break; \
-	else \
-		echo "$(COLOUR_YELLOW)minishell not compiled.$(COLOUR_END)"; \
-	fi
-#CI dessus est une condition qui permet de verifier si le projet est deja compile ou non#
-
-lib : 
-	if [ -f libft.a ]; then \
-		echo "$(COLOUR_GREEN)libft already compiled.$(COLOUR_END)";\
-		exit 0;\
-	else\
-		echo "$(COLOUR_YELLOW)libft not compiled$(COLOUR_END)";\
-		make -C $(HEADER_LIBFT);\
-		echo "$(COLOUR_CYAN)Compiling Libft...$(COLOUR_END)";\
-		cp ./$(HEADER_LIBFT)/libft.a libft.a;\
-		echo "$(COLOUR_GREEN)libft compiled.$(COLOUR_END)";\
+		else \
+		echo "$(COLOUR_YELLOW)Compiling minishell...$(COLOUR_END)"; \
+		$(MAKE) $(NAME); \
 	fi
 
-#CI dessus est une condition qui permet de verifier si la libft est deja compilee ou non#
-$(NAME): check lib $(_OBJS)
-	@echo "$(COLOUR_CYAN)Compiling minishell..."
+$(NAME): $(_OBJS)
 	@$(CC) $(_OBJS) libft.a $(CFLAGS) $(RL_LDFLAGS) -Lincludes/LIBFT -o $@
-#CI dessus est la regle qui permet de compiler le projet#
-$(OBJS_DIR)/%.o: $(SRC_PATH)/%.c
+	@echo "$(COLOUR_GREEN)minishell compiled.$(COLOUR_END)"
+
+$(OBJS_DIR)/%.o: $(SRC_PATH)/%.c $(DEPENDENCIES)
 	@mkdir -p $(dir $@)
 	@${CC} $(CFLAGS) $(RL_FLAGS) -c $< -o $@ -g3
-#CI dessus est la regle qui permet de compiler les .o#
+
 clean:
-			@$(RM) $(OBS)
-			@$(RM) ${_OBJS}
-			@$(RM) -r $(OBJS_DIR)
-			@$(RM) $(NAME)
-			@make fclean -C $(LIB)
-			@echo "$(COLOUR_RED)minishell Cleaned$(COLOUR_END)"
-#CI dessus est la regle qui permet de supprimer les .o et les .d#
-fclean:		clean
-			@$(RM) *.a
-			@echo "$(COLOUR_RED)minishell Fcleaned$(COLOUR_END)"
-#CI dessus est la regle qui permet de supprimer les .o, les .d et l'executable#/
-re:			fclean all
-#CI dessus est la regle qui permet de supprimer les .o, les .d et l'executable puis de recompiler le projet#
+	@$(RM) $(OBJS)
+	@$(RM) ${_OBJS}
+	@$(RM) -r $(OBJS_DIR)
+	@$(RM) $(NAME)
+	@make fclean -C $(LIB)
+	@echo "$(COLOUR_RED)minishell Cleaned$(COLOUR_END)"
+
+fclean: clean
+	@$(RM) *.a
+	@echo "$(COLOUR_RED)minishell Fcleaned$(COLOUR_END)"
+	
+test:	$(_OBJS)
+	@$(CC) $(_OBJS) libft.a $(TFLAGS) $(RL_LDFLAGS) -Lincludes/LIBFT -o $@
+	@echo "$(COLOUR_GREEN)minishell compiled.$(COLOUR_END)"
+	
+stest: check_lib
+	@echo "$(COLOUR_YELLOW)Compiling minishell...$(COLOUR_END)"
+	@if [ -f $(NAME) ]; then \
+		echo "$(COLOUR_GREEN)minishell already compiled.$(COLOUR_END)"; \
+		else \
+		echo "$(COLOUR_YELLOW)Compiling minishell...$(COLOUR_END)"; \
+		$(MAKE) $(TEST); \
+	fi
+	
+re: fclean all
+
 .PHONY: re fclean clean all
-#CI dessus sont les regles qui ne sont pas des fichiers#
 .SILENT:
-# ********************************EOF****************************************** #

@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   print_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/02 02:16:19 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/02 02:16:25 by nigateau         ###   ########.fr       */
+/*   Created: 2024/06/21 17:54:19 by nigateau          #+#    #+#             */
+/*   Updated: 2024/08/02 03:10:53 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void    print_env(t_envp **root)
+int    print_env(t_envp **root)
 {
     t_envp *curr;
 
     curr = *root;
+    if (curr == NULL)
+        return ERROR;
     while (curr != NULL)
     {
         printf("%s=%s\n", curr->key, curr->value);
         curr = curr->next;
     }
-    return;
+    return SUCCESS;
 }

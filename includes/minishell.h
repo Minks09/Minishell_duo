@@ -3,19 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/01 23:01:25 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/02 00:16:43 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include "struct.h"
-#include "Libft/libft.h"
-
+# include "Libft/libft.h"
+# include <unistd.h>
+# include <stdio.h>
+# include <string.h>
+# include <fcntl.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <limits.h>
+# include <errno.h>
+# include <signal.h>
+# include <sys/wait.h>
+# include <sys/termios.h>
+# include "struct.h"
 ////////COLORS////////
 #define C_GREEN = "\033[0;32m";
 #define C_RED = "\033[0;91m";
@@ -24,6 +35,33 @@
 #define C_CYAN = "\033[0;36m";
 #define C_END = "\033[0m";
 
+/************************************BUILTINS*****************************************/
+int			is_builtins(char *cmd);
+int			do_builtins(t_shell *shell);
+//echo.c
+int			echo(t_token **token);
+int			size_var_key(char *str);
+int			size_var_value(char *str);
+char		*get_value(char *str);
+int			is_there_dollar(char *str);
+void		expandx(t_shell *shell);
+//export.c
+char		*return_value_quoted(char *str);
+int			export(t_envp **root, char *new_var);
+//ft_cd.c
+int			update_wd_value(char *key, char *path, t_envp *env);
+int			update_wd(char *wd, t_shell *shell);
+void		do_cd(char *pwd, char *new_path, t_shell *shell);
+int			ft_cd(char *new_path, t_shell *shell);
+//ft_exit.c
+int			check_exit_arg(t_shell *shell);
+int			ft_exit(t_shell *shell);
+//ft_pwd.c
+int			ft_pwd(t_shell *shell);
+//print_env.c
+int			print_env(t_envp **root);
+//unset.c
+int			unset(t_envp **root, char *key);
 /**************************************PARSING*******************************************/
 
 //lexer.c
@@ -48,21 +86,25 @@ int	        count_strings_cmd(const char *str, char sep);
 int	        size_of_strings_cmd(const char *str, char sep);
 char	    *ft_strdup_cmd(const char *str, char sep);
 char	    **ft_split_command(const char *str, char sep);
+//split_pipe.c
+int			count_strings_pipe(const char *str, char sep);
+char 		*ft_strdup(const char *s1);
+char 		**ft_split_pipe(const char *str, char sep);
 //token.c
 void        parse_token(t_token **token, char **commands);
 void        insert_node_token(t_token **root, char *command);
 void        free_token_struct(t_token **token);
 t_token     *init_token_struct(void);
 char        *join_argument(char *argument, char *str);
-//env.c
-void        insert_node_env(t_envp **root, char *key, char *value);
-void        free_env(t_envp **root);
-t_envp      *return_env(t_shell *shell, char **env);
-char        **return_env_tab(char **envp);
-void        remove_node_env(t_envp **root, char *key);
-//heredoc.c
-int         heredoc(char *argument);
-t_bool      search_EOF(char *haystack, char *needle);
+void        insert_node_token(t_token **root, char *str);
+void        parse_token(t_token **token, char **str);
+//utils.c
+void        print_string_array(char **array);
+char        *return_key(char *str);
+char        *return_value(char *str);
+int         is_inside_quote(const char *str, int index);
+const char  *skip_quotes(const char *str);
+void        ft_putstr(char *str);
 //utils2.c
 t_bool      get_pathname(t_shell *shell, char *command);
 t_bool      check_command(t_shell *shell);
@@ -87,28 +129,28 @@ int         redirect_input(char *command, char *argument);
 int	        return_type(char *str);
 void        remove_node_env_extend(t_envp *to_remove);
 
+/***************************************SETUP***************************************/
+//child_signal.c
+void		CTRL_C_child(int sig);
+void		CTRL_else_child(int sig);
+void		signal_child(void);
+//main_signal.c
+void		CTRL_C(int sig);
+void		CTRL_else(int sig);
+void		signal_main(void);
+//setup
+void		set_bin_path(char **envp, t_shell *shell);
+void		free_path_bin(t_shell *shell);
+/***************************************UTILS****************************************/
+//error_utils.c
+int			ft_err_(int R_CODE);
+int			put_error(t_shell *shell, char *msg, int R_CODE);
+//free_struct.c
+void		free_struct(t_shell *shell);
 /*************************************************************************************/
-
-/************************************BUILTINS*****************************************/
-
-//export.c
-void        export(t_envp **root, char *new_var);
-char        *return_value_quoted(char *str);
-//echo.c
-//char        *expandz(char *str);
-//char        *get_value(char *str);
-//int         size_var_value(char *str);
-//int         size_var_key(char *str);
-void        echo(t_token **token);
-void        expandx(t_shell *shell);
-char	    *get_env(t_shell *shell, char *str);
-//export.c
-void        export(t_envp **root, char *new_var);
-char        *return_value_quoted(char *str);
-//print_env.c
-void        print_env(t_envp **root);
-//unset.c
-void        unset(t_envp **root, char *key);
-
-
-# endif
+//main.c
+int set_prompt(t_shell **shell);
+int init_termion(struct termios *new, struct termios *copy);
+int shell_init(t_shell **shell, struct termios *new, struct termios *copy);
+void main_shell(t_shell *shell, char **envp);
+#endif /* MINISHELL_H */

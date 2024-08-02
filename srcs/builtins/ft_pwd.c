@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 13:40:54 by nchebbi           #+#    #+#             */
-/*   Updated: 2024/06/16 16:50:30 by racinedelar      ###   ########.fr       */
+/*   Created: 2024/07/06 00:41:38 by racinedelar       #+#    #+#             */
+/*   Updated: 2024/07/11 22:26:00 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
-#include <stdio.h>
+# include <minishell.h>
 
-char	*ft_strrchr(const char *s, int c)
+int ft_pwd(t_shell *shell)
 {
-	size_t	len;
-
-	len = ft_strlen(s);
-	while (len > 0 && s[len] != (unsigned char)c)
-		len--;
-	if (s[len] == (unsigned char)c)
-		return ((char *)s + len);
-	return (0);
+	char *pwd;
+	if(ft_strncmp(shell->token->command, "pwd", 4))
+		return (ft_err_(R_ERROR));
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+		return (ft_err_(R_ERROR));
+	ft_putendl_fd(pwd, STDOUT_FILENO);
+	free(pwd);
+	return (SUCCESS);
 }

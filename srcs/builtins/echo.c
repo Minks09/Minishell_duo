@@ -3,36 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:02:14 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 23:15:20 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:48:20 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include <minishell.h>
 
-void    echo(t_token **token)
+int	echo(t_token **token)
 {
-    int     i;
-    t_token *curr;
+	int		i;
+	t_token *curr;
 
-    curr = *token;
-    i = 0;
-    while (curr != NULL)
-    {
-        if (strcmp(curr->command, "echo") == 0)
-            break;
-        curr = curr->next;
-    }
-    //if (strcmp(curr->argument[0], "-n") == 0)
-    //    echo_n(token);
-    while (curr->argument[i] != '\0')
-    {
-        printf("%c", curr->argument[i]);
-        i++;
-    }   
+	curr = *token;
+	i = 0;
+	while (curr != NULL)
+	{
+		if (strcmp(curr->command, "echo") == 0)
+			break;
+		curr = curr->next;
+	}
+	//if (strcmp(curr->argument[0], "-n") == 0)
+	//    echo_n(token);
+	if (curr->argument != NULL)
+	{
+		while (curr->argument[i++] != '\0')
+			printf("%c", curr->argument[i]);
+		return SUCCESS;
+	}
+	else 
+		return ERROR;
 }
+
+
 
 // int     size_var_key(char *str)
 // {

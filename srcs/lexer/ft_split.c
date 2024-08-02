@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 15:14:48 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/31 22:13:30 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/01 20:29:53 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nigateau <nigateau@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/16 13:41:30 by nigateau          #+#    #+#             */
+/*   Updated: 2023/10/26 17:32:39 by nigateau         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/minishell.h"
 
 int	check_sep(char c, char sep)
 {
@@ -68,7 +80,7 @@ char	*ft_stringdup(const char *str, char sep)
 	return (string);
 }
 
-char	**ft_split(const char *str, char sep)
+char	**ft_split_parse(const char *str, char sep)
 {
 	int		i;
 	int		nbr_of_strs;

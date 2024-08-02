@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:08:14 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 23:20:59 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/02 00:11:52 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../../../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int    check_redirection(char  *command, char *argument)
 {
@@ -29,7 +29,7 @@ int    redirect_output(char *command, char *argument)
 {
     if (command[1] == '\0')
         return(open(argument, O_WRONLY | O_CREAT | O_TRUNC, 0644));
-    if (command[1 == '>'])
+    if (command[1] == '>')
         return(open(argument, O_WRONLY | O_CREAT | O_APPEND, 0644));
     return(0);
 }

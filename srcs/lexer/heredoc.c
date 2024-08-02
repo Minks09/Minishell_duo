@@ -3,22 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:34:31 by nigateau          #+#    #+#             */
-/*   Updated: 2024/07/28 18:57:17 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/01 17:01:05 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../../../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 t_bool search_EOF(char *haystack, char *needle)
 {
-    int i;
     int cmp;
     char *tmp;
 
-    i = 0;
     tmp = haystack;
     while (*haystack != '\0')
     {
@@ -29,7 +27,6 @@ t_bool search_EOF(char *haystack, char *needle)
             return(TRUE);
         }
         haystack++;
-        i++;
     }
     haystack = tmp;
     free (tmp);
@@ -44,7 +41,7 @@ int    heredoc(char *argument)
     line = NULL;
     fd = open("heredoc", O_CREAT | O_RDWR | O_TRUNC, 0644);
     if (fd == -1)
-        return(0);
+        return (ERROR);
     while (1)
     {
         line = readline("> ");

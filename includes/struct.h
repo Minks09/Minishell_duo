@@ -3,61 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:16:13 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/01 02:00:32 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/01 20:29:45 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# include "Libft/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <string.h>
-# include <fcntl.h>
-# include <dirent.h>
-# include <sys/wait.h>
-# include <limits.h>
-# include <errno.h>
-# include <signal.h>
 # include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
 
 //definition des types possible de token 
-# define T_EMPTY 0
-# define T_CMD 1
-# define T_ARG 2
-# define T_TRUNC 3
-# define T_APPEND 4
-# define T_INPUT 5
-# define T_PIPE 6
-# define T_END 7
+# define T_EMPTY 			0
+# define T_CMD 				1
+# define T_ARG 				2 // = " "/ -{}
+# define T_TRUNC 			3 // = >
+# define T_APPEND 			4 // = >>
+# define T_INPUT 			5 // = <
+# define T_PIPE 			6 // = |
+# define T_END 				7
 //definition des type de redirections
-# define STDIN 0
-# define STDOUT 1
-# define STDERR 2
-//definition des types dexecution	
-# define SKIP 1
-# define NOSKIP 0
+# define STDIN 				0
+# define STDOUT 			1
+# define STDERR_FILENO 		2
 //definition of types of potential errors
-# define R_MALLOC 2
-# define R_CMD_NOT_FOUND 126// If a command is found but is not executable,the return status is 126
-# define R_CHILD_ABORTED 127//If a command is not found, the child process created to execute it returns a status of 127
-	//-> // output : Command not found
-# define R_FILE_NOT_FOUND 
+# define R_ERROR			0
+# define R_FILES			2
+# define R_MALLOC			3
+# define R_ATTR_NF			93//No such file or directory 
+# define R_FD				9//bad file descriptor
+# define R_WRONGARGUMENTS	22
+# define R_PERM 			126 // If a command is found but is not executable,the return status is 126
+# define R_PATH 			127 //If a command is not found, the child process created to execute it returns a status of 127
+# define R_FILE_NOT_FOUND	255
+# define BUFF_SIZE 			1042
+# define EXPANSION 			-36
 
-# define BUFF_SIZE 4096
-# define EXPANSION -36
-# define ERROR 1
-# define SUCCESS 0
-# define IS_DIRECTORY 126
-# define UNKNOWN_COMMAND 127
+/* ERROR CODES */
+# define ERROR 				-1
+# define SUCCESS 			0
+# define IS_DIRECTORY 		126
+# define UNKNOWN_COMMAND 	127
 
 # define FALSE 0
 # define TRUE 1
@@ -68,8 +59,17 @@
 # define READ 1
 # define EXEC 2
 # define QUIT 3
+# define QUIT_CHILD			130
+# define UNDEFINED_ERROR	255
 
-
+/* BOOLEANS CODE */
+# define NO 0
+# define YES 1
+/* SHELL STATUS TYPE */
+# define WAIT 0
+# define READ 1
+# define EXEC 2
+# define QUIT 3
 typedef struct s_quotes
 {
 	bool	dble;
@@ -88,12 +88,6 @@ typedef struct s_parse
 	int			index_token;
 }			t_parse;
 
-typedef struct s_pipe
-{
-	int		nb_pipes;
-	int		in[2];
-	int		out[2];
-}	t_pipe;
 
 typedef struct s_token
 {
@@ -107,32 +101,38 @@ typedef struct s_token
     struct s_token	*next;
 }	t_token;
 
+typedef struct s_pipe
+{
+	int		pipe_nbr;
+	int		in[2];
+	int		out[2];
+}	t_pipe;
+
 typedef struct s_envp
 {
-    char	*key;
-    char	*value;
-    struct s_envp	*next;
+	char	*key;
+	char	*value;
+	struct s_envp	*next;
 }	t_envp;
 
 typedef struct s_shell
 {
 	char		*prompt;
-	char		**path_bin; // tableau de chemin d'acces terminer par null
-	char 		**env_tab;
-	int			quit_child;
-	int			exit_status;
-	int			status;
-	int			shlvl;
-	int			nb_pipe;
-	int			fd_in;
-	int			fd_out;
-	pid_t		pid;
-	t_pipe		pipe;
-	t_token		*token;
-	t_envp		*env;
-	
+	char			**path_bin; // tableau de chemin d'acces terminer par null
+	char 			**env_tab;
+	int				quit_child;
+	int				exit_status;
+	int				status;
+	int				shlvl;
+	int				nb_pipe;
+	int				fd_in;
+	int				fd_out;
+	pid_t			pid;
+	t_pipe			pipe;
+	t_token			*token;
+	t_envp			*env;
 }	t_shell;
 
-typedef struct termios t_termios;
-
+typedef	struct termios t_termios;
+extern	int g_errno;
 #endif
