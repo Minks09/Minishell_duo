@@ -59,7 +59,7 @@ int shell_init(t_shell **shell, t_termios *new, t_termios *copy)
 	return ERROR;
 }
 
-void  main_shell(t_shell *shell, char **envp)
+void  main_shell(t_shell *shell)
 {
 	//t_token		*commands;
 	char 		*buff;
@@ -86,11 +86,10 @@ void  main_shell(t_shell *shell, char **envp)
 			printf("Debug: prompt = %s\n", prompt);
 			if (!prompt)
 				break;
-			else if (parsing(shell, prompt, envp) == 0)
+			while(parsing(shell, prompt) == 1)
 			{
 			signal_child();
 			main_exec(shell);
-			free(prompt);
 			}
 		}
 		free(buff);
@@ -116,7 +115,7 @@ int main(int argc, char **argv, char **envp)
 	shell_init(&shell, &new, &copy);
 	shell->env = return_env(shell, envp);
 	set_bin_path(envp, shell);
-	main_shell(shell, envp);
+	main_shell(shell);
 	free(shell->env);
 	free(shell->env_tab);
 	return (g_errno % 255);

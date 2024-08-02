@@ -6,7 +6,7 @@
 #    By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/11 23:08:02 by nigateau          #+#    #+#              #
-#    Updated: 2024/08/01 23:33:31 by racinedelar      ###   ########.fr        #
+#    Updated: 2024/08/02 04:44:09 by racinedelar      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,6 @@ SRCS = 	main.c\
 		exec/redir.c\
 		lexer/check_prompt.c\
 		lexer/env.c\
-		lexer/error.c\
 		lexer/ft_split.c\
 		lexer/heredoc.c\
 		lexer/lexer.c\

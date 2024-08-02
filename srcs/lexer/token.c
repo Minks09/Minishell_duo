@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:59:35 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/02 00:13:06 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/02 04:04:39 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,17 @@ void    insert_node_token(t_token **root, char *command)
 	int	type;
 
 	type = return_type(command);
-    new_node = malloc(sizeof(t_token));
-    if (!new_node)
-        exit(1);
-    new_node->command = strdup(command);
-    new_node->path = NULL;
-    new_node->argument = NULL;
-    new_node->operator = NULL;
-    new_node->file = NULL;
-    new_node->type = type;
-    new_node->fd = 0;
-    new_node->next = NULL;
+	new_node = malloc(sizeof(t_token));
+	if (!new_node)
+		exit(1);
+	new_node->command = strdup(command);
+	new_node->path = NULL;
+	new_node->argument = NULL;
+	new_node->operator = NULL;
+	new_node->file = NULL;
+	new_node->type = type;
+	new_node->fd = 0;
+	new_node->next = NULL;
 
 	curr = *root;
 	while (curr->next != NULL)
@@ -94,49 +94,49 @@ void    parse_token(t_token **token, char **str)
 	(*token)->command = strdup(str[i]);
 	(*token)->type = T_CMD;
 	tmp = (*token)->command[0];
-    while (str[++i] != NULL)
-    {
+	while (str[++i] != NULL)
+	{
 		if(check_redirection(str[i - 1], str[i]) != 0)
-            curr->fd = check_redirection(str[i - 1], str[i]);
+			curr->fd = check_redirection(str[i - 1], str[i]);
 		while (tmp != '|' && str[i])
-        {   
-            if (str[i][0] == '|' || str[i][0] == '<' || str[i][0] == '>')
-                break;
+		{
+			if (str[i][0] == '|' || str[i][0] == '<' || str[i][0] == '>')
+				break;
 			curr->argument = join_argument(curr->argument, str[i++]);
-        }
+		}
 		if (str[i] == NULL)
 			break;
 		insert_node_token(token, str[i]);
 		curr = curr->next;
 		tmp = curr->command[0];
-    }
+	}
 }
 
-char    *join_argument(char *argument, char *str)
+char	*join_argument(char *argument, char *str)
 {
-    int i;
-    int j;
-    int lenght;
-    char *new_argument;
+	int i;
+	int j;
+	int lenght;
+	char *new_argument;
 
-    i = -1;
-    j = -1;
-    if (!argument)
-        argument = strdup("");
-    lenght = strlen(argument) + strlen(str) + 1;
-    new_argument = malloc(sizeof(char) * (lenght + 1));
-    if (!new_argument)
-        return(NULL);
-    while (argument[++i] != '\0')
-        new_argument[i] = argument[i];
-    if (argument[i] != '\0')
-        new_argument[i++] = ' ';
-    while (str[++j] != '\0')
-        new_argument[i + j] = str[j];
-    new_argument[i + j] = '\0';
-    free(argument);
-    argument = NULL;
-    return(new_argument);
+	i = -1;
+	j = -1;
+	if (!argument)
+		argument = strdup("");
+	lenght = strlen(argument) + strlen(str) + 1;
+	new_argument = malloc(sizeof(char) * (lenght + 1));
+	if (!new_argument)
+		return(NULL);
+	while (argument[++i] != '\0')
+		new_argument[i] = argument[i];
+	if (argument[i] != '\0')
+		new_argument[i++] = ' ';
+	while (str[++j] != '\0')
+		new_argument[i + j] = str[j];
+	new_argument[i + j] = '\0';
+	free(argument);
+	argument = NULL;
+	return(new_argument);
 }
 
 // int main()

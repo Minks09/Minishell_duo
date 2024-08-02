@@ -6,11 +6,11 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 23:28:11 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/02 00:12:10 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/02 04:44:35 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../../../includes/minishell.h"
+#include  "../../includes/minishell.h"
 
 int	count_strings_cmd(const char *str, char sep)
 {

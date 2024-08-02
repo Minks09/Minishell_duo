@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:02:04 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/01 17:02:12 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/02 14:20:50 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,23 @@ void simple_exec(t_shell *shell) {
 }
 
 void main_exec(t_shell *shell) {
-    t_token *token = shell->token;
     char *curr_token;
-
-    while (token->command != NULL && shell->status != QUIT && token->type != T_END) {
-        curr_token = ft_strdup(token->command);
+    // t_token *head_token;
+    // int i; 
+    // i = 0;
+    // head_token = shell->token;
+    // while(shell->token != NULL){
+    //     printf("token %d : [CMD] = %s\n\t [ARG] = %s\n\t [TYPE] = %d\n", i++, shell->token->command, shell->token->argument, shell->token->type);
+    //     shell->token = shell->token->next;}
+    // shell->token = head_token;
+    while (shell->token->command != NULL && shell->status != QUIT && shell->token->type != T_END) {
+        if (shell->token->type == T_PIPE){
+            if (shell->token->next != NULL)
+                shell->token = shell->token->next;
+                break;
+            }
+        if (shell->token->type == T_CMD)
+            curr_token = ft_strdup(shell->token->command);
         shell->status = EXEC;
         if (is_builtins(curr_token) == 0)
             do_builtins(shell);
@@ -54,7 +66,10 @@ void main_exec(t_shell *shell) {
             else
                 simple_exec(shell);
         }
-        token = token->next;
+        if (shell->token->next != NULL)
+            shell->token = shell->token->next;
+        else
+            break;
     }
     shell->status = WAIT;
 }
