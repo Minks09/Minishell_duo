@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: nigateau <nigateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:59:35 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 23:25:55 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/03 18:01:45 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ char    *join_argument(char *argument, char *str)
         return(NULL);
     while (argument[++i] != '\0')
         new_argument[i] = argument[i];
-    if (argument[i] != '\0')
+    if (argument[0] != '\0')
         new_argument[i++] = ' ';
     while (str[++j] != '\0')
         new_argument[i + j] = str[j];

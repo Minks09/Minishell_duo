@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: nigateau <nigateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/01 23:01:25 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:43:55 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char        *return_value_quoted(char *str);
 //char        *get_value(char *str);
 //int         size_var_value(char *str);
 //int         size_var_key(char *str);
-void        echo(t_token **token);
+int         echo(t_token *token);
 void        expandx(t_shell *shell);
 char	    *get_env(t_shell *shell, char *str);
 //export.c

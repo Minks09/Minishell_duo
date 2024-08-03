@@ -3,35 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: nigateau <nigateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:02:14 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 23:15:20 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/03 18:06:46 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void    echo(t_token **token)
+int    echo(t_token *token)
 {
     int     i;
-    t_token *curr;
+    char	**arg;
 
-    curr = *token;
     i = 0;
-    while (curr != NULL)
-    {
-        if (strcmp(curr->command, "echo") == 0)
-            break;
-        curr = curr->next;
-    }
-    //if (strcmp(curr->argument[0], "-n") == 0)
-    //    echo_n(token);
-    while (curr->argument[i] != '\0')
-    {
-        printf("%c", curr->argument[i]);
-        i++;
-    }   
+	arg = ft_split(token->argument, ' ');
+	if (arg == NULL)
+		return (FALSE);
+    if (strncmp(arg[0], "-n\0", 3) == 0)
+	{
+		// while (arg[++i] != NULL)
+		// 	printf("%s",arg[i]);
+		token->argument += 3;
+		printf("%s",token->argument);
+		token->argument -= 3;
+		free_tab(arg);
+		return (TRUE);
+	}
+    // while (arg[i] != NULL)
+    // {
+    //     printf("%s",arg[i]);
+    //     i++;
+    // }
+	printf("%s",token->argument);
+	printf("\n");
+	free_tab(arg);
+	return (TRUE);
 }
 
 // int     size_var_key(char *str)

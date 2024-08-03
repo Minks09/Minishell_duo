@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nigateau <nigateau@student.42.lausanne>    +#+  +:+       +#+        */
+/*   By: nigateau <nigateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 16:18:24 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/01 23:23:35 by nigateau         ###   ########.fr       */
+/*   Updated: 2024/08/03 18:02:55 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int main(int argc, char **argv, char **envp)
 
     (void)argc;
     (void)argv;
-    prompt = strdup("cat file1.txt | grep $USER > sorted_file1.txt");
+    prompt = strdup("echo -n bonjour maman je suis $USER");
     shell = malloc(sizeof(t_shell));
     if (!parsing(shell, prompt, envp))
         {
@@ -102,16 +102,17 @@ int main(int argc, char **argv, char **envp)
     curr = shell->token;
     while (curr != NULL)
     {
-        printf("command : %s\n", curr->command);
-        if (curr->argument != NULL)
-            printf("argument : %s\n", curr->argument);
-        if (curr->file != NULL)
-            printf("file : %s\n", curr->file);
-        printf("type : %d\n", curr->type);
-        printf("fd : %d\n", curr->fd);
+        // printf("command : %s\n", curr->command);
+        // if (curr->argument != NULL)
+        //     printf("argument : %s\n", curr->argument);
+        // if (curr->file != NULL)
+        //     printf("file : %s\n", curr->file);
+        // printf("type : %d\n", curr->type);
+        // printf("fd : %d\n", curr->fd);
+        echo(curr);
         curr = curr->next;
     }
-    printf("number of pipe : %d\n", shell->nb_pipe);
+    //printf("number of pipe : %d\n", shell->nb_pipe);
     free_token_struct(&shell->token);
     free_env(&shell->env);
     free_tab(shell->env_tab);
