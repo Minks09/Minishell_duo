@@ -65,7 +65,7 @@ ${NAME}: ${_OBJS}
 all:   ${NAME}
 
 cmain:  ${NAME}
-			${CC} ${CFLAGS} main.c ${NAME}
+			@${CC} ${CFLAGS} main.c ${NAME}
 
 clean:
 		${RM} ${_OBJS}
@@ -79,3 +79,4 @@ fclean: clean
 re:    fclean all
 
 .PHONY: all clean fclean re
+.SILENT:

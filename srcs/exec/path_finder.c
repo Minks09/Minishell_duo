@@ -57,7 +57,8 @@ void	find_access(t_shell *shell)
 	tmp = ft_strjoin(shell->path_bin[i], shell->token->command);
 	if(shell->token->type == T_CMD)
 	{
-		if (is_builtins(shell->token->command) == 1)
+		if ((is_builtins(shell->token->command) == 1)
+		|| (3 <= shell->token->type && shell->token->type < 7))
 			shell->token = shell->token->next;
 		if (shell->path_bin == NULL)
 		{

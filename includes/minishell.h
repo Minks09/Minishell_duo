@@ -25,7 +25,7 @@
 # include <errno.h>
 # include <signal.h>
 # include <sys/wait.h>
-# include <sys/termios.h>
+# include <termios.h>
 # include "struct.h"
 ////////COLORS////////
 #define C_GREEN = "\033[0;32m";

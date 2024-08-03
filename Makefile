@@ -71,7 +71,7 @@ RM 				= 	rm -f
 
 CC 				= 	gcc
 
-CFLAGS 			= 	-I$(HEADER) -I$(HEADER_LIBFT) -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS 			= 	-I$(HEADER) -I$(HEADER_LIBFT) -Wall -Wextra -Werror -g
 TFLAGS			=	-I$(HEADER) -I$(HEADER_LIBFT)
 #CI dessus sont definis les variable utiles a la compilation comme les flags ou certaine commande#
 #//////////////////////////OBEJCTS/////////////////////////////////////////#
@@ -94,7 +94,11 @@ ifeq ($(shell uname -s), Darwin)
 	READLINE_PATH = /opt/homebrew/opt/readline
 	RL_FLAGS = -I$(READLINE_PATH)/include
 	RL_LDFLAGS = -L$(READLINE_PATH)/lib -lreadline -lhistory
-# Pour 42: 
+# Pour 42 linux:
+else ifeq ($(shell uname -s), Linux)
+    READLINE_PATH = /lib/x86_64-linux-gnu
+    RL_FLAGS = -I$(READLINE_PATH)
+    RL_LDFLAGS = -L$(READLINE_PATH) -lreadline -lhistory
 # READLINE_PATH = $(HOME)/.brew/opt/readline
 # CFLAGS += -I $(READLINE_PATH)/include -L$(READLINE_PATH)/lib
 endif

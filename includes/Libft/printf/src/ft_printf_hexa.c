@@ -30,8 +30,8 @@ static int	putnbr_base(unsigned long long n, char *base,
 
 int	ft_putnbr_base(unsigned long long n, char *base, int nb)
 {
-	if (n < 0)
-		return (putnbr_base(n * -1, base, nb, 0) + 1);
+	// if (n < 0)
+	// 	return (putnbr_base(n * -1, base, nb, 0) + 1);
 	return (putnbr_base(n, base, nb, 0));
 }
 

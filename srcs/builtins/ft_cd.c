@@ -76,10 +76,10 @@ void	do_cd(char *pwd, char *new_path, t_shell *shell)
 int	ft_cd(char *new_path, t_shell *shell)
 {
 	size_t	size;
+	size = 4096;
 	char	pwd[size];
 	char	*home;
 
-	size = 4096;
 	home = get_env_value("HOME", shell->env);
 	if (!new_path || ft_strncmp(new_path, "~", 2) == 0)
 		chdir(home);

@@ -16,11 +16,11 @@ int  set_prompt(t_shell **shell)
 {
 	char *tmp;
 
-   tmp = ft_strdup(">42_minibash< $ ");
+   tmp = ft_strdup(">42_minibash<$ :");
    (*shell)->prompt = malloc(ft_strlen(tmp) + 1);
    if (!(*shell)->prompt)
       return(ft_err_(R_MALLOC));
-   ft_strlcpy((*shell)->prompt, tmp, ft_strlen((*shell)->prompt));
+   ft_strlcpy((*shell)->prompt, tmp, ft_strlen(tmp) + 1);
    return SUCCESS;
 }
 
@@ -38,23 +38,23 @@ int init_termios(t_termios *termios_new, t_termios *termios_copy)
 int shell_init(t_shell **shell, t_termios *new, t_termios *copy)
 {
 	*shell = malloc(sizeof(t_shell));
-    if (!(*shell))
-        return ERROR;
+	if (!(*shell))
+		return ERROR;
 	(*shell)->pid = 0;
 	(*shell)->quit_child = 0;
 	(*shell)->exit_status = 0;
 	(*shell)->status = WAIT;
 	(*shell)->env_tab = NULL;
-	if (isatty(STDIN_FILENO))
+	if (isatty(STDIN))
 		(*shell)->shlvl = ft_atoi(getenv("SHLVL")) + 1;
 	else
 	(*shell)->shlvl += 1;
 	set_prompt(shell);
-  	if (!isatty(STDOUT) && isatty(STDIN))
+	if (!isatty(STDOUT) && isatty(STDIN))
 		ft_putstr_fd("WARNING: STDOUT is not a terminal,'\n'\
-		WARNING: Prompt history are disable", STDERR_FILENO);
-   	if (isatty(STDIN_FILENO) && init_termios(new, copy))
-   		return SUCCESS;
+		WARNING: Prompt history are disable", STDERR_FILENO); 
+	if (isatty(STDIN) && init_termios(new, copy))
+		return SUCCESS;
 	else 
 	return ERROR;
 }
@@ -91,8 +91,9 @@ void  main_shell(t_shell *shell)
 			buff = readline(shell->prompt);
 		else
 			buff = get_next_line(STDIN_FILENO);
-		// buff == ft_strjoin(buff, "\0");
-		if (!buff)
+		if(!buff)
+			return;
+		if (buff != NULL && *buff == '\0')
 			return;
 		if (buff && *buff){
 			if (isatty(STDIN_FILENO))
