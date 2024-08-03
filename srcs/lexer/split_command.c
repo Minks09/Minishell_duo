@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   split_command.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
+/*   By: nigateau <nigateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 23:28:11 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/02 04:44:35 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/03 15:16:09 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	count_strings_cmd(const char *str, char sep)
 {
 	int	i;
 	int	count;
-    int inside_quote;
+	int	inside_quote;
 
 	i = 0;
-    inside_quote = 0;
+	inside_quote = 0;
 	count = 0;
 	while (str[i] != '\0')
 	{
 		while (str[i] != '\0' && (check_sep(sep, str[i]) == 1))
 			i++;
-        if (!is_inside_quote(&str[i], i) && inside_quote == 0)
-        {
-            count++;
-            inside_quote++;
-        }
+		if (!is_inside_quote(&str[i], i) && inside_quote == 0)
+		{
+			count++;
+			inside_quote++;
+		}
 		if (str[i] != '\0' && (!is_inside_quote(&str[i], i)))
 			count++;
 		while (str[i] != '\0' && (check_sep(sep, str[i]) == 0))
@@ -37,31 +37,31 @@ int	count_strings_cmd(const char *str, char sep)
 	}
 	return (count);
 }
+
 int	size_of_strings_cmd(const char *str, char sep)
 {
 	int	i;
 
 	i = 0;
-    if (str[i] == '\"')
-    {
-        i++;
-        while(str[i] != '\0' && str[i] != '\"')
-            i++;
-        if(str[i] == '\"')
-            i++;
-        return(i);
-
-    }
-    if (str[i] == '\'')
-    {
-        i++;
-        while(str[i] != '\0' && str[i] != '\'')
-            i++;
-        if(str[i] == '\"')
-            i++;
-        return(i);
-    }
-	while (str[i] != '\0' && (check_sep(str[i], sep) == 0 ))
+	if (str[i] == '\"')
+	{
+		i++;
+		while (str[i] != '\0' && str[i] != '\"')
+			i++;
+		if (str[i] == '\"')
+			i++;
+		return (i);
+	}
+	if (str[i] == '\'')
+	{
+		i++;
+		while (str[i] != '\0' && str[i] != '\'')
+			i++;
+		if (str[i] == '\"')
+			i++;
+		return (i);
+	}
+	while (str[i] != '\0' && (check_sep(str[i], sep) == 0))
 		i++;
 	return (i);
 }
@@ -105,11 +105,11 @@ char	**ft_split_command(const char *str, char sep)
 		{
 			strings[i++] = ft_strdup_cmd(str, sep);
 		}
-        if (*str == '\"')
-            str = skip_quotes(str);
-        else
-		    while (*str != '\0' && (check_sep(*str, sep) == 0))
-			    str++;
+		if (*str == '\"')
+			str = skip_quotes(str);
+		else
+			while (*str != '\0' && (check_sep(*str, sep) == 0))
+				str++;
 	}
 	strings[i] = NULL;
 	return (strings);

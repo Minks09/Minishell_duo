@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/02 17:16:09 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/03 15:57:27 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int			size_of_strings(const char *str, char sep);
 char		*ft_stringdup(const char *str, char sep);
 char		**ft_split_parse(const char *str, char sep);
 //heredoc.c
-t_bool		search_EOF(char *haystack, char *needle);
+t_bool		search_eof(char *haystack, char *needle);
 int			heredoc(char *argument);
 //lexer.c
 t_bool		check_both_quotes(char *input);

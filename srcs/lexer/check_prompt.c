@@ -3,37 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   check_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
+/*   By: nigateau <nigateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 16:18:24 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/02 13:52:24 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/03 15:24:37 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "../../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-char    *check_prompt(char *prompt)
+char	*check_prompt(char *prompt)
 {
-	char    *clean_prompt;
+	char	*clean_prompt;
+
 	if (!check_both_quotes(prompt) || !search_semi_back(prompt))
 		return (NULL);
 	//ft_strtrim(prompt, '\t');
 	escape_double_quote(prompt);
 	escape_single_quote(prompt);
 	clean_prompt = end_with_pipe(prompt);
-	return(clean_prompt);
+	return (clean_prompt);
 }
 
-t_bool    parsing(t_shell *shell, char *prompt)
+t_bool	parsing(t_shell *shell, char *prompt)
 {
-	char    *clean_prompt;
-	char     **commands;
-	t_token     *root_token;
-	// t_envp      *root_env;
+	char	*clean_prompt;
+	char	**commands;
+	t_token	*root_token;
 
+	// t_envp      *root_env;
 	clean_prompt = check_prompt(prompt);
 	if (!clean_prompt)
-		return(FALSE);
+		return (FALSE);
 	commands = ft_split_command(clean_prompt, ' ');
 	commands = split_pipe(commands);
 	root_token = init_token_struct();
@@ -47,13 +48,13 @@ t_bool    parsing(t_shell *shell, char *prompt)
 	free_tab(commands);
 	if (!check_command(shell))
 		return (FALSE);
-	return(TRUE);
+	return (TRUE);
 }
 
-int     return_pipe_nbr(char *prompt)
+int	return_pipe_nbr(char *prompt)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
@@ -61,14 +62,14 @@ int     return_pipe_nbr(char *prompt)
 	{
 		if (prompt[i] == '|' && (!is_inside_quote(&prompt[i], i)))
 			count++;
-			i++;
+		i++;
 	}
 	return (count);
 }
 
-t_bool    command_not_valid(char *command)
+t_bool	command_not_valid(char *command)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	write(1, "Command not found : ", 21);
@@ -77,8 +78,8 @@ t_bool    command_not_valid(char *command)
 		write(1, &command[i], 1);
 		i++;
 	}
-	write(1,"\n", 1);
-	return(FALSE);
+	write(1, "\n", 1);
+	return (FALSE);
 }
 
 // int main(int argc, char **argv, char **envp)

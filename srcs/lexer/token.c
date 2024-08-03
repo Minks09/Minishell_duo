@@ -6,63 +6,61 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:59:35 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/02 17:39:48 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/03 17:25:46 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_token *init_token_struct(void)
+t_token	*init_token_struct(void)
 {
-	t_token  *token;
+	t_token	*token;
 
 	token = malloc(sizeof(t_token));
 	if (!token)
 		exit(1);
-	
 	token->command = NULL;
 	token->path = NULL;
 	token->argument = NULL;
 	token->operator = NULL;
 	token->file = NULL;
-
 	token->type = 0;
 	token->fd = -1;
 	token->next = NULL;
 	return (token);
 }
 
-void    free_token_struct(t_token **token)
+void	free_token_struct(t_token **token)
 {
-	t_token  *curr;
-	t_token  *tmp;
+	t_token	*curr;
+	t_token	*tmp;
 
 	curr = *token;
 	while (curr != NULL)
 	{
 		tmp = curr;
 		curr = curr->next;
-		free (tmp->command);
+		free(tmp->command);
 		tmp->command = NULL;
-		free (tmp->path);
+		free(tmp->path);
 		tmp->path = NULL;
-		free (tmp->argument);
+		free(tmp->argument);
 		tmp->argument = NULL;
-		free (tmp->operator);
+		free(tmp->operator);
 		tmp->operator = NULL;
-		free (tmp->file);
+		free(tmp->file);
 		tmp->file = NULL;
-		free (tmp);
+		free(tmp);
 		tmp = NULL;
 	}
 	*token = NULL;
 }
 
-void    insert_node_token(t_token **root, char *command)
+void	insert_node_token(t_token **root, char *command)
 {
-	t_token *new_node;
-	t_token *curr;
-	int	type;
+	t_token	*new_node;
+	t_token	*curr;
+	int		type;
 
 	type = return_type(command);
 	new_node = malloc(sizeof(t_token));
@@ -76,18 +74,17 @@ void    insert_node_token(t_token **root, char *command)
 	new_node->type = type;
 	new_node->fd = 0;
 	new_node->next = NULL;
-
 	curr = *root;
 	while (curr->next != NULL)
 		curr = curr->next;
 	curr->next = new_node;
 }
 
-void    parse_token(t_token **token, char **str)
+void	parse_token(t_token **token, char **str)
 {
-	int i;
-	t_token *curr;
-	char tmp;
+	int		i;
+	t_token	*curr;
+	char	tmp;
 
 	i = 0;
 	curr = *token;
@@ -96,16 +93,16 @@ void    parse_token(t_token **token, char **str)
 	tmp = (*token)->command[0];
 	while (str[++i] != NULL)
 	{
-		if(check_redirection(str[i - 1], str[i]) != 0)
+		if (check_redirection(str[i - 1], str[i]) != 0)
 			curr->fd = check_redirection(str[i - 1], str[i]);
 		while (tmp != '|' && str[i])
 		{
 			if (str[i][0] == '|' || str[i][0] == '<' || str[i][0] == '>')
-				break;
+				break ;
 			curr->argument = join_argument(curr->argument, str[i++]);
 		}
 		if (str[i] == NULL)
-			break;
+			break ;
 		insert_node_token(token, str[i]);
 		curr = curr->next;
 		tmp = curr->command[0];
@@ -114,10 +111,10 @@ void    parse_token(t_token **token, char **str)
 
 char	*join_argument(char *argument, char *str)
 {
-	int i;
-	int j;
-	int lenght;
-	char *new_argument;
+	int		i;
+	int		j;
+	int		lenght;
+	char	*new_argument;
 
 	i = -1;
 	j = -1;
@@ -126,7 +123,7 @@ char	*join_argument(char *argument, char *str)
 	lenght = strlen(argument) + strlen(str) + 1;
 	new_argument = malloc(sizeof(char) * (lenght + 1));
 	if (!new_argument)
-		return(NULL);
+		return (NULL);
 	while (argument[++i] != '\0')
 		new_argument[i] = argument[i];
 	if (argument[i] != '\0')
@@ -136,7 +133,7 @@ char	*join_argument(char *argument, char *str)
 	new_argument[i + j] = '\0';
 	free(argument);
 	argument = NULL;
-	return(new_argument);
+	return (new_argument);
 }
 
 // int main()

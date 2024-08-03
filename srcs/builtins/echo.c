@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
+/*   By: nigateau <nigateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:02:14 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/02 03:20:58 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/03 15:44:15 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int	echo(t_token **token)
 {
 	int		i;
-	t_token *curr;
+	t_token	*curr;
 
 	curr = *token;
 	i = 0;
 	while (curr != NULL)
 	{
 		if (strcmp(curr->command, "echo") == 0)
-			break;
+			break ;
 		curr = curr->next;
 	}
 	//if (strcmp(curr->argument[0], "-n") == 0)
@@ -31,16 +31,16 @@ int	echo(t_token **token)
 	{
 		while (curr->argument[i++] != '\0')
 			printf("%c", curr->argument[i]);
-		return SUCCESS;
+		return (SUCCESS);
 	}
-	else 
-		return ERROR;
+	else
+		return (ERROR);
 }
 
 char	*get_env(t_shell *shell, char *str)
 {
-	int	size;
-	t_envp *curr;
+	int		size;
+	t_envp	*curr;
 
 	str++;
 	curr = shell->env;
@@ -51,19 +51,19 @@ char	*get_env(t_shell *shell, char *str)
 		{
 			str--;
 			free(str);
-			return(strdup(curr->value));
+			return (strdup(curr->value));
 		}
 		curr = curr->next;
 	}
 	return (str);
 }
 
-void    expandx(t_shell *shell)
+void	expandx(t_shell *shell)
 {
-    //int	i;
-	//char *value;
-	t_token *curr_token;
+	t_token	*curr_token;
 
+	//int	i;
+	//char *value;
 	curr_token = shell->token;
 	while (curr_token != NULL)
 	{
@@ -169,7 +169,8 @@ void    expandx(t_shell *shell)
 //         return (str);
 //     value = get_value(str);
 //     size_var = size_var_key(str);
-//     new_str = (char *)malloc((sizeof(char) * strlen(str)) -size_var_key(str) +size_var_value(str));
+//     new_str = (char *)malloc((sizeof(char) * strlen(str)) -size_var_key(str)
+//		+size_var_value(str));
 //     if(!new_str)
 //         return (NULL);
 //     while (str[i] != '$')
@@ -204,4 +205,3 @@ void    expandx(t_shell *shell)
 //     free(str);
 //     return (1);
 // }
-

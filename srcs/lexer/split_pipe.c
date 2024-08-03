@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 18:32:09 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/02 17:16:01 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/03 15:58:28 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	count_strings_pipe(const char *str, char sep)
 		while (str[i] != '\0' && check_sep(str[i], sep) == 0)
 			i++;
 	}
-    count += count - 1;
+	count += count - 1;
 	return (count);
 }
 
@@ -52,8 +52,8 @@ char	**ft_split_pipe(const char *str, char sep)
 		if (*str != '\0')
 		{
 			strings[i++] = ft_stringdup(str, sep);
-            if (i < nbr_of_strs)
-                strings[i++] = ft_strdup("|");
+			if (i < nbr_of_strs)
+				strings[i++] = ft_strdup("|");
 		}
 		while (*str != '\0' && (check_sep(*str, sep) == 0))
 			str++;
@@ -61,52 +61,54 @@ char	**ft_split_pipe(const char *str, char sep)
 	strings[i] = NULL;
 	return (strings);
 }
-char    **split_pipe(char **str)
-{
-    int i;
-    int size;
-    char **tab;
 
-    i = 0;
-    size = 0;
-    while (str[i] != NULL)
-        size += count_strings_pipe(str[i++], '|');
-    tab = malloc(sizeof(char *) * (size + 1));
-    if (!tab)
-        return (NULL);
-    i = 0;
-    while (str[i] != NULL)
-        i++;
-    fill_new_tab(str, tab, i);
-    free_tab(str);
-    return(tab);
-}
-void    fill_new_tab(char **str,char **tab, int size)
+char	**split_pipe(char **str)
 {
-    int i;
-    int j;
-    int z;
-    char **tmp;
-    
-    i = 0;
-    z = 0;
-    while (i < size)
-    {
-        if (count_strings_pipe(str[i], '|') != 1)
-        {
-            tmp = ft_split_pipe(str[i], '|');
-            j = -1;
-            while (tmp[++j] != NULL)
-                tab[i + j] = strdup(tmp[j]);
-            z += j - 1;
-            free_tab(tmp);
-        }
-        else
-            tab[i + z] = strdup(str[i]);
-        i++;
-    }
-    tab[i + z] = NULL;
-    return;
+	int		i;
+	int		size;
+	char	**tab;
+
+	i = 0;
+	size = 0;
+	while (str[i] != NULL)
+		size += count_strings_pipe(str[i++], '|');
+	tab = malloc(sizeof(char *) * (size + 1));
+	if (!tab)
+		return (NULL);
+	i = 0;
+	while (str[i] != NULL)
+		i++;
+	fill_new_tab(str, tab, i);
+	free_tab(str);
+	return (tab);
+}
+
+void	fill_new_tab(char **str, char **tab, int size)
+{
+	int		i;
+	int		j;
+	int		z;
+	char	**tmp;
+
+	i = 0;
+	z = 0;
+	while (i < size)
+	{
+		if (count_strings_pipe(str[i], '|') != 1)
+		{
+			tmp = ft_split_pipe(str[i], '|');
+			j = -1;
+			while (tmp[++j] != NULL)
+				tab[i + j] = strdup(tmp[j]);
+			z += j - 1;
+			free_tab(tmp);
+		}
+		else
+			tab[i + z] = strdup(str[i]);
+		i++;
+	}
+	tab[i + z] = NULL;
+	return ;
 }
 
 // int	main(int argc, char **argv)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
+/*   By: nigateau <nigateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:22:20 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/02 00:10:33 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/03 15:18:26 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,82 +15,85 @@
 t_bool	check_both_quotes(char *input)
 {
 	int	squotes_count;
-	int dquotes_count;
+	int	dquotes_count;
 	int	i;
 
 	i = 0;
 	squotes_count = 0;
 	dquotes_count = 0;
-	while(input[i])
+	while (input[i])
 	{
-		if(input[i] == '\'')
+		if (input[i] == '\'')
 			squotes_count++;
-		if(input[i] == '\"')
+		if (input[i] == '\"')
 			dquotes_count++;
 		i++;
 	}
-	if((squotes_count % 2) || (dquotes_count % 2))
+	if ((squotes_count % 2) || (dquotes_count % 2))
 		return (FALSE);
 	return (TRUE);
 }
 
 void	escape_single_quote(char *input)
 {
-	int i;
+	int	i;
 	int	len;
-	
+
 	i = 0;
 	len = strlen(input);
 	while (input[i] != '\'' && input[i] != '\0')
-			i++;
+		i++;
 	if (input[i] == '\0')
-		return;
-	i++;
-	while (input[i])
+		return ;
+	//i++;
+	while (input[++i])
 	{
-		if (input[i] == '[' || input[i] == ']' || input[i] == '\\' || input[i] == '^'
-		|| input[i] == '.' || input[i] == '|' || input[i] == '?' || input[i] == '*'
-		|| input[i] == '+' || input[i] == '-' || input[i] == '{'|| input[i] == '}'
-		|| input[i] == '(' || input[i] == ')' || input[i] == '$')
+		if (input[i] == '[' || input[i] == ']' || input[i] == '\\'
+			|| input[i] == '^' || input[i] == '.' || input[i] == '|'
+			|| input[i] == '?' || input[i] == '*' || input[i] == '+'
+			|| input[i] == '-' || input[i] == '{' || input[i] == '}'
+			|| input[i] == '(' || input[i] == ')' || input[i] == '$')
 		{
 			memmove(&input[i + 1], &input[i], len - i + 1);
 			input[i++] = '\\';
 			len++;
 		}
 		if (input[i] == '\'')
-			break;
-		i++;
+			break ;
+		//i++;
 	}
 }
 
 void	escape_double_quote(char *input)
 {
-	int i;
+	int	i;
 	int	len;
-	
+
 	i = 0;
 	len = strlen(input);
 	while (input[i] != '\"' && input[i] != '\0')
-			i++;
+		i++;
 	if (input[i] == '\0')
-		return;
-	i++;
-	while (input[i])
+		return ;
+	//i++;
+	while (input[++i])
 	{
-		if (input[i] == '[' || input[i] == ']' || input[i] == '\\' || input[i] == '^'
-		|| input[i] == '.' || input[i] == '|' || input[i] == '?' || input[i] == '*'
-		|| input[i] == '+' || input[i] == '-' || input[i] == '{'|| input[i] == '}'
-		|| input[i] == '(' || input[i] == ')')
+		if (input[i] == '[' || input[i] == ']' || input[i] == '\\'
+			|| input[i] == '^' || input[i] == '.' || input[i] == '|'
+			|| input[i] == '?' || input[i] == '*' || input[i] == '+'
+			|| input[i] == '-' || input[i] == '{' || input[i] == '}'
+			|| input[i] == '(' || input[i] == ')')
 		{
 			memmove(&input[i + 1], &input[i], len - i + 1);
 			input[i++] = '\\';
 			len++;
 		}
 		if (input[i] == '\"')
-			break;
-		i++;
+			break ;
+		//i++;
 	}
 }
+
 t_bool	search_semi_back(char *str)
 {
 	int	i;
