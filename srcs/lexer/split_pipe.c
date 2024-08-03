@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 18:32:09 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/02 00:12:24 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/02 17:16:01 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,27 +32,6 @@ int	count_strings_pipe(const char *str, char sep)
 	}
     count += count - 1;
 	return (count);
-}
-
-char	*ft_strdup(const char *s1)
-{
-	int		len;
-	char	*s2;
-
-	len = (int)strlen(s1);
-	if (s1[len] == '\0')
-		len++;
-	s2 = (char *)malloc(len * sizeof(char));
-	if (!s2)
-	{
-		free(s2);
-		return (NULL);
-	}
-	while (--len >= 0)
-	{
-		s2[len] = s1[len];
-	}
-	return (s2);
 }
 
 char	**ft_split_pipe(const char *str, char sep)

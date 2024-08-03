@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 22:22:24 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/01 00:59:10 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/02 20:18:29 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 int is_builtins(char *cmd)
 {
 	return(!ft_strncmp(cmd, "echo", 5) || \
-	!ft_strncmp(cmd, "cd", 3) || \
-	!ft_strncmp(cmd, "pwd", 4) || \
-	!ft_strncmp(cmd, "export", 7) || \
-	!ft_strncmp(cmd, "unset", 6) || \
-	!ft_strncmp(cmd, "env", 4) || \
-	!ft_strncmp(cmd, "exit", 5));
+			!ft_strncmp(cmd, "cd", 3) || \
+			!ft_strncmp(cmd, "pwd", 4) || \
+			!ft_strncmp(cmd, "export", 7) || \
+			!ft_strncmp(cmd, "unset", 6) || \
+			!ft_strncmp(cmd, "env", 4) || \
+			!ft_strncmp(cmd, "exit", 5));
 }
 
 int do_builtins(t_shell *shell)

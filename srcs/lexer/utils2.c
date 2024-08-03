@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 12:09:31 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/02 00:13:54 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/02 16:55:32 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,26 +80,26 @@ char *find_path(t_envp *shell_env)
     return(pathname);
 }
 
-char	*ft_strjoin(const char *s1, const char *s2)
-{
-	int		i;
-	int		j;
-	int		tot_len;
-	char	*str;
+// char	*ft_strjoin(const char *s1, const char *s2)
+// {
+// 	int		i;
+// 	int		j;
+// 	int		tot_len;
+// 	char	*str;
 
-	i = -1;
-	j = -1;
-	tot_len = strlen(s1) + strlen(s2);
-	str = (char *)malloc(sizeof(char) * tot_len + 1);
-	if (str == NULL)
-		return (NULL);
-	while (s1[++i] != '\0')
-		str[i] = s1[i];
-	while (s2[++j] != '\0')
-		str[i + j] = s2[j];
-	str[i + j] = '\0';
-	return (str);
-}
+// 	i = -1;
+// 	j = -1;
+// 	tot_len = strlen(s1) + strlen(s2);
+// 	str = (char *)malloc(sizeof(char) * (tot_len + 1));
+// 	if (str == NULL)
+// 		return (NULL);
+// 	while (s1[++i] != '\0')
+// 		str[i] = s1[i];
+// 	while (s2[++j] != '\0')
+// 		str[i + j] = s2[j];
+// 	str[i + j] = '\0';
+// 	return (str);
+// }
 
 char    *end_with_pipe(char *str)
 {

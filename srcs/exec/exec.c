@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 17:02:04 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/02 14:20:50 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/02 19:45:32 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ void simple_exec(t_shell *shell) {
 
 void main_exec(t_shell *shell) {
     char *curr_token;
-    // t_token *head_token;
-    // int i; 
-    // i = 0;
-    // head_token = shell->token;
-    // while(shell->token != NULL){
-    //     printf("token %d : [CMD] = %s\n\t [ARG] = %s\n\t [TYPE] = %d\n", i++, shell->token->command, shell->token->argument, shell->token->type);
-    //     shell->token = shell->token->next;}
-    // shell->token = head_token;
+    t_token *head_token;
+    int i; 
+    i = 0;
+    head_token = shell->token;
+    while(shell->token->next != NULL){
+        printf("token %d : [CMD] = %s\n\t [ARG] = %s\n\t [TYPE] = %d\n", i++, shell->token->command, shell->token->argument, shell->token->type);
+        shell->token = shell->token->next;}
+    shell->token = head_token;
     while (shell->token->command != NULL && shell->status != QUIT && shell->token->type != T_END) {
         if (shell->token->type == T_PIPE){
             if (shell->token->next != NULL)

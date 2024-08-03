@@ -59,15 +59,31 @@ int shell_init(t_shell **shell, t_termios *new, t_termios *copy)
 	return ERROR;
 }
 
+void template_token(t_shell *shell)
+{
+	shell->token = malloc(sizeof(t_token));
+	if (!shell->token)
+		return;
+	shell->token->command = "ls";
+	shell->token->path = NULL;
+	shell->token->argument = "-la";
+	shell->token->operator = NULL;
+	shell->token->file = NULL;
+	shell->token->type = 0;
+	shell->token->fd = 0;
+	shell->token->next = NULL;
+}
+
 void  main_shell(t_shell *shell)
 {
 	//t_token		*commands;
 	char 		*buff;
-	char		*prompt;
+	// char		*prompt;
 
-	buff = malloc(sizeof(char*) * BUFF_SIZE);
-	if(!buff)
-		return;
+	buff = NULL;
+	// buff = malloc(sizeof(char*) * BUFF_SIZE);
+	// if(!buff)
+	// 	return;
 	while (shell->status != QUIT)
 	{
 		signal_main();
@@ -75,6 +91,7 @@ void  main_shell(t_shell *shell)
 			buff = readline(shell->prompt);
 		else
 			buff = get_next_line(STDIN_FILENO);
+		// buff == ft_strjoin(buff, "\0");
 		if (!buff)
 			return;
 		if (buff && *buff){
@@ -82,17 +99,13 @@ void  main_shell(t_shell *shell)
 				add_history(buff);
 			else
 				ft_putendl_fd(buff, STDOUT_FILENO);
-			prompt = check_prompt(buff);
-			printf("Debug: prompt = %s\n", prompt);
-			if (!prompt)
-				break;
-			while(parsing(shell, prompt) == 1)
+			if(parsing(shell, buff) == 1)
 			{
 			signal_child();
+			buildfull_command(shell);
 			main_exec(shell);
 			}
 		}
-		free(buff);
 	}
 	rl_clear_history();
 	// quit_shell(shell);

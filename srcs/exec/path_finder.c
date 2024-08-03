@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 20:21:14 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/01 17:01:51 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/02 20:18:59 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,27 +46,54 @@ void find_access(t_shell *shell)
 {
 	int		i;
 	char	*tmp;
+	char	*new_test;
+	t_token	*head;
 	
+	head = shell->token;
 	i = 0;
 	tmp = ft_strjoin(shell->path_bin[i], shell->token->command);
-	while (shell->token != NULL && is_builtins(shell->token->command) != 0)
+	if(shell->token->type == T_CMD)
 	{
+		if (is_builtins(shell->token->command) == 1)
+			shell->token = shell->token->next;
 		if (shell->path_bin == NULL)
 		{
-			if(full_path(shell) == NULL)
+			if(full_path(shell) != NULL)
 			{
 				ft_putstr_fd("No executable path found", STDERR_FILENO);
 				shell->exit_status = R_PATH;
 				return ;
 			}
 		}
-		while (access(tmp, X_OK) != 0)
+		while (access(tmp, X_OK) != 0 && shell->path_bin[i] != NULL)
 		{
-			free(tmp);
-			i++;
-			tmp = ft_strjoin(shell->path_bin[i], shell->token->command);
+			new_test = ft_strjoin(shell->path_bin[i++], shell->token->command);
+			tmp = ft_strdup(new_test);
+		}
+		if (shell->token->argument != NULL){
+			free(new_test);
+			new_test = ft_strjoin(tmp, shell->token->argument);
 		}
 		shell->token->path = ft_strdup(tmp);
-		free(tmp);
+		shell->token = shell->token->next;
 	}
+	shell->token = head;
+	return;
+}
+void	buildfull_command(t_shell *shell)
+{
+	t_token *head;
+	int i = 0;
+	head = shell->token;
+	shell->status = WAIT;
+	while(shell->token != NULL)
+	{
+		find_access(shell);
+		printf("*********token%d*******************\n", i);
+		printf("[CMD]\t%s\n[PATH]\t%s\n[ARG]\t%s\n[OPER]\t%s\n", shell->token->command, shell->token->path, shell->token->argument, shell->token->operator);
+		printf("[FILE]\t%s\n[TYPE]\t%d\n[FD]\t%d\n", shell->token->file, shell->token->type, shell->token->fd);
+		shell->token = shell->token->next;
+		i++;
+	}
+	shell->token = head;
 }

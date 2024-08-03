@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 16:07:42 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/02 13:53:49 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/02 17:16:09 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void		pipe_exec(t_shell *shell);
 //path_finder.c
 char		*full_path(t_shell *shell);
 void		find_access(t_shell *shell);
+void		buildfull_command(t_shell *shell);
 //pipe.c
 void		init_first_pipe(t_shell *shell);
 void		init_mid_pipe(t_shell *shell);
@@ -127,7 +128,6 @@ char	    *ft_strdup_cmd(const char *str, char sep);
 char	    **ft_split_command(const char *str, char sep);
 //split_pipe.c
 int			count_strings_pipe(const char *str, char sep);
-char 		*ft_strdup(const char *s1);
 char 		**ft_split_pipe(const char *str, char sep);
 char		**split_pipe(char **str);
 void		fill_new_tab(char **str, char **tab, int size);
@@ -148,7 +148,7 @@ t_bool      get_pathname(t_shell *shell, char *command);
 t_bool      check_command(t_shell *shell);
 char        *end_with_pipe(char *str);
 char        *find_path(t_envp *shell_env);
-char	    *ft_strjoin(const char *s1, const char *s2);
+// char	    *ft_strjoin(const char *s1, const char *s2);
 
 /***************************************SETUP***************************************/
 //child_signal.c

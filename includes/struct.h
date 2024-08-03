@@ -6,7 +6,7 @@
 /*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 21:16:13 by racinedelar       #+#    #+#             */
-/*   Updated: 2024/08/01 20:29:45 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/02 16:07:49 by racinedelar      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define R_PERM 			126 // If a command is found but is not executable,the return status is 126
 # define R_PATH 			127 //If a command is not found, the child process created to execute it returns a status of 127
 # define R_FILE_NOT_FOUND	255
-# define BUFF_SIZE 			1042
+# define BUFF_SIZE 			1048576 // mac argument define for bash on our computer
 # define EXPANSION 			-36
 
 /* ERROR CODES */
