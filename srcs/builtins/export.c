@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: racinedelarbre <racinedelarbre@student.    +#+  +:+       +#+        */
+/*   By: nigateau <nigateau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 02:14:18 by nigateau          #+#    #+#             */
-/*   Updated: 2024/08/02 03:09:23 by racinedelar      ###   ########.fr       */
+/*   Updated: 2024/08/03 15:43:28 by nigateau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char    *return_value_quoted(char *str)
+char	*return_value_quoted(char *str)
 {
 	int		size;
 	char	*tmp;
@@ -44,5 +44,5 @@ int	export(t_envp **root, char *new_var)
 		value = return_value(new_var);
 	key = return_key(new_var);
 	insert_node_env(root, key, value);
-	return SUCCESS;
+	return (SUCCESS);
 }
